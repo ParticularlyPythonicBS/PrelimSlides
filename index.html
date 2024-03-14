@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.4.551">
 
   <meta name="author" content="Anil Radhakrishnan">
-  <meta name="dcterms.date" content="2024-03-09">
+  <meta name="dcterms.date" content="2024-03-14">
   <title>Nonlinear dynamics with neural networks</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -37,6 +37,7 @@
   <link href="index_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
   <link href="index_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
   <link href="index_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="index_files/libs/revealjs/plugin/reveal-attribution/attribution.css" rel="stylesheet">
   <link href="index_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
 
@@ -337,10 +338,13 @@
 <div class="quarto-title-author-name">
 Anil Radhakrishnan 
 </div>
-</div>
+        <p class="quarto-title-affiliation">
+            North Carolina State University
+          </p>
+    </div>
 </div>
 
-  <p class="date">2024-03-09</p>
+  <p class="date">2024-03-14</p>
 </section>
 <section>
 <section id="motivation" class="title-slide slide level1 center">
@@ -349,15 +353,101 @@ Anil Radhakrishnan
 </section>
 <section id="motivation-why-neural-networks" class="slide level2">
 <h2>Motivation: Why Neural Networks?</h2>
+<ul>
+<li>The preeminent computational tool of the contemporary world.</li>
+<li>Differentable, optimizable, and scalable.</li>
+<li>Emergent uses in and out of Physics. <img data-src="assets/ChatGPT.png" class="absolute" style="left: 50px; bottom: 0px; width: 250px; height: 250px; "></li>
+</ul>
+<p><img data-src="assets/Microsoft_365_Copilot_Icon.png" class="absolute" style="left: 400px; bottom: 0px; width: 250px; height: 250px; "></p>
+<p><img data-src="assets/netket.png" class="absolute" style="left: 750px; bottom: 0px; width: 250px; height: 250px; "></p>
+<aside class="notes">
+<p>Speaker notes go here.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="motivation-why-nonlinear-dynamics" class="slide level2">
 <h2>Motivation: Why Nonlinear Dynamics?</h2>
+<ul>
+<li>Captures complexity.</li>
+<li>Formal, well established framework.</li>
+<li>Emergent uses in and out of Physics.</li>
+</ul>
+<div style="padding:50% 0 0 0;position:relative;">
+<iframe src="https://player.vimeo.com/video/739921904?h=f803d0bbff&amp;autoplay=1&amp;loop=1&amp;title=0&amp;byline=0&amp;portrait=0" style="position:absolute;top:0;left:5%;width:90%;height:90%;" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen="">
+</iframe>
+</div>
+<script src="https://player.vimeo.com/api/player.js"></script>
+<div class="attribution">
+<p>Animation by <a href="https://github.com/williamgilpin/cphy">Wliiam Gilpin</a></p>
+</div>
+<aside class="notes">
+<p>Avalanche activity cascades in a sandpile automaton; a vortex street formed by flow past a cylinder; and Turing patterns in a reaction-diffusion model.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="motivation-why-nonlinear-dynamics-for-neural-networks" class="slide level2">
 <h2>Motivation: Why Nonlinear Dynamics for Neural Networks?</h2>
+<ul>
+<li>Optimization is inescapably nonlinear.</li>
+<li>Neural networks are inherently nonlinear.</li>
+<li>Scope of nonlinearities in neural networks is underexplored.</li>
+</ul>
+<div style="padding:100% 0 0 0;position:relative;">
+<iframe src="https://player.vimeo.com/video/903855670?h=ca2b077023&amp;autoplay=1&amp;loop=1&amp;title=0&amp;byline=0&amp;portrait=0" style="position:absolute;top:0;left:30%;width:40%;height:40%;" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen="">
+</iframe>
+</div>
+<script src="https://player.vimeo.com/api/player.js"></script>
+<div class="attribution">
+<p>Trainability fractal by <a href="https://sohl-dickstein.github.io/2024/02/12/fractal.html">Jascha Sohl-Dickstein</a></p>
+</div>
+<aside class="notes">
+<p>Each pixel corresponds to training the same neural network from the same initialization on the same data — but with different hyperparameters. Blue-green colors mean that training converged for those hyperparameters, and the network successfully trained. Red-yellow colors mean that training diverged for those hyperparameters. The paler the color the faster the convergence or divergence</p>
+<p>The neural network consists of an input layer, a tanh nonlinearity, and an output layer. In the image, the x-coordinate changes the learning rate for the input layer’s parameters, and the y-coordinate changes the learning rate for the output layer’s parameters.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="motivation-why-neural-networks-for-nonlinear-dynamics" class="slide level2">
 <h2>Motivation: Why Neural Networks for Nonlinear Dynamics?</h2>
+<ul>
+<li>Nonlinear dynamical systems are computationally expensive to solve.</li>
+<li>Paradigm of solution as an element of a distribution translates naturally to neural networks.</li>
+<li>Data-driven methods accommodate realistic complexity.</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="assets/escher_day_night.webp" class="quarto-figure quarto-figure-center" width="700"></p>
+</figure>
+</div>
+<div class="attribution">
+<p>Day and Night by <a href="https://www.wikiart.org/en/m-c-escher/day-and-night">M.C. Escher</a></p>
+</div>
 </section></section>
 <section>
 <section id="background" class="title-slide slide level1 center">
@@ -430,6 +520,7 @@ Anil Radhakrishnan
 </section>
 <section id="background-pendulum" class="slide level2">
 <h2>Background: Pendulum</h2>
+<p>The career of a young theoretical physicist consists of treating the harmonic oscillator in ever-increasing levels of abstraction. - Sidney Coleman</p>
 </section>
 <section id="background-kuramoto-oscillator" class="slide level2">
 <h2>Background: Kuramoto Oscillator</h2>
@@ -593,6 +684,7 @@ You can learn more about using RevealJS with Quarto at: <https://quarto.org/docs
   <script src="index_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
   <script src="index_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
   <script src="index_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="index_files/libs/revealjs/plugin/reveal-attribution/attribution.js"></script>
   <script src="index_files/libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
@@ -703,7 +795,7 @@ You can learn more about using RevealJS with Quarto at: <https://quarto.org/docs
         showNotes: false,
 
         // Global override for autoplaying embedded media (null/true/false)
-        autoPlayMedia: null,
+        autoPlayMedia: true,
 
         // Global override for preloading lazy-loaded iframes (null/true/false)
         preloadIframes: null,
@@ -725,7 +817,7 @@ You can learn more about using RevealJS with Quarto at: <https://quarto.org/docs
         defaultTiming: null,
 
         // Enable slide navigation via mouse wheel
-        mouseWheel: false,
+        mouseWheel: true,
 
         // The display mode that will be used to show slides
         display: 'block',
@@ -785,7 +877,7 @@ You can learn more about using RevealJS with Quarto at: <https://quarto.org/docs
         },
 
         // reveal.js plugins
-        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, RevealAttribution, QuartoSupport,
 
           RevealMath,
           RevealNotes,

@@ -2,23 +2,83 @@
 title: Nonlinear dynamics with neural networks
 subtitle: Preliminary Examination
 author: Anil Radhakrishnan
+institute: North Carolina State University
 date: last-modified
 format:
   revealjs:
     theme: [default, assets/custom.scss]
     logo: assets/ncstate_red_letter_logo.png
     slide-number: true
+    show-slide-number: all
     chalkboard: true
+    progress: true
+    touch: true
+    keyboard: true
+    mouse-wheel: true
+    controls: auto
+    auto-play-media: true
+    citations-hover: true
+    reference-location: section
+revealjs-plugins:
+  - attribution
     
 ---
 # Motivation
 ## Motivation: Why Neural Networks?
+- The preeminent computational tool of the contemporary world.
+- Differentable, optimizable, and scalable.
+- Emergent uses in and out of Physics.
+![](assets/ChatGPT.png){.absolute bottom=0 left=50 width="250" height="250"}
 
+![](assets/Microsoft_365_Copilot_Icon.png){.absolute bottom=0 left=400 width="250" height="250"}
+
+![](assets/netket.png){.absolute bottom=0 left=750 width="250" height="250"}
+
+::: {.notes}
+Speaker notes go here.
+:::
+  
 ## Motivation: Why Nonlinear Dynamics?
+- Captures complexity.
+- Formal, well established framework.
+- Emergent uses in and out of Physics.
+
+<div style="padding:50% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/739921904?h=f803d0bbff&autoplay=1&loop=1&title=0&byline=0&portrait=0" style="position:absolute;top:0;left:5%;width:90%;height:90%;" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
+
+::: {.attribution}
+Animation by [Wliiam Gilpin](https://github.com/williamgilpin/cphy)
+:::
+
+::: {.notes}
+Avalanche activity cascades in a sandpile automaton; a vortex street formed by flow past a cylinder; and Turing patterns in a reaction-diffusion model.
+:::
 
 ## Motivation: Why Nonlinear Dynamics for Neural Networks?
+- Optimization is inescapably nonlinear.
+- Neural networks are inherently nonlinear.
+- Scope of nonlinearities in neural networks is underexplored.
+  
+<div style="padding:100% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/903855670?h=ca2b077023&autoplay=1&loop=1&title=0&byline=0&portrait=0" style="position:absolute;top:0;left:30%;width:40%;height:40%;" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
+
+::: {.attribution}
+Trainability fractal by [Jascha Sohl-Dickstein](https://sohl-dickstein.github.io/2024/02/12/fractal.html)
+:::
+::: {.notes}
+Each pixel corresponds to training the same neural network from the same initialization on the same data — but with different hyperparameters. Blue-green colors mean that training converged for those hyperparameters, and the network successfully trained. Red-yellow colors mean that training diverged for those hyperparameters. The paler the color the faster the convergence or divergence
+
+The neural network consists of an input layer, a tanh nonlinearity, and an output layer. In the image, the x-coordinate changes the learning rate for the input layer’s parameters, and the y-coordinate changes the learning rate for the output layer’s parameters.
+:::
 
 ## Motivation: Why Neural Networks for Nonlinear Dynamics?
+- Nonlinear dynamical systems are computationally expensive to solve.
+- Paradigm of solution as an element of a distribution translates naturally to neural networks.
+- Data-driven methods accommodate realistic complexity.
+
+![](assets/escher_day_night.webp){.nostretch fig-align="center" width=700}
+  
+::: {.attribution}
+Day and Night by [M.C. Escher](https://www.wikiart.org/en/m-c-escher/day-and-night)
+:::
 
 # Background
 ## Background: Differentiable Computing
@@ -61,6 +121,7 @@ format:
 ## Background: Chaos Control
 
 ## Background: Pendulum
+The career of a young theoretical physicist consists of treating the harmonic oscillator in ever-increasing levels of abstraction. - Sidney Coleman
 
 ## Background: Kuramoto Oscillator
 
