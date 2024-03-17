@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.4.551">
 
   <meta name="author" content="Anil Radhakrishnan">
-  <meta name="dcterms.date" content="2024-03-14">
+  <meta name="dcterms.date" content="2024-03-17">
   <title>Nonlinear dynamics with neural networks</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -32,6 +32,7 @@
     }
   </style>
   <link rel="stylesheet" href="index_files/libs/revealjs/dist/theme/quarto.css">
+  <link rel="stylesheet" href="assets/style.css">
   <link href="index_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="index_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="index_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -344,7 +345,7 @@ Anil Radhakrishnan
     </div>
 </div>
 
-  <p class="date">2024-03-14</p>
+  <p class="date">2024-03-17</p>
 </section>
 <section>
 <section id="motivation" class="title-slide slide level1 center">
@@ -356,10 +357,33 @@ Anil Radhakrishnan
 <ul>
 <li>The preeminent computational tool of the contemporary world.</li>
 <li>Differentable, optimizable, and scalable.</li>
-<li>Emergent uses in and out of Physics. <img data-src="assets/ChatGPT.png" class="absolute" style="left: 50px; bottom: 0px; width: 250px; height: 250px; "></li>
+<li>Emergent uses in and out of Physics.</li>
 </ul>
-<p><img data-src="assets/Microsoft_365_Copilot_Icon.png" class="absolute" style="left: 400px; bottom: 0px; width: 250px; height: 250px; "></p>
-<p><img data-src="assets/netket.png" class="absolute" style="left: 750px; bottom: 0px; width: 250px; height: 250px; "></p>
+<div class="quarto-layout-panel" data-layout-ncol="3">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-figure quarto-figure-left">
+<figure>
+<p><img data-src="assets/ChatGPT.png" class="quarto-figure quarto-figure-left" alt="ChatGPT" width="250"></p>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="assets/Microsoft_365_Copilot_Icon.png" class="quarto-figure quarto-figure-center" alt="CoPilot" width="250"></p>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-figure quarto-figure-right">
+<figure>
+<p><img data-src="assets/netket.png" class="quarto-figure quarto-figure-right" alt="NetKet" width="250"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
 <aside class="notes">
 <p>Speaker notes go here.</p>
 <style type="text/css">
@@ -410,7 +434,7 @@ Anil Radhakrishnan
 <li>Neural networks are inherently nonlinear.</li>
 <li>Scope of nonlinearities in neural networks is underexplored.</li>
 </ul>
-<div style="padding:100% 0 0 0;position:relative;">
+<div style="padding:90% 0 0 0;position:relative;">
 <iframe src="https://player.vimeo.com/video/903855670?h=ca2b077023&amp;autoplay=1&amp;loop=1&amp;title=0&amp;byline=0&amp;portrait=0" style="position:absolute;top:0;left:30%;width:40%;height:40%;" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen="">
 </iframe>
 </div>
@@ -440,12 +464,8 @@ Anil Radhakrishnan
 <li>Paradigm of solution as an element of a distribution translates naturally to neural networks.</li>
 <li>Data-driven methods accommodate realistic complexity.</li>
 </ul>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="assets/escher_day_night.webp" class="quarto-figure quarto-figure-center" width="700"></p>
-</figure>
-</div>
-<div class="attribution">
+
+<img src="assets/escher_day_night.png" alt="Escher's day and night wood blood painting" style="display: block; width: 30%; margin-top: -25px; margin-left: auto; margin-right: auto;" class="r-stretch"><div class="attribution">
 <p>Day and Night by <a href="https://www.wikiart.org/en/m-c-escher/day-and-night">M.C. Escher</a></p>
 </div>
 </section></section>
@@ -456,12 +476,45 @@ Anil Radhakrishnan
 </section>
 <section id="background-differentiable-computing" class="slide level2">
 <h2>Background: Differentiable Computing</h2>
+<ul>
+<li>Programming paradigm which composes parameterized algorithmic components and optimizes them using gradient search.</li>
+<li>Concept emergent from but not limited to deep learning.</li>
+<li></li>
+</ul>
 </section>
 <section id="background-neural-networks" class="slide level2">
 <h2>Background: Neural Networks</h2>
+<p><img data-src="figures/NN.png" style="width:80.0%" alt="Neural Network diagram"> <span class="math display">\[
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Param}{\mathcal{P}}
+\]</span></p>
+<p><span class="math display">\[\varphi: \R^d \rightarrow \R^N_L \qquad T^l: \R^{N_{l-1}}\rightarrow \R^{N_{l}} \qquad \rho: \R\rightarrow \R\]</span> <span class="math display">\[x \in \R^d \qquad W^l \in \R^{N_l\times N_{l-1}} \qquad b^l \in \R^{N_l}\]</span></p>
 </section>
 <section id="background-backpropagation" class="slide level2">
 <h2>Background: Backpropagation</h2>
+<p>Consider a differentiable cost function <span class="math inline">\(C\)</span>,</p>
+<div class="quarto-layout-panel" data-layout="[ 40, 60 ]">
+<div class="quarto-layout-row">
+<div id="first-column" class="quarto-layout-cell" style="flex-basis: 40.0%;justify-content: flex-start;">
+<p><span class="math display">\[
+\begin{eqnarray*}
+\delta^L =&amp; \nabla_{\varphi}C\odot\rho'(T^L)\\
+\delta^l =&amp; ((w^{l+1})^\intercal \delta^{l+1} ))\odot\rho'(T^l)\\
+\dfrac{\partial C}{\partial b^l_j} =&amp; \delta_j^l \\
+\dfrac{\partial C}{\partial w^l_{jk}} =&amp; T^{l-1}_k\delta_j^l \\
+\end{eqnarray*}
+\]</span></p>
+</div>
+<div id="second-column" class="quarto-layout-cell" style="flex-basis: 60.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-right">
+<figure>
+<p><img data-src="figures/backprop_zoomed.png" class="quarto-figure quarto-figure-right" style="width:90.0%" alt="backprop diagram"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<p>The tunable parameters can then be updated by: <span class="math display">\[\Param\gets \Param -\eta \nabla_{\Param}C\]</span></p>
 </section>
 <section id="background-loss-functions" class="slide level2">
 <h2>Background: Loss Functions</h2>
@@ -478,7 +531,10 @@ Anil Radhakrishnan
 <section>
 <section id="metalearning-activation-functions" class="title-slide slide level1 center">
 <h1>Metalearning Activation functions</h1>
+<script type="text/javascript" src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script>
+<div class="altmetric-embed" data-badge-type="large-donut" data-altmetric-id="126463806">
 
+</div>
 </section>
 <section id="foundation" class="slide level2">
 <h2>Foundation</h2>
@@ -571,47 +627,7 @@ Anil Radhakrishnan
 <section id="background-group-equivariant-neural-networks" class="slide level2">
 <h2>Background: Group Equivariant Neural Networks</h2>
 <!-- 
-## Sample Slide Title
 
-### Example of a subtitle
-
-We can create unordered lists:
-
-- first item 
-    - A sub item
-
-Or ordered lists
-
-1. Ordered list first item
-    1. Nested list item
-
-Or **bold**, *italic*, or [URL](https://ncsu.edu) text.
-
-## Mathematics
-
-Inline mode: $c^2 = a^2 + b^2$
-
-Display mode: 
-
-$$x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$$
-
-## Columns
-
-We could also split content between two columns:
-
-::: {.columns}
-
-::: {.column width="45%"}
-Left column
-:::
-
-::: {.column width="45%"}
-Right column
-:::
-
-:::
-
-<https://quarto.org/docs/presentations/revealjs/#multiple-columns>
 
 ## Code Highlighting
 

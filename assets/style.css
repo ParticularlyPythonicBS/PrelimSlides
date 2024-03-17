@@ -1,0 +1,7 @@
+.reveal section img {
+    margin-bottom: -50px;
+}
+
+figcaption {
+    display: none;
+}

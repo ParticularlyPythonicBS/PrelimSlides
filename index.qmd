@@ -8,6 +8,7 @@ format:
   revealjs:
     theme: [default, assets/custom.scss]
     logo: assets/ncstate_red_letter_logo.png
+    css: assets/style.css
     slide-number: true
     show-slide-number: all
     chalkboard: true
@@ -28,11 +29,16 @@ revealjs-plugins:
 - The preeminent computational tool of the contemporary world.
 - Differentable, optimizable, and scalable.
 - Emergent uses in and out of Physics.
-![](assets/ChatGPT.png){.absolute bottom=0 left=50 width="250" height="250"}
 
-![](assets/Microsoft_365_Copilot_Icon.png){.absolute bottom=0 left=400 width="250" height="250"}
+::: {layout-ncol=3}
 
-![](assets/netket.png){.absolute bottom=0 left=750 width="250" height="250"}
+![](assets/ChatGPT.png){fig-alt="ChatGPT" fig-align="left" width="250"}
+
+![](assets/Microsoft_365_Copilot_Icon.png){fig-alt="CoPilot" fig-align="center" width="250"}
+
+![](assets/netket.png){fig-alt="NetKet" fig-align="right" width="250"}
+
+:::
 
 ::: {.notes}
 Speaker notes go here.
@@ -58,7 +64,7 @@ Avalanche activity cascades in a sandpile automaton; a vortex street formed by f
 - Neural networks are inherently nonlinear.
 - Scope of nonlinearities in neural networks is underexplored.
   
-<div style="padding:100% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/903855670?h=ca2b077023&autoplay=1&loop=1&title=0&byline=0&portrait=0" style="position:absolute;top:0;left:30%;width:40%;height:40%;" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
+<div style="padding:90% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/903855670?h=ca2b077023&autoplay=1&loop=1&title=0&byline=0&portrait=0" style="position:absolute;top:0;left:30%;width:40%;height:40%;" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
 
 ::: {.attribution}
 Trainability fractal by [Jascha Sohl-Dickstein](https://sohl-dickstein.github.io/2024/02/12/fractal.html)
@@ -74,7 +80,8 @@ The neural network consists of an input layer, a tanh nonlinearity, and an outpu
 - Paradigm of solution as an element of a distribution translates naturally to neural networks.
 - Data-driven methods accommodate realistic complexity.
 
-![](assets/escher_day_night.webp){.nostretch fig-align="center" width=700}
+<img src="assets/escher_day_night.png" alt="Escher's day and night wood blood painting" style="display: block; width: 30%; margin-top: -25px; margin-left: auto; margin-right: auto;">
+
   
 ::: {.attribution}
 Day and Night by [M.C. Escher](https://www.wikiart.org/en/m-c-escher/day-and-night)
@@ -82,10 +89,44 @@ Day and Night by [M.C. Escher](https://www.wikiart.org/en/m-c-escher/day-and-nig
 
 # Background
 ## Background: Differentiable Computing
+- Programming paradigm which composes parameterized algorithmic components and optimizes them using gradient search.
+- Concept emergent from but not limited to deep learning.
+- 
 
 ## Background: Neural Networks
 
+![](figures/NN.png){fig-alt="Neural Network diagram" width=80%}
+$$
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Param}{\mathcal{P}}
+$$
+
+$$\varphi: \R^d \rightarrow \R^N_L \qquad T^l: \R^{N_{l-1}}\rightarrow \R^{N_{l}} \qquad \rho: \R\rightarrow \R$$
+$$x \in \R^d \qquad W^l \in \R^{N_l\times N_{l-1}} \qquad b^l \in \R^{N_l}$$
+
 ## Background: Backpropagation
+
+Consider a differentiable cost function $C$,
+
+:::: {layout="[ 40, 60 ]"}
+
+::: {#first-column}
+$$
+\begin{eqnarray*}
+\delta^L =& \nabla_{\varphi}C\odot\rho'(T^L)\\
+\delta^l =& ((w^{l+1})^\intercal \delta^{l+1} ))\odot\rho'(T^l)\\
+\dfrac{\partial C}{\partial b^l_j} =& \delta_j^l \\
+\dfrac{\partial C}{\partial w^l_{jk}} =& T^{l-1}_k\delta_j^l \\
+\end{eqnarray*}
+$$
+:::
+
+::: {#second-column}
+![](figures/backprop_zoomed.png){fig-alt="backprop diagram" fig-align="right" width=90%}
+:::
+::::
+The tunable parameters can then be updated by:
+$$\Param\gets \Param -\eta \nabla_{\Param}C$$
 
 ## Background: Loss Functions
 
@@ -96,6 +137,8 @@ Day and Night by [M.C. Escher](https://www.wikiart.org/en/m-c-escher/day-and-nig
 ## Background: Physics-Informed Neural Networks
 
 # Metalearning Activation functions
+<script type="text/javascript" src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script><div class="altmetric-embed" data-badge-type="large-donut" data-altmetric-id="126463806"></div>
+
 ## Foundation
 
 ## Insight
@@ -152,47 +195,7 @@ The career of a young theoretical physicist consists of treating the harmonic os
 ## Background: Group Equivariant Neural Networks
 
 <!-- 
-## Sample Slide Title
 
-### Example of a subtitle
-
-We can create unordered lists:
-
-- first item 
-    - A sub item
-
-Or ordered lists
-
-1. Ordered list first item
-    1. Nested list item
-
-Or **bold**, *italic*, or [URL](https://ncsu.edu) text.
-
-## Mathematics
-
-Inline mode: $c^2 = a^2 + b^2$
-
-Display mode: 
-
-$$x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$$
-
-## Columns
-
-We could also split content between two columns:
-
-::: {.columns}
-
-::: {.column width="45%"}
-Left column
-:::
-
-::: {.column width="45%"}
-Right column
-:::
-
-:::
-
-<https://quarto.org/docs/presentations/revealjs/#multiple-columns>
 
 ## Code Highlighting
 
