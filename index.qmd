@@ -122,7 +122,7 @@ $$
 :::
 
 ::: {#second-column}
-![](figures/backprop_zoomed.png){fig-alt="backprop diagram" fig-align="right" width=90%}
+![](figures/backprop_zoomed.png){fig-alt="backprop diagram" fig-align="right" width=80%}
 :::
 ::::
 The tunable parameters can then be updated by:
@@ -193,6 +193,21 @@ The career of a young theoretical physicist consists of treating the harmonic os
 ## Background: Controllers for Dynamical systems
 
 ## Background: Group Equivariant Neural Networks
+
+# Symmetries of controllers
+## Foundation
+
+## Insight
+
+## Methodology
+
+## Expectation
+
+# Conclusions
+
+## Conclusion
+
+## Deliverables
 
 <!-- 
 
