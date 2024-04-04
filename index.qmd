@@ -89,14 +89,17 @@ Day and Night by [M.C. Escher](https://www.wikiart.org/en/m-c-escher/day-and-nig
 
 # Background
 ## Background: Differentiable Computing
-- Programming paradigm which composes parameterized algorithmic components and optimizes them using gradient search.
-- Concept emergent from but not limited to deep learning.
-- 
+- Paradigm where programs can be differentiated end-to-end automatically, enabling optimizatio of parameters of the program.
+- Techniques to differentiate through complex programs is more than just deep learning.
+- Can be interpreted probabilistically or as a dynamical system.
+![](figures/autodiff.png){fig-alt="autodifferentiation diagram" width=80% }
+
 
 ## Background: Neural Networks
 
 ![](figures/NN.png){fig-alt="Neural Network diagram" width=80%}
 $$
+\newcommand{\defeq}{\mathrel{\mathop:}=}
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\Param}{\mathcal{P}}
 $$
@@ -126,15 +129,56 @@ $$
 :::
 ::::
 The tunable parameters can then be updated by:
-$$\Param\gets \Param -\eta \nabla_{\Param}C$$
+$\Param\gets \Param -\eta \nabla_{\Param}C$
 
 ## Background: Loss Functions
+- Neural networks compute a probability distribution on the data space. 
+- Our objective is maximize the likihood the assigned to emperical data.
+-Constructing a suitable differentiable loss function gives the path to optimization of a neural network.
+Common loss functions include:
+  - Mean Squared Error $\mathcal{L}(\theta) = \sum_{i=1}^N (y_i - f(x_i;\theta))^2$
+  - Cross Entropy $\mathcal{L}(\theta) = -\sum_{i=1}^N y_i \log(f(x_i;\theta))$
+  - Kullback-Leibler Divergence $\mathcal{L}(\theta) = \sum_{i=1}^N y_i \log\left(\dfrac{y_i}{f(x_i;\theta)}\right)$
+  
+Loss functions are combined and regularized to balance the tradeoff between model complexity and data fit.
 
 ## Background: Optimization
+- To find the best model parametrization, we minimize the loss function with respect to the model parameters. 
+- That is we compute, $\mathcal{L^\star} \defeq \inf_{\theta \in \Theta} \mathcal{L}(\theta)$ assuming an infimum exists.
+- To converge to a minima the optimizer needs an oracle $\mathcal{O}$, i.e. evaluation of the Loss function, its gradients, or higher order derivatives.
+Then, for an algortihm $\mathcal{A}$,
+$$
+  \theta ^ {t+1} 
+  \defeq \mathcal{A}(\theta ^ 0, \ldots, \theta ^ t, 
+    \mathcal{O}(\theta ^ 0), \ldots, \mathcal{O}(\theta ^ t), \lambda),
+$$
+where $\lambda \in \Lambda$ is a hyperparameter.
+
+Stochastic Gradient Descent, Adam, and RMSProp are common optimization algorithms for training neural networks.
 
 ## Background: Meta-Learning
 
-## Background: Physics-Informed Neural Networks
+:::: {layout="[ 70, 30 ]"}
+
+::: {#first-column}
+- Meta-learning or learning to learn tries to improve the learning algorithm itself given the experience of mutiple learning episodes.
+- During base learning , an inner learning algorithm solves a task defined by a dataset and objective. 
+- During meta-learning , an outer algorithm updates the inner learning algorithm such that the model it learns improves an outer objective.
+:::
+
+::: {#second-column}
+![](figures/Metalearning.png){fig-alt="metalearning" fig-align="center" width=80%}
+:::
+::::
+Algorithms for meta-learning are still in a nascent stage with significant computational overhead.
+
+::: {.attribution}
+Figure by [Dr. John Lindner ](https://www.nature.com/articles/s41598-023-40766-6)
+:::
+
+## Background: Physics-Informed Neural Networks(PiNNs)
+PiNNs allow for synthesyzing data with partial differential equation constraints.
+
 
 # Metalearning Activation functions
 <script type="text/javascript" src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script><div class="altmetric-embed" data-badge-type="large-donut" data-altmetric-id="126463806"></div>

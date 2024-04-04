@@ -8,10 +8,10 @@
 <link href="index_files/libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="index_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="index_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.4.551">
+  <meta name="generator" content="quarto-1.4.553">
 
   <meta name="author" content="Anil Radhakrishnan">
-  <meta name="dcterms.date" content="2024-03-17">
+  <meta name="dcterms.date" content="2024-04-04">
   <title>Nonlinear dynamics with neural networks</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -345,7 +345,7 @@ Anil Radhakrishnan
     </div>
 </div>
 
-  <p class="date">2024-03-17</p>
+  <p class="date">2024-04-04</p>
 </section>
 <section>
 <section id="motivation" class="title-slide slide level1 center">
@@ -477,14 +477,15 @@ Anil Radhakrishnan
 <section id="background-differentiable-computing" class="slide level2">
 <h2>Background: Differentiable Computing</h2>
 <ul>
-<li>Programming paradigm which composes parameterized algorithmic components and optimizes them using gradient search.</li>
-<li>Concept emergent from but not limited to deep learning.</li>
-<li></li>
+<li>Paradigm where programs can be differentiated end-to-end automatically, enabling optimizatio of parameters of the program.</li>
+<li>Techniques to differentiate through complex programs is more than just deep learning.</li>
+<li>Can be interpreted probabilistically or as a dynamical system. <img data-src="figures/autodiff.png" style="width:80.0%" alt="autodifferentiation diagram"></li>
 </ul>
 </section>
 <section id="background-neural-networks" class="slide level2">
 <h2>Background: Neural Networks</h2>
 <p><img data-src="figures/NN.png" style="width:80.0%" alt="Neural Network diagram"> <span class="math display">\[
+\newcommand{\defeq}{\mathrel{\mathop:}=}
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\Param}{\mathcal{P}}
 \]</span></p>
@@ -514,19 +515,62 @@ Anil Radhakrishnan
 </div>
 </div>
 </div>
-<p>The tunable parameters can then be updated by: <span class="math display">\[\Param\gets \Param -\eta \nabla_{\Param}C\]</span></p>
+<p>The tunable parameters can then be updated by: <span class="math inline">\(\Param\gets \Param -\eta \nabla_{\Param}C\)</span></p>
 </section>
 <section id="background-loss-functions" class="slide level2">
 <h2>Background: Loss Functions</h2>
+<ul>
+<li>Neural networks compute a probability distribution on the data space.</li>
+<li>Our objective is maximize the likihood the assigned to emperical data. -Constructing a suitable differentiable loss function gives the path to optimization of a neural network. Common loss functions include:
+<ul>
+<li>Mean Squared Error <span class="math inline">\(\mathcal{L}(\theta) = \sum_{i=1}^N (y_i - f(x_i;\theta))^2\)</span></li>
+<li>Cross Entropy <span class="math inline">\(\mathcal{L}(\theta) = -\sum_{i=1}^N y_i \log(f(x_i;\theta))\)</span></li>
+<li>Kullback-Leibler Divergence <span class="math inline">\(\mathcal{L}(\theta) = \sum_{i=1}^N y_i \log\left(\dfrac{y_i}{f(x_i;\theta)}\right)\)</span></li>
+</ul></li>
+</ul>
+<p>Loss functions are combined and regularized to balance the tradeoff between model complexity and data fit.</p>
 </section>
 <section id="background-optimization" class="slide level2">
 <h2>Background: Optimization</h2>
+<ul>
+<li>To find the best model parametrization, we minimize the loss function with respect to the model parameters.</li>
+<li>That is we compute, <span class="math inline">\(\mathcal{L^\star} \defeq \inf_{\theta \in \Theta} \mathcal{L}(\theta)\)</span> assuming an infimum exists.</li>
+<li>To converge to a minima the optimizer needs an oracle <span class="math inline">\(\mathcal{O}\)</span>, i.e.&nbsp;evaluation of the Loss function, its gradients, or higher order derivatives. Then, for an algortihm <span class="math inline">\(\mathcal{A}\)</span>, <span class="math display">\[
+\theta ^ {t+1}
+\defeq \mathcal{A}(\theta ^ 0, \ldots, \theta ^ t,
+  \mathcal{O}(\theta ^ 0), \ldots, \mathcal{O}(\theta ^ t), \lambda),
+\]</span> where <span class="math inline">\(\lambda \in \Lambda\)</span> is a hyperparameter.</li>
+</ul>
+<p>Stochastic Gradient Descent, Adam, and RMSProp are common optimization algorithms for training neural networks.</p>
 </section>
 <section id="background-meta-learning" class="slide level2">
 <h2>Background: Meta-Learning</h2>
+<div class="quarto-layout-panel" data-layout="[ 70, 30 ]">
+<div class="quarto-layout-row">
+<div id="first-column" class="quarto-layout-cell" style="flex-basis: 70.0%;justify-content: flex-start;">
+<ul>
+<li>Meta-learning or learning to learn tries to improve the learning algorithm itself given the experience of mutiple learning episodes.</li>
+<li>During base learning , an inner learning algorithm solves a task defined by a dataset and objective.</li>
+<li>During meta-learning , an outer algorithm updates the inner learning algorithm such that the model it learns improves an outer objective.</li>
+</ul>
+</div>
+<div id="second-column" class="quarto-layout-cell" style="flex-basis: 30.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="figures/Metalearning.png" class="quarto-figure quarto-figure-center" style="width:80.0%" alt="metalearning"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<p>Algorithms for meta-learning are still in a nascent stage with significant computational overhead.</p>
+<div class="attribution">
+<p>Figure by <a href="https://www.nature.com/articles/s41598-023-40766-6">Dr.&nbsp;John Lindner</a></p>
+</div>
 </section>
-<section id="background-physics-informed-neural-networks" class="slide level2">
-<h2>Background: Physics-Informed Neural Networks</h2>
+<section id="background-physics-informed-neural-networkspinns" class="slide level2">
+<h2>Background: Physics-Informed Neural Networks(PiNNs)</h2>
+<p>PiNNs allow for synthesyzing data with partial differential equation constraints.</p>
 </section></section>
 <section>
 <section id="metalearning-activation-functions" class="title-slide slide level1 center">
