@@ -197,10 +197,13 @@ PiNNs allow for synthesyzing data with partial differential equation constraints
 
 # Background Deux
 
-## Background: Pontryagin's Maximum Principle
-<iframe src="https://openprocessing.org/sketch/164434/embed/" width="800" height="550"></iframe>
+## Background: Coordinates matter
 
-## Background: Hamilton-Jacobi-Bellman Equation
+<video width="700" height="500" loop style="display: block; margin-left: auto; margin-right: auto;">
+  <source src="figures/coordinates.webm" type="video/webm">
+  Your browser does not support the video tag.
+</video>
+## Background: Pontryagin's Maximum Principle
 
 ## Background: Model Predictive Control
 
