@@ -198,6 +198,7 @@ PiNNs allow for synthesyzing data with partial differential equation constraints
 # Background Deux
 
 ## Background: Pontryagin's Maximum Principle
+<iframe src="https://openprocessing.org/sketch/164434/embed/" width="800" height="550"></iframe>
 
 ## Background: Hamilton-Jacobi-Bellman Equation
 
