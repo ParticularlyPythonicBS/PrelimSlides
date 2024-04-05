@@ -203,6 +203,12 @@ PiNNs allow for synthesyzing data with partial differential equation constraints
   <source src="figures/coordinates.webm" type="video/webm">
   Your browser does not support the video tag.
 </video>
+
+::: {.attribution}
+Adapted from Heliocentrism and Geocentrism by [Malin Christersson
+](https://www.malinc.se/math/)
+:::
+
 ## Background: Pontryagin's Maximum Principle
 
 ## Background: Model Predictive Control
