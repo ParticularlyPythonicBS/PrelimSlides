@@ -7,11 +7,13 @@
 <link href="index_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="index_files/libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="index_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="index_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<link href="index_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="index_files/libs/quarto-contrib/videojs/video.min.js"></script>
+<link href="index_files/libs/quarto-contrib/videojs/video-js.css" rel="stylesheet"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.4.553">
 
   <meta name="author" content="Anil Radhakrishnan">
-  <meta name="dcterms.date" content="2024-04-04">
+  <meta name="dcterms.date" content="2024-04-06">
   <title>Nonlinear dynamics with neural networks</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -325,6 +327,15 @@
       margin-right: 0; 
     }
   </style>
+  <style>
+  .center-xy {
+    margin: 0;
+    position: absolute;
+    top: 0%;
+    -ms-transform: translateY(20%);
+    transform: translateY(20%);
+  }
+  </style>
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -345,7 +356,7 @@ Anil Radhakrishnan
     </div>
 </div>
 
-  <p class="date">2024-04-04</p>
+  <p class="date">2024-04-06</p>
 </section>
 <section>
 <section id="motivation" class="title-slide slide level1 center">
@@ -570,45 +581,186 @@ Anil Radhakrishnan
 </section>
 <section id="background-physics-informed-neural-networkspinns" class="slide level2">
 <h2>Background: Physics-Informed Neural Networks(PiNNs)</h2>
-<p>PiNNs allow for synthesyzing data with partial differential equation constraints.</p>
+<ul>
+<li>PiNNs allow for synthesyzing data with differential equation constraints.</li>
+<li>We can incorporate the physics as a weak constraint in a composite loss function or morph the architecture to enforce hard constraints.</li>
+<li>Adding symplectic constraints to the loss function gives Hamiltonian Neural Networks which excel for conservative system predictions.</li>
+</ul>
+
+<img src="figures/HNN_schema.png" alt="HNN schema" style="display: block; width: 30%; margin-top: -25px; margin-left: auto; margin-right: auto;" class="r-stretch"><div class="attribution">
+<p>Figure by <a href="https://arxiv.org/abs/2006.08656">Greydanus et al.</a></p>
+</div>
+</section>
+<section id="background-coordinates-matter" class="slide level2">
+<h2>Background: Coordinates matter</h2>
+<!--  -->
+<div>
+<video width="700" height="500" loop="" style="display: block; margin-left: auto; margin-right: auto;">
+<source src="figures/coordinates.mp4" type="video/mp4">
+Your browser does not support the video tag. </video>
+</div>
+<p>Neural networks are coordinate dependent. The choice of coordinates can significantly affect the performance of the network.</p>
+<div class="attribution">
+<p>Adapted from Heliocentrism and Geocentrism by <a href="https://www.malinc.se/math/">Malin Christersson</a></p>
+</div>
 </section></section>
 <section>
 <section id="metalearning-activation-functions" class="title-slide slide level1 center">
 <h1>Metalearning Activation functions</h1>
+(Published and Patented)
 <script type="text/javascript" src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script>
 <div class="altmetric-embed" data-badge-type="large-donut" data-altmetric-id="126463806">
 
 </div>
 </section>
-<section id="foundation" class="slide level2">
+<section id="foundation" class="slide level2 center">
 <h2>Foundation</h2>
+<ul>
+<li>Most complex systems showcase diversity in populations.</li>
+<li>Artificial neural network architectures are traditionally layerwise-homogenous due to computational efficiencies.</li>
+<li>Will neurons diversify if given the opportunity?</li>
+</ul>
 </section>
 <section id="insight" class="slide level2">
 <h2>Insight</h2>
+<div class="quarto-layout-panel" data-layout="[ 65, 35 ]">
+<div class="quarto-layout-row">
+<div id="first-column" class="quarto-layout-cell" style="flex-basis: 65.0%;justify-content: flex-start;">
+<div class="center-xy">
+<ul>
+<li>Activation functions can themselves be modeled as neural networks.</li>
+<li>Through metalearning, we can optimize the activation function subnetwork for a given task.</li>
+<li>Using multiple neural network initializations, we can allow the activations to <em>diversify</em> and evolve into different communities.</li>
+</ul>
+</div>
+</div>
+<div id="second-column" class="quarto-layout-cell" style="flex-basis: 35.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="figures/meta_act_schema_vert.png" class="quarto-figure quarto-figure-center" style="width:80.0%" alt="metalearning"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div class="attribution">
+<p>Figure from <a href="https://www.nature.com/articles/s41598-023-40766-6">Publication</a></p>
+</div>
 </section>
 <section id="methodology" class="slide level2">
 <h2>Methodology</h2>
+<div class="quarto-layout-panel" data-layout="[ 65, 35 ]">
+<div class="quarto-layout-row">
+<div id="first-column" class="quarto-layout-cell" style="flex-basis: 65.0%;justify-content: flex-start;">
+<ul>
+<li>Developed a metalearning framework to optimize activation functions.</li>
+<li>Tested the algorithm on classification and regression tasks for conventional and physics-informed neural networks.</li>
+<li>Showed a regime where learned diverse activations are superior.</li>
+<li>Gave preliminary analysis to support the hypothesis that diversity in activation functions can improve performance.</li>
+</ul>
+</div>
+<div id="second-column" class="quarto-layout-cell" style="flex-basis: 35.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="figures/2NeuronSubpopulation_Sine_1_compact2.png" class="quarto-figure quarto-figure-center" style="width:100.0%" alt="2neuronmnist1d"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div class="attribution">
+<p>Figure from <a href="https://www.nature.com/articles/s41598-023-40766-6">Publication</a></p>
+</div>
 </section>
-<section id="results-published-and-patented" class="slide level2">
-<h2>Results (Published and Patented)</h2>
+<section id="results" class="slide level2">
+<h2>Results</h2>
+
+<img data-src="figures/meta_div_scaling.png" class="quarto-figure quarto-figure-center r-stretch" style="width:80.0%" alt="metalearning"><div class="attribution">
+<p>Figure from <a href="https://www.nature.com/articles/s41598-023-40766-6">Publication</a></p>
+</div>
+</section>
+<section id="results-real-world-data" class="slide level2">
+<h2>Results Real World Data</h2>
+
+<img data-src="figures/real_pendulum.png" class="quarto-figure quarto-figure-center r-stretch" style="width:80.0%" alt="real world example"><div class="attribution">
+<p>Figure from <a href="https://www.nature.com/articles/s41598-023-40766-6">Publication</a></p>
+</div>
+</section>
+<section id="analysis-participation-ratio" class="slide level2">
+<h2>Analysis: Participation Ratio</h2>
+<p>Estimate change in dimensionality of network activations</p>
+<div class="quarto-layout-panel" data-layout="[ 65, 35 ]">
+<div class="quarto-layout-row">
+<div id="first-column" class="quarto-layout-cell" style="flex-basis: 65.0%;justify-content: flex-start;">
+<p><span class="math display">\[
+Nr = \mathcal{R}
+    = \frac{(\operatorname{tr}{\bf C})^2}{\operatorname{tr}{\bf C}^2}
+    = \frac{\left(\sum_{n=1}^N\lambda_n \right)^2}{\sum_{n=1}^N \lambda_n^2}
+\]</span></p>
+<p>where <span class="math inline">\(\lambda_n\)</span> are the co-variance matrix <span class="math inline">\(\bf C\)</span>’s eigenvalues for neuronal activity data matrix. The normalized participation ratio <span class="math inline">\(r = \mathcal{R} / N\)</span>.</p>
+</div>
+<div id="second-column" class="quarto-layout-cell" style="flex-basis: 35.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="figures/Participation_ratio.png" class="quarto-figure quarto-figure-center" style="width:100.0%" alt="participation ratio"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<p>We find that the participation ratio is significantly greater for the diverse activation functions indicating a greater use of the network’s capacity.</p>
+<div class="attribution">
+<p>Figure from <a href="https://www.nature.com/articles/s41598-023-40766-6">Publication</a></p>
+</div>
+<aside class="notes">
+<p>If all the variance is in one dimension, say <span class="math inline">\(\lambda_n = \delta_{n1}\)</span>, then <span class="math inline">\(\mathcal{R} = 1\)</span></p>
+<p>If the variance is evenly distributed across all dimensions, so <span class="math inline">\(\lambda_n = \lambda_1\)</span>, then <span class="math inline">\(\mathcal{R} = N\)</span>.</p>
+<p>Typically, <span class="math inline">\(1 &lt; \mathcal{R} &lt; N\)</span>, and <span class="math inline">\(\mathcal{R}\)</span> corresponds to the number of dimensions needed to explain most of the variance</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="conclusions" class="slide level2">
 <h2>Conclusions</h2>
+<ul>
+<li>Learned Diversity Networks discover sets of activation functions that can outperform traditional activations.</li>
+<li>These networks excel in the regime of low data few shot learning.</li>
+<li>Due to the nature of metalearning, the memory overhead is significant concern for scaling.</li>
+</ul>
 </section>
-<section id="speculations" class="slide level2">
-<h2>Speculations</h2>
-</section></section>
+<section id="speculations-achieving-stable-minima" class="slide level2">
+<h2>Speculations: Achieving stable minima</h2>
+<p>Optimization of a neural network with shuffled data is akin to noisy descent in the loss landscape. This can me modeled with the Langevin equation: <span class="math display">\[
+\DeclareMathOperator{\Tr}{Tr}
+d\theta_{t} = - \nabla \mathcal{L}(\theta_{t})\, dt + \sqrt{2\mathbf{D}} \cdot d\mathcal{W}_{t}
+\]</span> with noise intensity <span class="math inline">\(\mathbf{D} = (\eta / B) \mathcal{L}(\theta) \mathbf{H}(\theta^*)\)</span></p>
+<p>Resulting minima from diverse neurons is flatter than from homogeneous ones, as measured by both the trace <span class="math inline">\(\Tr\mathbf{H}\)</span> of the Hessian and the fraction <span class="math inline">\(f\)</span> of its eigenvalues near zero: <span class="math inline">\(\Tr \mathbf{H}_1 &gt;  \Tr \mathbf{H}_2 &gt; \Tr \mathbf{H}_{12}\)</span> and <span class="math inline">\(f_1 &lt; f_2 &lt; f_{12}\)</span></p>
+<p>Since the noise term aligns with Hessian bear the minima, this suggests that the minima found by diverse neurons are flatter and more stable.</p>
+</section>
+<section id="speculations-structure-and-universality-to-diverse-activations" class="slide level2">
+<h2>Speculations: Structure and universality to diverse activations</h2>
+<ul>
+<li>Learned activation functions appear qualitatively independent of the base activation function.</li>
+<li>The odd and even nature of the learned functions suggest that the network is learning to span the space of possible activation functions.</li>
+</ul>
+
+<img data-src="figures/learned_act_insight.png" class="quarto-figure quarto-figure-center r-stretch" style="width:80.0%" alt="spanning sets"></section></section>
 <section>
 <section id="background-deux" class="title-slide slide level1 center">
 <h1>Background Deux</h1>
 
 </section>
-<section id="background-coordinates-matter" class="slide level2">
-<h2>Background: Coordinates matter</h2>
-<video width="700" height="500" loop="" style="display: block; margin-left: auto; margin-right: auto;">
-<source src="figures/coordinates.webm" type="video/webm">
-<p>Your browser does not support the video tag.  ## Background: Pontryagin’s Maximum Principle</p>
-</video></section>
+<section id="background-pontryagins-maximum-principle" class="slide level2">
+<h2>Background: Pontryagin’s Maximum Principle</h2>
+</section>
 <section id="background-model-predictive-control" class="slide level2">
 <h2>Background: Model Predictive Control</h2>
 </section>
@@ -1150,6 +1302,7 @@ You can learn more about using RevealJS with Quarto at: <https://quarto.org/docs
       }
     });
     </script>
+    <script>videojs(video_shortcode_videojs_video1);</script>
     
 
 </body></html>

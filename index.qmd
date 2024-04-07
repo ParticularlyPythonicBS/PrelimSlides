@@ -20,6 +20,17 @@ format:
     auto-play-media: true
     citations-hover: true
     reference-location: section
+    include-in-header: 
+      text: |
+        <style>
+        .center-xy {
+          margin: 0;
+          position: absolute;
+          top: 0%;
+          -ms-transform: translateY(20%);
+          transform: translateY(20%);
+        }
+        </style>
 revealjs-plugins:
   - attribution
     
@@ -177,37 +188,170 @@ Figure by [Dr. John Lindner ](https://www.nature.com/articles/s41598-023-40766-6
 :::
 
 ## Background: Physics-Informed Neural Networks(PiNNs)
-PiNNs allow for synthesyzing data with partial differential equation constraints.
+- PiNNs allow for synthesyzing data with differential equation constraints.
+- We can incorporate the physics as a weak constraint in a composite loss function or morph the architecture to enforce hard constraints.
+- Adding symplectic constraints to the loss function gives Hamiltonian Neural Networks which excel for conservative system predictions.
 
+<img src="figures/HNN_schema.png" alt="HNN schema" style="display: block; width: 30%; margin-top: -25px; margin-left: auto; margin-right: auto;">
 
-# Metalearning Activation functions
-<script type="text/javascript" src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script><div class="altmetric-embed" data-badge-type="large-donut" data-altmetric-id="126463806"></div>
-
-## Foundation
-
-## Insight
-
-## Methodology
-
-## Results (Published and Patented)
-
-## Conclusions
-
-## Speculations
-
-# Background Deux
+::: {.attribution}
+Figure by [Greydanus et al.](https://arxiv.org/abs/2006.08656)
+:::
 
 ## Background: Coordinates matter
 
+<!-- {{<video figures/coordinates.mp4 width="500" height="400" autoplay="true" loop="true">}} -->
+<div>
 <video width="700" height="500" loop style="display: block; margin-left: auto; margin-right: auto;">
-  <source src="figures/coordinates.webm" type="video/webm">
+  <source src="figures/coordinates.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
+</div>
+Neural networks are coordinate dependent. The choice of coordinates can significantly affect the performance of the network.
 
 ::: {.attribution}
 Adapted from Heliocentrism and Geocentrism by [Malin Christersson
 ](https://www.malinc.se/math/)
 :::
+
+
+# Metalearning Activation functions 
+(Published and Patented)
+<script type="text/javascript" src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script><div class="altmetric-embed" data-badge-type="large-donut" data-altmetric-id="126463806"></div>
+
+## Foundation {.center}
+
+- Most complex systems showcase diversity in populations.
+- Artificial neural network architectures are traditionally layerwise-homogenous due to computational efficiencies.
+- Will neurons diversify if given the opportunity?
+
+
+
+## Insight
+:::: {layout="[ 65, 35 ]"}
+
+::: {#first-column}
+::: {.center-xy}
+- Activation functions can themselves be modeled as neural networks.
+- Through metalearning, we can optimize the activation function subnetwork for a given task.
+- Using multiple neural network initializations, we can allow the activations to _diversify_ and evolve into different communities.
+:::
+:::
+
+::: {#second-column}
+![](figures/meta_act_schema_vert.png){fig-alt="metalearning" fig-align="center" width=80%}
+:::
+::::
+
+::: {.attribution}
+Figure from [Publication](https://www.nature.com/articles/s41598-023-40766-6)
+:::
+
+## Methodology
+:::: {layout="[ 65, 35 ]"}
+
+::: {#first-column}
+
+- Developed a metalearning framework to optimize activation functions.
+- Tested the algorithm on classification and regression tasks for conventional and physics-informed neural networks.
+- Showed a regime where learned diverse activations are superior.
+- Gave preliminary analysis to support the hypothesis that diversity in activation functions can improve performance.
+
+:::
+
+::: {#second-column}
+
+![](figures/2NeuronSubpopulation_Sine_1_compact2.png){fig-alt="2neuronmnist1d" fig-align="center" width=100%}
+
+:::
+::::
+
+::: {.attribution}
+Figure from [Publication](https://www.nature.com/articles/s41598-023-40766-6)
+:::
+
+## Results
+![](figures/meta_div_scaling.png){fig-alt="metalearning" fig-align="center" width=80%}
+
+::: {.attribution}
+Figure from [Publication](https://www.nature.com/articles/s41598-023-40766-6)
+:::
+
+## Results Real World Data
+![](figures/real_pendulum.png){fig-alt="real world example" fig-align="center" width=80%}
+
+::: {.attribution}
+Figure from [Publication](https://www.nature.com/articles/s41598-023-40766-6)
+:::
+
+## Analysis: Participation Ratio
+Estimate change in dimensionality of network activations
+
+:::: {layout="[ 65, 35 ]"}
+
+::: {#first-column}
+
+$$
+Nr = \mathcal{R} 
+    = \frac{(\operatorname{tr}{\bf C})^2}{\operatorname{tr}{\bf C}^2}
+    = \frac{\left(\sum_{n=1}^N\lambda_n \right)^2}{\sum_{n=1}^N \lambda_n^2}
+$$
+
+where $\lambda_n$ are the co-variance matrix $\bf C$'s eigenvalues for neuronal activity data matrix.
+The normalized participation ratio $r = \mathcal{R} / N$.
+
+:::
+
+::: {#second-column}
+
+![](figures/Participation_ratio.png){fig-alt="participation ratio" fig-align="center" width=100%}
+
+:::
+::::
+
+We find that the participation ratio is significantly greater for the diverse activation functions indicating a greater use of the network's capacity.
+
+::: {.attribution}
+Figure from [Publication](https://www.nature.com/articles/s41598-023-40766-6)
+:::
+
+::: {.notes}
+If all the variance is in one dimension, say $\lambda_n = \delta_{n1}$, then $\mathcal{R} = 1$
+
+If the variance is evenly distributed across all dimensions, so $\lambda_n = \lambda_1$, then $\mathcal{R} = N$. 
+
+Typically, $1 < \mathcal{R} < N$, and $\mathcal{R}$ corresponds to the number of dimensions needed to explain most of the variance
+:::
+
+## Conclusions
+
+- Learned Diversity Networks discover sets of activation functions that can outperform traditional activations.
+- These networks excel in the regime of low data few shot learning.
+- Due to the nature of metalearning, the memory overhead is significant concern for scaling.
+
+## Speculations: Achieving stable minima
+Optimization of a neural network with shuffled data is akin to noisy descent in the loss landscape.
+This can me modeled with the Langevin equation:
+$$
+\DeclareMathOperator{\Tr}{Tr}
+d\theta_{t} = - \nabla \mathcal{L}(\theta_{t})\, dt + \sqrt{2\mathbf{D}} \cdot d\mathcal{W}_{t}
+$$
+with noise intensity $\mathbf{D} = (\eta / B) \mathcal{L}(\theta) \mathbf{H}(\theta^*)$
+
+Resulting minima from diverse neurons is flatter than from homogeneous ones, as measured by both the trace $\Tr\mathbf{H}$ of the Hessian and the fraction $f$ of its eigenvalues near zero: $\Tr \mathbf{H}_1 >  \Tr \mathbf{H}_2 > \Tr \mathbf{H}_{12}$ and $f_1 < f_2 < f_{12}$
+
+Since the noise term aligns with Hessian bear the minima, this suggests that the minima found by diverse neurons are flatter and more stable.
+
+## Speculations: Structure and universality to diverse activations
+
+- Learned activation functions appear qualitatively independent of the base activation function.
+- The odd and even nature of the learned functions suggest that the network is learning to span the space of possible activation functions.
+
+![](figures/learned_act_insight.png){fig-alt="spanning sets" fig-align="center" width=80%}
+
+
+
+# Background Deux
 
 ## Background: Pontryagin's Maximum Principle
 

@@ -1,6 +1,11 @@
 .reveal section img {
     margin-bottom: -50px;
 }
+.reveal .slides > section > section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
 
 figcaption {
     display: none;
