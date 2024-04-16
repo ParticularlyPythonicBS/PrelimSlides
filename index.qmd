@@ -99,16 +99,24 @@ Day and Night by [M.C. Escher](https://www.wikiart.org/en/m-c-escher/day-and-nig
 :::
 
 # Background
+Neural Networks and optimization
+
+<!-- ![](assets/machine_learning_xkcd.png){fig-alt="Machine Learning XKCD" fig-align="center" height="350px"}
+
+::: {.attribution}
+XKCD comic by [Randall Munroe](https://xkcd.com/1838/)
+::: -->
+
 ## Background: Differentiable Computing
 - Paradigm where programs can be differentiated end-to-end automatically, enabling optimizatio of parameters of the program.
 - Techniques to differentiate through complex programs is more than just deep learning.
 - Can be interpreted probabilistically or as a dynamical system.
-![](figures/autodiff.png){fig-alt="autodifferentiation diagram" width=80% }
+![](figures/BG1/autodiff.png){fig-alt="autodifferentiation diagram" width=80% }
 
 
 ## Background: Neural Networks
 
-![](figures/NN.png){fig-alt="Neural Network diagram" width=80%}
+![](figures/BG1/NN.png){fig-alt="Neural Network diagram" width=80%}
 $$
 \newcommand{\defeq}{\mathrel{\mathop:}=}
 \newcommand{\R}{\mathbb{R}}
@@ -136,7 +144,7 @@ $$
 :::
 
 ::: {#second-column}
-![](figures/backprop_zoomed.png){fig-alt="backprop diagram" fig-align="right" width=80%}
+![](figures/BG1/backprop_zoomed.png){fig-alt="backprop diagram" fig-align="right" width=80%}
 :::
 ::::
 The tunable parameters can then be updated by:
@@ -145,7 +153,7 @@ $\Param\gets \Param -\eta \nabla_{\Param}C$
 ## Background: Loss Functions
 - Neural networks compute a probability distribution on the data space. 
 - Our objective is maximize the likihood the assigned to emperical data.
--Constructing a suitable differentiable loss function gives the path to optimization of a neural network.
+- Constructing a suitable differentiable loss function gives the path to optimization of a neural network.
 Common loss functions include:
   - Mean Squared Error $\mathcal{L}(\theta) = \sum_{i=1}^N (y_i - f(x_i;\theta))^2$
   - Cross Entropy $\mathcal{L}(\theta) = -\sum_{i=1}^N y_i \log(f(x_i;\theta))$
@@ -169,16 +177,16 @@ Stochastic Gradient Descent, Adam, and RMSProp are common optimization algorithm
 
 ## Background: Meta-Learning
 
-:::: {layout="[ 70, 30 ]"}
+:::: {layout="[ 50, 50 ]"}
 
 ::: {#first-column}
-- Meta-learning or learning to learn tries to improve the learning algorithm itself given the experience of mutiple learning episodes.
-- During base learning , an inner learning algorithm solves a task defined by a dataset and objective. 
-- During meta-learning , an outer algorithm updates the inner learning algorithm such that the model it learns improves an outer objective.
+- Improve the learning algorithm itself given the experience of mutiple learning episodes.
+- Base learning: an inner learning algorithm solves a task defined by a dataset and objective. 
+- Meta-learning: an outer algorithm updates the inner learning algorithm.
 :::
 
 ::: {#second-column}
-![](figures/Metalearning.png){fig-alt="metalearning" fig-align="center" width=80%}
+![](figures/BG1/Metalearning.png){fig-alt="metalearning" fig-align="center" width=80%}
 :::
 ::::
 Algorithms for meta-learning are still in a nascent stage with significant computational overhead.
@@ -188,11 +196,11 @@ Figure by [Dr. John Lindner ](https://www.nature.com/articles/s41598-023-40766-6
 :::
 
 ## Background: Physics-Informed Neural Networks(PiNNs)
-- PiNNs allow for synthesyzing data with differential equation constraints.
-- We can incorporate the physics as a weak constraint in a composite loss function or morph the architecture to enforce hard constraints.
-- Adding symplectic constraints to the loss function gives Hamiltonian Neural Networks which excel for conservative system predictions.
+- Synthesyzing data with differential equation constraints.
+- Physics as a weak constraint in a composite loss function or a hard constraint with architectural choices.
+- Symplectic constraints to the loss function gives Hamiltonian Neural Networks.
 
-<img src="figures/HNN_schema.png" alt="HNN schema" style="display: block; width: 30%; margin-top: -25px; margin-left: auto; margin-right: auto;">
+<img src="figures/BG1/HNN_schema.png" alt="HNN schema" style="display: block; width: 30%; margin-top: -25px; margin-left: auto; margin-right: auto;">
 
 ::: {.attribution}
 Figure by [Greydanus et al.](https://arxiv.org/abs/2006.08656)
@@ -203,7 +211,7 @@ Figure by [Greydanus et al.](https://arxiv.org/abs/2006.08656)
 <!-- {{<video figures/coordinates.mp4 width="500" height="400" autoplay="true" loop="true">}} -->
 <div>
 <video width="700" height="500" loop style="display: block; margin-left: auto; margin-right: auto;">
-  <source src="figures/coordinates.mp4" type="video/mp4">
+  <source src="figures/BG1/coordinates.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
 </div>
@@ -233,13 +241,13 @@ Adapted from Heliocentrism and Geocentrism by [Malin Christersson
 ::: {#first-column}
 ::: {.center-xy}
 - Activation functions can themselves be modeled as neural networks.
-- Through metalearning, we can optimize the activation function subnetwork for a given task.
-- Using multiple neural network initializations, we can allow the activations to _diversify_ and evolve into different communities.
+- Activation function subnetworks are optimizable via metalearning.
+- Multiple subnetwork initializations allow the activations to _diversify_ and evolve into different communities.
 :::
 :::
 
 ::: {#second-column}
-![](figures/meta_act_schema_vert.png){fig-alt="metalearning" fig-align="center" width=80%}
+![](figures/Result1/meta_act_schema_vert.png){fig-alt="metalearning" fig-align="center" width=80%}
 :::
 ::::
 
@@ -248,20 +256,20 @@ Figure from [Publication](https://www.nature.com/articles/s41598-023-40766-6)
 :::
 
 ## Methodology
-:::: {layout="[ 65, 35 ]"}
+:::: {layout="[ 60, 40 ]"}
 
 ::: {#first-column}
 
 - Developed a metalearning framework to optimize activation functions.
 - Tested the algorithm on classification and regression tasks for conventional and physics-informed neural networks.
 - Showed a regime where learned diverse activations are superior.
-- Gave preliminary analysis to support the hypothesis that diversity in activation functions can improve performance.
+- Gave preliminary analysis to support diversity in activation functions improving performance.
 
 :::
 
 ::: {#second-column}
 
-![](figures/2NeuronSubpopulation_Sine_1_compact2.png){fig-alt="2neuronmnist1d" fig-align="center" width=100%}
+![](figures/Result1/2NeuronSubpopulation_Sine_1_compact2.png){fig-alt="2neuronmnist1d" fig-align="center" width=100%}
 
 :::
 ::::
@@ -270,15 +278,16 @@ Figure from [Publication](https://www.nature.com/articles/s41598-023-40766-6)
 Figure from [Publication](https://www.nature.com/articles/s41598-023-40766-6)
 :::
 
-## Results
-![](figures/meta_div_scaling.png){fig-alt="metalearning" fig-align="center" width=80%}
+## Results: Scaling
+![](figures/Result1/meta_div_scaling.png){fig-alt="scaling" fig-align="center" width=80%}
+
 
 ::: {.attribution}
 Figure from [Publication](https://www.nature.com/articles/s41598-023-40766-6)
 :::
 
 ## Results Real World Data
-![](figures/real_pendulum.png){fig-alt="real world example" fig-align="center" width=80%}
+![](figures/Result1/real_pendulum.png){fig-alt="real world example" fig-align="center" width=80%}
 
 ::: {.attribution}
 Figure from [Publication](https://www.nature.com/articles/s41598-023-40766-6)
@@ -304,12 +313,13 @@ The normalized participation ratio $r = \mathcal{R} / N$.
 
 ::: {#second-column}
 
-![](figures/Participation_ratio.png){fig-alt="participation ratio" fig-align="center" width=100%}
+![](figures/Result1/Participation_ratio.png){fig-alt="participation ratio" fig-align="center" width=100%}
 
 :::
 ::::
 
-We find that the participation ratio is significantly greater for the diverse activation functions indicating a greater use of the network's capacity.
+Diverse activation functions use more of the network's capacity.
+<!-- The participation ratio is significantly greater for the diverse activation functions indicating a greater use of the network's capacity. -->
 
 ::: {.attribution}
 Figure from [Publication](https://www.nature.com/articles/s41598-023-40766-6)
@@ -347,13 +357,23 @@ Since the noise term aligns with Hessian bear the minima, this suggests that the
 - Learned activation functions appear qualitatively independent of the base activation function.
 - The odd and even nature of the learned functions suggest that the network is learning to span the space of possible activation functions.
 
-![](figures/learned_act_insight.png){fig-alt="spanning sets" fig-align="center" width=80%}
+![](figures/Result1/learned_act_insight.png){fig-alt="spanning sets" fig-align="center" width=80%}
 
 
 
 # Background Deux
+Control and Dynamics
+<!-- ![](assets/chaos_xkcd.png){fig-alt="Machine Learning XKCD" fig-align="center" height="350px"}
 
-## Background: Pontryagin's Maximum Principle
+::: {.attribution}
+XKCD comic by [Randall Munroe](https://xkcd.com/1399/)
+::: -->
+
+## Background: Traditional Optimal control strategies
+There are two main approaches to general optimal control:
+
+- Pontryagin's maximum principle: (BVP) in hamiltonian framework
+  - Explicitly  
 
 ## Background: Model Predictive Control
 
@@ -362,7 +382,7 @@ Since the noise term aligns with Hessian bear the minima, this suggests that the
 ## Background: Chaos Control
 
 ## Background: Pendulum
-The career of a young theoretical physicist consists of treating the harmonic oscillator in ever-increasing levels of abstraction. - Sidney Coleman
+<!-- The career of a young theoretical physicist consists of treating the harmonic oscillator in ever-increasing levels of abstraction. - Sidney Coleman -->
 
 ## Background: Kuramoto Oscillator
 
@@ -374,10 +394,29 @@ The career of a young theoretical physicist consists of treating the harmonic os
 ## Foundation
 
 ## Insight
+- Optimal control of network dynamics involves minimizing a cost functional.
+- Traditional control approaches like Pontryagin's maximum principle or Hamilton-Jacobi-Bellman equations are analytically and computationally intractable for complex systems.
+- Neural networks based on neural ODES can approximate the optimal control policy.
 
 ## Methodology
 
-## Results (Preliminary)
+![](figures/Result2/MPC.png){fig-alt="Model Predictive control" fig-align="center" width=100%}
+
+## Results (Kuramoto Grid)
+
+::: {layout-nrow=2}
+![](figures/Result2/Uncontrolled_kuramoto_dynamics.png){fig-alt="Uncontrolled Kuramoto dynamics" fig-align="top" width=100%}
+
+![](figures/Result2/NN_controlled_kuramoto_dynamics.png){fig-alt="NN controlled Kuramoto dynamics" fig-align="top" width=100%}
+
+![](figures/Result2/Uncontrolled_kuramoto_dynamics_noisy_0.1.png){fig-alt="Uncontrolled Kuramoto dynamics with noise" fig-align="bottom" width=100%}
+
+![](figures/Result2/NN_controlled_kuramoto_dynamics_noisy_0.1.png){fig-alt="NN controlled Kuramoto dynamics with noise" fig-align="bottom" width=100%}
+:::
+
+## Results (Pendulum Array)
+![](figures/Result2/controlled_pendulum_dynamics.png){fig-alt="Controlled Pendulum dynamics" fig-align="center" width=100%}
+
 
 ## Future Work
 
@@ -407,59 +446,4 @@ The career of a young theoretical physicist consists of treating the harmonic os
 
 ## Deliverables
 
-<!-- 
-
-
-## Code Highlighting
-
-For continuous highlighting, use `from-to` (`6-8`).
-
-For discontinuous highlighting, use `line1, line2, ...` (`1, 4`).
-
-To highlight lines in a progressive manner, use `range1|range2` (`|6-8|1,4|`). 
-
-```{.python code-line-numbers="|6-8|1,4|"}
-import numpy as np
-import matplotlib.pyplot as plt
-
-r = np.arange(0, 2, 0.01)
-theta = 2 * np.pi * r
-fig, ax = plt.subplots(subplot_kw={'projection': 'polar'})
-ax.plot(theta, r)
-ax.set_rticks([0.5, 1, 1.5, 2])
-ax.grid(True)
-plt.show()
-```
-
-<https://quarto.org/docs/presentations/revealjs/#code-blocks>
-
-## Enable more revealjs features
-
-The theme is built ontop of Quarto's `revealjs` implementation. So, any [features](https://quarto.org/docs/presentations/revealjs/) of available are also usable within the theme. For example, if we wanted to incorporate the [chalkboard](https://quarto.org/docs/presentations/revealjs/presenting.html#chalkboard) feature. We would use:
-
-```yaml
-format:
-  ncsu-revealjs: 
-    chalkboard: true
-```
-
-## Summary {#sec-summary}
-
-### NCSU-themed presentation slide deck
-
-The Quarto NCSU Revealjs theme is an extension of Reveal.js and
-offers all of its [features](https://quarto.org/docs/presentations/revealjs/) in the context of being brand friendly to North Carolina State University.
-
-Install the theme without this template:
-
-```bash
-quarto install extension ParticularlyPythonicBS/ncsu-revealjs
-```
-
-Install the theme with the template being present:
-
-```bash
-quarto use template ParticularlyPythonicBS/ncsu-revealjs
-```
-
-You can learn more about using RevealJS with Quarto at: <https://quarto.org/docs/presentations/revealjs/> -->
+## Acknowledgements

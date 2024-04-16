@@ -13,7 +13,7 @@
   <meta name="generator" content="quarto-1.4.553">
 
   <meta name="author" content="Anil Radhakrishnan">
-  <meta name="dcterms.date" content="2024-04-06">
+  <meta name="dcterms.date" content="2024-04-15">
   <title>Nonlinear dynamics with neural networks</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -356,7 +356,7 @@ Anil Radhakrishnan
     </div>
 </div>
 
-  <p class="date">2024-04-06</p>
+  <p class="date">2024-04-15</p>
 </section>
 <section>
 <section id="motivation" class="title-slide slide level1 center">
@@ -483,19 +483,24 @@ Anil Radhakrishnan
 <section>
 <section id="background" class="title-slide slide level1 center">
 <h1>Background</h1>
+<p>Neural Networks and optimization</p>
+<!-- ![](assets/machine_learning_xkcd.png){fig-alt="Machine Learning XKCD" fig-align="center" height="350px"}
 
+::: {.attribution}
+XKCD comic by [Randall Munroe](https://xkcd.com/1838/)
+::: -->
 </section>
 <section id="background-differentiable-computing" class="slide level2">
 <h2>Background: Differentiable Computing</h2>
 <ul>
 <li>Paradigm where programs can be differentiated end-to-end automatically, enabling optimizatio of parameters of the program.</li>
 <li>Techniques to differentiate through complex programs is more than just deep learning.</li>
-<li>Can be interpreted probabilistically or as a dynamical system. <img data-src="figures/autodiff.png" style="width:80.0%" alt="autodifferentiation diagram"></li>
+<li>Can be interpreted probabilistically or as a dynamical system. <img data-src="figures/BG1/autodiff.png" style="width:80.0%" alt="autodifferentiation diagram"></li>
 </ul>
 </section>
 <section id="background-neural-networks" class="slide level2">
 <h2>Background: Neural Networks</h2>
-<p><img data-src="figures/NN.png" style="width:80.0%" alt="Neural Network diagram"> <span class="math display">\[
+<p><img data-src="figures/BG1/NN.png" style="width:80.0%" alt="Neural Network diagram"> <span class="math display">\[
 \newcommand{\defeq}{\mathrel{\mathop:}=}
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\Param}{\mathcal{P}}
@@ -520,7 +525,7 @@ Anil Radhakrishnan
 <div id="second-column" class="quarto-layout-cell" style="flex-basis: 60.0%;justify-content: center;">
 <div class="quarto-figure quarto-figure-right">
 <figure>
-<p><img data-src="figures/backprop_zoomed.png" class="quarto-figure quarto-figure-right" style="width:80.0%" alt="backprop diagram"></p>
+<p><img data-src="figures/BG1/backprop_zoomed.png" class="quarto-figure quarto-figure-right" style="width:80.0%" alt="backprop diagram"></p>
 </figure>
 </div>
 </div>
@@ -532,7 +537,8 @@ Anil Radhakrishnan
 <h2>Background: Loss Functions</h2>
 <ul>
 <li>Neural networks compute a probability distribution on the data space.</li>
-<li>Our objective is maximize the likihood the assigned to emperical data. -Constructing a suitable differentiable loss function gives the path to optimization of a neural network. Common loss functions include:
+<li>Our objective is maximize the likihood the assigned to emperical data.</li>
+<li>Constructing a suitable differentiable loss function gives the path to optimization of a neural network. Common loss functions include:
 <ul>
 <li>Mean Squared Error <span class="math inline">\(\mathcal{L}(\theta) = \sum_{i=1}^N (y_i - f(x_i;\theta))^2\)</span></li>
 <li>Cross Entropy <span class="math inline">\(\mathcal{L}(\theta) = -\sum_{i=1}^N y_i \log(f(x_i;\theta))\)</span></li>
@@ -556,19 +562,19 @@ Anil Radhakrishnan
 </section>
 <section id="background-meta-learning" class="slide level2">
 <h2>Background: Meta-Learning</h2>
-<div class="quarto-layout-panel" data-layout="[ 70, 30 ]">
+<div class="quarto-layout-panel" data-layout="[ 50, 50 ]">
 <div class="quarto-layout-row">
-<div id="first-column" class="quarto-layout-cell" style="flex-basis: 70.0%;justify-content: flex-start;">
+<div id="first-column" class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <ul>
-<li>Meta-learning or learning to learn tries to improve the learning algorithm itself given the experience of mutiple learning episodes.</li>
-<li>During base learning , an inner learning algorithm solves a task defined by a dataset and objective.</li>
-<li>During meta-learning , an outer algorithm updates the inner learning algorithm such that the model it learns improves an outer objective.</li>
+<li>Improve the learning algorithm itself given the experience of mutiple learning episodes.</li>
+<li>Base learning: an inner learning algorithm solves a task defined by a dataset and objective.</li>
+<li>Meta-learning: an outer algorithm updates the inner learning algorithm.</li>
 </ul>
 </div>
-<div id="second-column" class="quarto-layout-cell" style="flex-basis: 30.0%;justify-content: center;">
+<div id="second-column" class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="figures/Metalearning.png" class="quarto-figure quarto-figure-center" style="width:80.0%" alt="metalearning"></p>
+<p><img data-src="figures/BG1/Metalearning.png" class="quarto-figure quarto-figure-center" style="width:80.0%" alt="metalearning"></p>
 </figure>
 </div>
 </div>
@@ -582,12 +588,12 @@ Anil Radhakrishnan
 <section id="background-physics-informed-neural-networkspinns" class="slide level2">
 <h2>Background: Physics-Informed Neural Networks(PiNNs)</h2>
 <ul>
-<li>PiNNs allow for synthesyzing data with differential equation constraints.</li>
-<li>We can incorporate the physics as a weak constraint in a composite loss function or morph the architecture to enforce hard constraints.</li>
-<li>Adding symplectic constraints to the loss function gives Hamiltonian Neural Networks which excel for conservative system predictions.</li>
+<li>Synthesyzing data with differential equation constraints.</li>
+<li>Physics as a weak constraint in a composite loss function or a hard constraint with architectural choices.</li>
+<li>Symplectic constraints to the loss function gives Hamiltonian Neural Networks.</li>
 </ul>
 
-<img src="figures/HNN_schema.png" alt="HNN schema" style="display: block; width: 30%; margin-top: -25px; margin-left: auto; margin-right: auto;" class="r-stretch"><div class="attribution">
+<img src="figures/BG1/HNN_schema.png" alt="HNN schema" style="display: block; width: 30%; margin-top: -25px; margin-left: auto; margin-right: auto;" class="r-stretch"><div class="attribution">
 <p>Figure by <a href="https://arxiv.org/abs/2006.08656">Greydanus et al.</a></p>
 </div>
 </section>
@@ -596,7 +602,7 @@ Anil Radhakrishnan
 <!--  -->
 <div>
 <video width="700" height="500" loop="" style="display: block; margin-left: auto; margin-right: auto;">
-<source src="figures/coordinates.mp4" type="video/mp4">
+<source src="figures/BG1/coordinates.mp4" type="video/mp4">
 Your browser does not support the video tag. </video>
 </div>
 <p>Neural networks are coordinate dependent. The choice of coordinates can significantly affect the performance of the network.</p>
@@ -629,15 +635,15 @@ Your browser does not support the video tag. </video>
 <div class="center-xy">
 <ul>
 <li>Activation functions can themselves be modeled as neural networks.</li>
-<li>Through metalearning, we can optimize the activation function subnetwork for a given task.</li>
-<li>Using multiple neural network initializations, we can allow the activations to <em>diversify</em> and evolve into different communities.</li>
+<li>Activation function subnetworks are optimizable via metalearning.</li>
+<li>Multiple subnetwork initializations allow the activations to <em>diversify</em> and evolve into different communities.</li>
 </ul>
 </div>
 </div>
 <div id="second-column" class="quarto-layout-cell" style="flex-basis: 35.0%;justify-content: center;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="figures/meta_act_schema_vert.png" class="quarto-figure quarto-figure-center" style="width:80.0%" alt="metalearning"></p>
+<p><img data-src="figures/Result1/meta_act_schema_vert.png" class="quarto-figure quarto-figure-center" style="width:80.0%" alt="metalearning"></p>
 </figure>
 </div>
 </div>
@@ -649,20 +655,20 @@ Your browser does not support the video tag. </video>
 </section>
 <section id="methodology" class="slide level2">
 <h2>Methodology</h2>
-<div class="quarto-layout-panel" data-layout="[ 65, 35 ]">
+<div class="quarto-layout-panel" data-layout="[ 60, 40 ]">
 <div class="quarto-layout-row">
-<div id="first-column" class="quarto-layout-cell" style="flex-basis: 65.0%;justify-content: flex-start;">
+<div id="first-column" class="quarto-layout-cell" style="flex-basis: 60.0%;justify-content: flex-start;">
 <ul>
 <li>Developed a metalearning framework to optimize activation functions.</li>
 <li>Tested the algorithm on classification and regression tasks for conventional and physics-informed neural networks.</li>
 <li>Showed a regime where learned diverse activations are superior.</li>
-<li>Gave preliminary analysis to support the hypothesis that diversity in activation functions can improve performance.</li>
+<li>Gave preliminary analysis to support diversity in activation functions improving performance.</li>
 </ul>
 </div>
-<div id="second-column" class="quarto-layout-cell" style="flex-basis: 35.0%;justify-content: center;">
+<div id="second-column" class="quarto-layout-cell" style="flex-basis: 40.0%;justify-content: center;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="figures/2NeuronSubpopulation_Sine_1_compact2.png" class="quarto-figure quarto-figure-center" style="width:100.0%" alt="2neuronmnist1d"></p>
+<p><img data-src="figures/Result1/2NeuronSubpopulation_Sine_1_compact2.png" class="quarto-figure quarto-figure-center" style="width:100.0%" alt="2neuronmnist1d"></p>
 </figure>
 </div>
 </div>
@@ -672,17 +678,17 @@ Your browser does not support the video tag. </video>
 <p>Figure from <a href="https://www.nature.com/articles/s41598-023-40766-6">Publication</a></p>
 </div>
 </section>
-<section id="results" class="slide level2">
-<h2>Results</h2>
+<section id="results-scaling" class="slide level2">
+<h2>Results: Scaling</h2>
 
-<img data-src="figures/meta_div_scaling.png" class="quarto-figure quarto-figure-center r-stretch" style="width:80.0%" alt="metalearning"><div class="attribution">
+<img data-src="figures/Result1/meta_div_scaling.png" class="quarto-figure quarto-figure-center r-stretch" style="width:80.0%" alt="scaling"><div class="attribution">
 <p>Figure from <a href="https://www.nature.com/articles/s41598-023-40766-6">Publication</a></p>
 </div>
 </section>
 <section id="results-real-world-data" class="slide level2">
 <h2>Results Real World Data</h2>
 
-<img data-src="figures/real_pendulum.png" class="quarto-figure quarto-figure-center r-stretch" style="width:80.0%" alt="real world example"><div class="attribution">
+<img data-src="figures/Result1/real_pendulum.png" class="quarto-figure quarto-figure-center r-stretch" style="width:80.0%" alt="real world example"><div class="attribution">
 <p>Figure from <a href="https://www.nature.com/articles/s41598-023-40766-6">Publication</a></p>
 </div>
 </section>
@@ -702,13 +708,13 @@ Nr = \mathcal{R}
 <div id="second-column" class="quarto-layout-cell" style="flex-basis: 35.0%;justify-content: center;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="figures/Participation_ratio.png" class="quarto-figure quarto-figure-center" style="width:100.0%" alt="participation ratio"></p>
+<p><img data-src="figures/Result1/Participation_ratio.png" class="quarto-figure quarto-figure-center" style="width:100.0%" alt="participation ratio"></p>
 </figure>
 </div>
 </div>
 </div>
 </div>
-<p>We find that the participation ratio is significantly greater for the diverse activation functions indicating a greater use of the network’s capacity.</p>
+<p>Diverse activation functions use more of the network’s capacity. <!-- The participation ratio is significantly greater for the diverse activation functions indicating a greater use of the network's capacity. --></p>
 <div class="attribution">
 <p>Figure from <a href="https://www.nature.com/articles/s41598-023-40766-6">Publication</a></p>
 </div>
@@ -752,14 +758,25 @@ d\theta_{t} = - \nabla \mathcal{L}(\theta_{t})\, dt + \sqrt{2\mathbf{D}} \cdot d
 <li>The odd and even nature of the learned functions suggest that the network is learning to span the space of possible activation functions.</li>
 </ul>
 
-<img data-src="figures/learned_act_insight.png" class="quarto-figure quarto-figure-center r-stretch" style="width:80.0%" alt="spanning sets"></section></section>
+<img data-src="figures/Result1/learned_act_insight.png" class="quarto-figure quarto-figure-center r-stretch" style="width:80.0%" alt="spanning sets"></section></section>
 <section>
 <section id="background-deux" class="title-slide slide level1 center">
 <h1>Background Deux</h1>
+<p>Control and Dynamics <!-- ![](assets/chaos_xkcd.png){fig-alt="Machine Learning XKCD" fig-align="center" height="350px"}
 
+::: {.attribution}
+XKCD comic by [Randall Munroe](https://xkcd.com/1399/)
+::: --></p>
 </section>
-<section id="background-pontryagins-maximum-principle" class="slide level2">
-<h2>Background: Pontryagin’s Maximum Principle</h2>
+<section id="background-traditional-optimal-control-strategies" class="slide level2">
+<h2>Background: Traditional Optimal control strategies</h2>
+<p>There are two main approaches to general optimal control:</p>
+<ul>
+<li>Pontryagin’s maximum principle: (BVP) in hamiltonian framework
+<ul>
+<li>Explicitly</li>
+</ul></li>
+</ul>
 </section>
 <section id="background-model-predictive-control" class="slide level2">
 <h2>Background: Model Predictive Control</h2>
@@ -772,7 +789,7 @@ d\theta_{t} = - \nabla \mathcal{L}(\theta_{t})\, dt + \sqrt{2\mathbf{D}} \cdot d
 </section>
 <section id="background-pendulum" class="slide level2">
 <h2>Background: Pendulum</h2>
-<p>The career of a young theoretical physicist consists of treating the harmonic oscillator in ever-increasing levels of abstraction. - Sidney Coleman</p>
+<!-- The career of a young theoretical physicist consists of treating the harmonic oscillator in ever-increasing levels of abstraction. - Sidney Coleman -->
 </section>
 <section id="background-kuramoto-oscillator" class="slide level2">
 <h2>Background: Kuramoto Oscillator</h2>
@@ -793,13 +810,57 @@ d\theta_{t} = - \nabla \mathcal{L}(\theta_{t})\, dt + \sqrt{2\mathbf{D}} \cdot d
 </section>
 <section id="insight-1" class="slide level2">
 <h2>Insight</h2>
+<ul>
+<li>Optimal control of network dynamics involves minimizing a cost functional.</li>
+<li>Traditional control approaches like Pontryagin’s maximum principle or Hamilton-Jacobi-Bellman equations are analytically and computationally intractable for complex systems.</li>
+<li>Neural networks based on neural ODES can approximate the optimal control policy.</li>
+</ul>
 </section>
 <section id="methodology-1" class="slide level2">
 <h2>Methodology</h2>
+
+<img data-src="figures/Result2/MPC.png" class="quarto-figure quarto-figure-center r-stretch" style="width:100.0%" alt="Model Predictive control"></section>
+<section id="results-kuramoto-grid" class="slide level2">
+<h2>Results (Kuramoto Grid)</h2>
+<div class="quarto-layout-panel" data-layout-nrow="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-top">
+<figure>
+<p><img data-src="figures/Result2/Uncontrolled_kuramoto_dynamics.png" class="quarto-figure quarto-figure-top" style="width:100.0%" alt="Uncontrolled Kuramoto dynamics"></p>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-top">
+<figure>
+<p><img data-src="figures/Result2/NN_controlled_kuramoto_dynamics.png" class="quarto-figure quarto-figure-top" style="width:100.0%" alt="NN controlled Kuramoto dynamics"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-bottom">
+<figure>
+<p><img data-src="figures/Result2/Uncontrolled_kuramoto_dynamics_noisy_0.1.png" class="quarto-figure quarto-figure-bottom" style="width:100.0%" alt="Uncontrolled Kuramoto dynamics with noise"></p>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-bottom">
+<figure>
+<p><img data-src="figures/Result2/NN_controlled_kuramoto_dynamics_noisy_0.1.png" class="quarto-figure quarto-figure-bottom" style="width:100.0%" alt="NN controlled Kuramoto dynamics with noise"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
 </section>
-<section id="results-preliminary" class="slide level2">
-<h2>Results (Preliminary)</h2>
-</section>
+<section id="results-pendulum-array" class="slide level2">
+<h2>Results (Pendulum Array)</h2>
+
+<img data-src="figures/Result2/controlled_pendulum_dynamics.png" class="quarto-figure quarto-figure-center r-stretch" style="width:100.0%" alt="Controlled Pendulum dynamics"></section>
 <section id="future-work" class="slide level2">
 <h2>Future Work</h2>
 </section>
@@ -850,62 +911,9 @@ d\theta_{t} = - \nabla \mathcal{L}(\theta_{t})\, dt + \sqrt{2\mathbf{D}} \cdot d
 </section>
 <section id="deliverables" class="slide level2">
 <h2>Deliverables</h2>
-<!-- 
-
-
-## Code Highlighting
-
-For continuous highlighting, use `from-to` (`6-8`).
-
-For discontinuous highlighting, use `line1, line2, ...` (`1, 4`).
-
-To highlight lines in a progressive manner, use `range1|range2` (`|6-8|1,4|`). 
-
-```{.python code-line-numbers="|6-8|1,4|"}
-import numpy as np
-import matplotlib.pyplot as plt
-
-r = np.arange(0, 2, 0.01)
-theta = 2 * np.pi * r
-fig, ax = plt.subplots(subplot_kw={'projection': 'polar'})
-ax.plot(theta, r)
-ax.set_rticks([0.5, 1, 1.5, 2])
-ax.grid(True)
-plt.show()
-```
-
-<https://quarto.org/docs/presentations/revealjs/#code-blocks>
-
-## Enable more revealjs features
-
-The theme is built ontop of Quarto's `revealjs` implementation. So, any [features](https://quarto.org/docs/presentations/revealjs/) of available are also usable within the theme. For example, if we wanted to incorporate the [chalkboard](https://quarto.org/docs/presentations/revealjs/presenting.html#chalkboard) feature. We would use:
-
-```yaml
-format:
-  ncsu-revealjs: 
-    chalkboard: true
-```
-
-## Summary {#sec-summary}
-
-### NCSU-themed presentation slide deck
-
-The Quarto NCSU Revealjs theme is an extension of Reveal.js and
-offers all of its [features](https://quarto.org/docs/presentations/revealjs/) in the context of being brand friendly to North Carolina State University.
-
-Install the theme without this template:
-
-```bash
-quarto install extension ParticularlyPythonicBS/ncsu-revealjs
-```
-
-Install the theme with the template being present:
-
-```bash
-quarto use template ParticularlyPythonicBS/ncsu-revealjs
-```
-
-You can learn more about using RevealJS with Quarto at: <https://quarto.org/docs/presentations/revealjs/> -->
+</section>
+<section id="acknowledgements" class="slide level2">
+<h2>Acknowledgements</h2>
 <div class="quarto-auto-generated-content">
 <p><img src="assets/ncstate_red_letter_logo.png" class="slide-logo"></p>
 <div class="footer footer-default">
