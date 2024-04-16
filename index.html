@@ -497,11 +497,7 @@ Anil Radhakrishnan
 <section>
 <section id="neural-networks-and-optimization" class="title-slide slide level1 center">
 <h1>Neural Networks and optimization</h1>
-<!-- ![](assets/machine_learning_xkcd.png){fig-alt="Machine Learning XKCD" fig-align="center" height="350px"}
 
-::: {.attribution}
-XKCD comic by [Randall Munroe](https://xkcd.com/1838/)
-::: -->
 </section>
 <section id="background-differentiable-computing" class="slide level2">
 <h2>Background: Differentiable Computing</h2>
@@ -775,11 +771,7 @@ d\theta_{t} = - \nabla \mathcal{L}(\theta_{t})\, dt + \sqrt{2\mathbf{D}} \cdot d
 <section>
 <section id="control-and-chaos" class="title-slide slide level1 center">
 <h1>Control and Chaos</h1>
-<!-- ![](assets/chaos_xkcd.png){fig-alt="Machine Learning XKCD" fig-align="center" height="350px"}
 
-::: {.attribution}
-XKCD comic by [Randall Munroe](https://xkcd.com/1399/)
-::: -->
 </section>
 <section id="background-hamilton-jacobi-bellmanhjb-equation" class="slide level2">
 <h2>Background: Hamilton Jacobi Bellman(HJB) Equation</h2>
@@ -791,20 +783,59 @@ V(x(t_0),t_0,t_f) = \min_{u(t))} J(x(t_0),u(t),t_0,t_f)\\
 -\dfrac{\partial V}{\partial t} = \min_{u(t)} \left[ \mathcal{L}(x(t),u(t)) + \dfrac{\partial V}{\partial x}^T f(x(t),u(t)) \right]
 \]</span></p>
 </section>
-<section id="background-pontryagins-maximum-principle" class="slide level2">
-<h2>Background: Pontryagin’s Maximum Principle</h2>
-</section>
 <section id="background-model-predictive-control" class="slide level2">
 <h2>Background: Model Predictive Control</h2>
+<p>Control scheme where a model is used for predicting the future behavior of the system over finite time window</p>
+<div>
+<video width="700" height="300" loop="" style="display: block; margin-left: auto; margin-right: auto;">
+<source src="figures/BG2/MPC.mp4" type="video/mp4">
+Your browser does not support the video tag. </video>
+</div>
+<div>
+<video width="200" height="200" loop="" style="display: block; margin-left: auto; margin-right: auto;">
+<source src="figures/BG2/disc_3d_ctrl_motor.mp4" type="video/mp4">
+Your browser does not support the video tag. </video>
+</div>
+<div class="attribution">
+<p>Animations from <a href="https://www.do-mpc.com/en/latest/theory_mpc.html">do-mpc documentation</a></p>
+</div>
+<aside class="notes">
+<p>Based on these predictions and the current measured/estimated state of the system, the optimal control inputs with respect to a defined control objective and subject to system constraints is computed. After a certain time interval, the measurement, estimation and computation process is repeated with a shifted horizon</p>
+<p>Proactive control action: The controller is anticipating future disturbances, set-points etc.</p>
+<p>Non-linear control: MPC can explicitly consider non-linear systems without linearization</p>
+<p>Arbitrary control objective: Traditional set-point tracking and regulation or economic MPC</p>
+<p>constrained formulation: Explicitly consider physical, safety or operational system constraints The dotted line indicates the current prediction and the solid line represents the realized values.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="background-chaos" class="slide level2">
 <h2>Background: Chaos</h2>
 <p>Let <span class="math inline">\(X\)</span> be a metric space. A continous map <span class="math inline">\(f: X \rightarrow X\)</span> is said to be chaotic on <span class="math inline">\(X\)</span> if:</p>
+<table style="width:100%">
+<tbody><tr>
+<td style="vertical-align:top">
 <ul>
-<li><span class="math inline">\(f\)</span> has sensitive dependence on initial conditions</li>
-<li>is topologically transitive</li>
-<li>and has dense periodic orbits. <video width="400" height="400" loop="" style="display: block; margin-left: auto; margin-right: auto;"> <source src="figures/BG2/lorentz_attractor.mp4" type="video/mp4"> Your browser does not support the video tag. </video></li>
-</ul>
+<li><p><span class="math inline">\(f\)</span> has sensitive dependence on initial conditions</p></li>
+<li><p>is topologically transitive</p></li>
+<li><p>and has dense periodic orbits</p>
+</li></ul></td>
+<td style="vertical-align:top">
+<video width="600" height="700" loop="" style="display: block; margin-left: auto; margin-right: auto;">
+<source src="figures/BG2/lorentz_attractor.mp4" type="video/mp4">
+<p>Your browser does not support the video tag. </p>
+</video></td>
+</tr>
+</tbody></table>
+
 </section>
 <section id="background-chaos-control" class="slide level2">
 <h2>Background: Chaos Control</h2>
@@ -812,6 +843,9 @@ V(x(t_0),t_0,t_f) = \min_{u(t))} J(x(t_0),u(t),t_0,t_f)\\
 <section id="background-pendulum" class="slide level2">
 <h2>Background: Pendulum</h2>
 <!-- The career of a young theoretical physicist consists of treating the harmonic oscillator in ever-increasing levels of abstraction. - Sidney Coleman -->
+<p><span class="math display">\[
+  ml^2\ddot\theta =-\gamma\dot\theta\nonumber-mgl\sin{\theta}\nonumber+\tau_{0}+\tau_{1}\sin{\omega t}
+\]</span></p>
 </section>
 <section id="background-kuramoto-oscillator" class="slide level2">
 <h2>Background: Kuramoto Oscillator</h2>
@@ -819,10 +853,13 @@ V(x(t_0),t_0,t_f) = \min_{u(t))} J(x(t_0),u(t),t_0,t_f)\\
 <section id="background-array-systems" class="slide level2">
 <h2>Background: Array Systems</h2>
 <div>
-<video width="700" height="500" loop="" style="display: block; margin-left: auto; margin-right: auto;">
+<video width="700" height="400" loop="" style="display: block; margin-left: auto; margin-right: auto;">
 <source src="figures/BG2/Chaotic_pendulum_array.mp4" type="video/mp4">
 Your browser does not support the video tag. </video>
 </div>
+<p><span class="math display">\[
+l_n^2\ddot\theta_n =-\gamma\dot\theta_n\nonumber-l_n\sin{\theta_n}\nonumber +\tau_{0}+\tau_{1}\sin{\omega t}\nonumber +\kappa(\theta_{n-1}+\theta_{n+1}-2\theta_n)
+\]</span></p>
 </section></section>
 <section>
 <section id="neural-network-control-of-chaos" class="title-slide slide level1 center">
@@ -886,7 +923,7 @@ Your browser does not support the video tag. </video>
 
 <img data-src="figures/Result2/controlled_pendulum_dynamics.png" class="quarto-figure quarto-figure-center r-stretch" style="width:100.0%" alt="Controlled Pendulum dynamics"></section>
 <section id="future-work-exotic-dynamics" class="slide level2">
-<h2>Future Work Exotic Dynamics</h2>
+<h2>Future Work: Exotic Dynamics</h2>
 <div>
 <video width="700" height="500" loop="" style="display: block; margin-left: auto; margin-right: auto;">
 <source src="figures/Result2/ks.mp4" type="video/mp4">
@@ -981,6 +1018,9 @@ V(x(t_0),t_0,t_f) = V(x(t_0),t_0,t) + V(x(t),t,t_f)
 <p><span class="math display">\[
 \implies \boxed{-\dfrac{\partial V}{\partial t} = \min_{u(t)} \left[ \mathcal{L}(x(t),u(t)) + \dfrac{\partial V}{\partial x}^T f(x(t),u(t)) \right]}
 \]</span></p>
+</section>
+<section id="pontryagins-maximum-principle" class="slide level2 unnumbered unlisted" data-visibility="uncounted">
+<h2>Pontryagin’s Maximum Principle</h2>
 </section>
 <section id="stochasticity-and-noise" class="slide level2 unnumbered unlisted" data-visibility="uncounted">
 <h2>Stochasticity and noise</h2>

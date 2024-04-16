@@ -102,12 +102,6 @@ Day and Night by [M.C. Escher](https://www.wikiart.org/en/m-c-escher/day-and-nig
 
 # Neural Networks and optimization
 
-<!-- ![](assets/machine_learning_xkcd.png){fig-alt="Machine Learning XKCD" fig-align="center" height="350px"}
-
-::: {.attribution}
-XKCD comic by [Randall Munroe](https://xkcd.com/1838/)
-::: -->
-
 ## Background: Differentiable Computing
 
 - Paradigm where programs can be differentiated end-to-end automatically, enabling optimizatio of parameters of the program.
@@ -364,11 +358,6 @@ Since the noise term aligns with Hessian bear the minima, this suggests that the
 
 
 # Control and Chaos
-<!-- ![](assets/chaos_xkcd.png){fig-alt="Machine Learning XKCD" fig-align="center" height="350px"}
-
-::: {.attribution}
-XKCD comic by [Randall Munroe](https://xkcd.com/1399/)
-::: -->
 
 ## Background: Hamilton Jacobi Bellman(HJB) Equation
 Extension of Hamilton Jacobi equation/ Continous time analog of Dynamic Programming.
@@ -380,36 +369,87 @@ V(x(t_0),t_0,t_f) = \min_{u(t))} J(x(t_0),u(t),t_0,t_f)\\
 -\dfrac{\partial V}{\partial t} = \min_{u(t)} \left[ \mathcal{L}(x(t),u(t)) + \dfrac{\partial V}{\partial x}^T f(x(t),u(t)) \right]
 $$
 
-## Background: Pontryagin's Maximum Principle
-
 ## Background: Model Predictive Control
+
+Control scheme where a model is used for predicting the future behavior of the system over finite time window
+
+
+<div>
+<video width="700" height="300" loop style="display: block; margin-left: auto; margin-right: auto;">
+  <source src="figures/BG2/MPC.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+</div>
+
+<div>
+<video width="200" height="200" loop style="display: block; margin-left: auto; margin-right: auto;">
+  <source src="figures/BG2/disc_3d_ctrl_motor.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+</div>
+
+
+::: {.attribution}
+Animations from [do-mpc documentation](https://www.do-mpc.com/en/latest/theory_mpc.html)
+:::
+
+::: {.notes}
+Based on these predictions and the current measured/estimated state of the system, the optimal control inputs with respect to a defined control objective and subject to system constraints is computed. 
+After a certain time interval, the measurement, estimation and computation process is repeated with a shifted horizon
+
+Proactive control action: The controller is anticipating future disturbances, set-points etc.
+
+Non-linear control: MPC can explicitly consider non-linear systems without linearization
+
+Arbitrary control objective: Traditional set-point tracking and regulation or economic MPC
+
+constrained formulation: Explicitly consider physical, safety or operational system constraints
+The dotted line indicates the current prediction and the solid line represents the realized values.
+:::
 
 ## Background: Chaos
 
 Let $X$ be a metric space. A continous map $f: X \rightarrow X$ is said to be chaotic on $X$ if:
 
+<table style="width:100%">
+  <tr>
+    <td style="vertical-align:top">
+
 - $f$ has sensitive dependence on initial conditions
 - is topologically transitive
-- and has dense periodic orbits.
-<video width="400" height="400" loop style="display: block; margin-left: auto; margin-right: auto;">
+- and has dense periodic orbits
+
+    </td>
+    <td style="vertical-align:top">
+<video width="600" height="700" loop style="display: block; margin-left: auto; margin-right: auto;">
   <source src="figures/BG2/lorentz_attractor.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
+    </td>
+  </tr>
+</table>
 
 ## Background: Chaos Control
 
 ## Background: Pendulum
 <!-- The career of a young theoretical physicist consists of treating the harmonic oscillator in ever-increasing levels of abstraction. - Sidney Coleman -->
+$$
+  ml^2\ddot\theta =-\gamma\dot\theta\nonumber-mgl\sin{\theta}\nonumber+\tau_{0}+\tau_{1}\sin{\omega t}
+$$
 
 ## Background: Kuramoto Oscillator
 
 ## Background: Array Systems
 <div>
-<video width="700" height="500" loop style="display: block; margin-left: auto; margin-right: auto;">
+<video width="700" height="400" loop style="display: block; margin-left: auto; margin-right: auto;">
   <source src="figures/BG2/Chaotic_pendulum_array.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
 </div>
+
+$$
+l_n^2\ddot\theta_n =-\gamma\dot\theta_n\nonumber-l_n\sin{\theta_n}\nonumber +\tau_{0}+\tau_{1}\sin{\omega t}\nonumber +\kappa(\theta_{n-1}+\theta_{n+1}-2\theta_n)
+$$
 
 # Neural Network control of chaos
 ## Foundation
@@ -439,7 +479,7 @@ Let $X$ be a metric space. A continous map $f: X \rightarrow X$ is said to be ch
 ![](figures/Result2/controlled_pendulum_dynamics.png){fig-alt="Controlled Pendulum dynamics" fig-align="center" width=100%}
 
 
-## Future Work Exotic Dynamics
+## Future Work: Exotic Dynamics
 <div>
 <video width="700" height="500" loop style="display: block; margin-left: auto; margin-right: auto;">
   <source src="figures/Result2/ks.mp4" type="video/mp4">
@@ -508,6 +548,8 @@ $$
 $$
 \implies \boxed{-\dfrac{\partial V}{\partial t} = \min_{u(t)} \left[ \mathcal{L}(x(t),u(t)) + \dfrac{\partial V}{\partial x}^T f(x(t),u(t)) \right]}
 $$
+
+## Pontryagin's Maximum Principle {.unnumbered .unlisted visibility="uncounted"}
 
 ## Stochasticity and noise {.unnumbered .unlisted visibility="uncounted"}
 
