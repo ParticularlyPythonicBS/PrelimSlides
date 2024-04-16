@@ -2,7 +2,7 @@
 title: Nonlinear dynamics with neural networks
 subtitle: Preliminary Examination
 author: Anil Radhakrishnan
-institute: Nonlinear Artificial Intelligence laboratory, North Carolina State University
+institute: Nonlinear Artificial Intelligence Laboratory, North Carolina State University
 date: last-modified
 format:
   revealjs:
@@ -22,17 +22,17 @@ format:
     auto-play-media: true
     citations-hover: true
     reference-location: section
-    # include-in-header: 
-    #   text: |
-    #     <style>
-    #     .center-xy {
-    #       margin: 0;
-    #       position: absolute;
-    #       top: 0%;
-    #       -ms-transform: translateY(20%);
-    #       transform: translateY(20%);
-    #     }
-    #     </style>
+    include-in-header: 
+      text: |
+        <style>
+        .center-xy {
+          margin: 0;
+          position: absolute;
+          top: 0%;
+          -ms-transform: translateY(20%);
+          transform: translateY(20%);
+        }
+        </style>
 revealjs-plugins:
   - attribution
     
@@ -109,6 +109,7 @@ XKCD comic by [Randall Munroe](https://xkcd.com/1838/)
 ::: -->
 
 ## Background: Differentiable Computing
+
 - Paradigm where programs can be differentiated end-to-end automatically, enabling optimizatio of parameters of the program.
 - Techniques to differentiate through complex programs is more than just deep learning.
 - Can be interpreted probabilistically or as a dynamical system.
@@ -228,10 +229,10 @@ Adapted from Heliocentrism and Geocentrism by [Malin Christersson
 (Published and Patented)
 <script type="text/javascript" src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script><div class="altmetric-embed" data-badge-type="large-donut" data-altmetric-id="126463806"></div>
 
-## Foundation {.center}
+## Foundation
 
 - Most complex systems showcase diversity in populations.
-- Artificial neural network architectures are traditionally layerwise-homogenous due to computational efficiencies.
+- Artificial neural network architectures are traditionally layerwise-homogenous
 - Will neurons diversify if given the opportunity?
 
 
@@ -384,6 +385,16 @@ $$
 ## Background: Model Predictive Control
 
 ## Background: Chaos
+
+Let $X$ be a metric space. A continous map $f: X \rightarrow X$ is said to be chaotic on $X$ if:
+
+- $f$ has sensitive dependence on initial conditions
+- is topologically transitive
+- and has dense periodic orbits.
+<video width="400" height="400" loop style="display: block; margin-left: auto; margin-right: auto;">
+  <source src="figures/BG2/lorentz_attractor.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
 
 ## Background: Chaos Control
 

@@ -327,6 +327,15 @@
       margin-right: 0; 
     }
   </style>
+  <style>
+  .center-xy {
+    margin: 0;
+    position: absolute;
+    top: 0%;
+    -ms-transform: translateY(20%);
+    transform: translateY(20%);
+  }
+  </style>
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -342,7 +351,7 @@
 Anil Radhakrishnan 
 </div>
         <p class="quarto-title-affiliation">
-            Nonlinear Artificial Intelligence laboratory, North Carolina State University
+            Nonlinear Artificial Intelligence Laboratory, North Carolina State University
           </p>
     </div>
 </div>
@@ -623,11 +632,11 @@ Your browser does not support the video tag. </video>
 
 </div>
 </section>
-<section id="foundation" class="slide level2 center">
+<section id="foundation" class="slide level2">
 <h2>Foundation</h2>
 <ul>
 <li>Most complex systems showcase diversity in populations.</li>
-<li>Artificial neural network architectures are traditionally layerwise-homogenous due to computational efficiencies.</li>
+<li>Artificial neural network architectures are traditionally layerwise-homogenous</li>
 <li>Will neurons diversify if given the opportunity?</li>
 </ul>
 </section>
@@ -790,6 +799,12 @@ V(x(t_0),t_0,t_f) = \min_{u(t))} J(x(t_0),u(t),t_0,t_f)\\
 </section>
 <section id="background-chaos" class="slide level2">
 <h2>Background: Chaos</h2>
+<p>Let <span class="math inline">\(X\)</span> be a metric space. A continous map <span class="math inline">\(f: X \rightarrow X\)</span> is said to be chaotic on <span class="math inline">\(X\)</span> if:</p>
+<ul>
+<li><span class="math inline">\(f\)</span> has sensitive dependence on initial conditions</li>
+<li>is topologically transitive</li>
+<li>and has dense periodic orbits. <video width="400" height="400" loop="" style="display: block; margin-left: auto; margin-right: auto;"> <source src="figures/BG2/lorentz_attractor.mp4" type="video/mp4"> Your browser does not support the video tag. </video></li>
+</ul>
 </section>
 <section id="background-chaos-control" class="slide level2">
 <h2>Background: Chaos Control</h2>
