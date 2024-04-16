@@ -2,12 +2,12 @@
 title: Nonlinear dynamics with neural networks
 subtitle: Preliminary Examination
 author: Anil Radhakrishnan
-institute: North Carolina State University
+institute: Nonlinear Artificial Intelligence laboratory, North Carolina State University
 date: last-modified
 format:
   revealjs:
     theme: [default, assets/custom.scss]
-    logo: assets/ncstate_red_letter_logo.png
+    logo: assets/NAIL_state.png
     css: assets/style.css
     slide-number: true
     toc: true
@@ -22,17 +22,17 @@ format:
     auto-play-media: true
     citations-hover: true
     reference-location: section
-    include-in-header: 
-      text: |
-        <style>
-        .center-xy {
-          margin: 0;
-          position: absolute;
-          top: 0%;
-          -ms-transform: translateY(20%);
-          transform: translateY(20%);
-        }
-        </style>
+    # include-in-header: 
+    #   text: |
+    #     <style>
+    #     .center-xy {
+    #       margin: 0;
+    #       position: absolute;
+    #       top: 0%;
+    #       -ms-transform: translateY(20%);
+    #       transform: translateY(20%);
+    #     }
+    #     </style>
 revealjs-plugins:
   - attribution
     
@@ -369,7 +369,15 @@ Since the noise term aligns with Hessian bear the minima, this suggests that the
 XKCD comic by [Randall Munroe](https://xkcd.com/1399/)
 ::: -->
 
-## Background: Hamilton Jacobi Bellman Equation
+## Background: Hamilton Jacobi Bellman(HJB) Equation
+Extension of Hamilton Jacobi equation/ Continous time analog of Dynamic Programming.
+
+$$
+\dfrac{dx}{dt} = f(x(t),u(t))dt \\
+J(x,u,t_0,t_f) = Q(x(t_f), t_f) + \int_{t_0}^{t_f} \mathcal{L}(x(\tau),u(\tau))d\tau\\
+V(x(t_0),t_0,t_f) = \min_{u(t))} J(x(t_0),u(t),t_0,t_f)\\
+-\dfrac{\partial V}{\partial t} = \min_{u(t)} \left[ \mathcal{L}(x(t),u(t)) + \dfrac{\partial V}{\partial x}^T f(x(t),u(t)) \right]
+$$
 
 ## Background: Pontryagin's Maximum Principle
 
@@ -385,8 +393,12 @@ XKCD comic by [Randall Munroe](https://xkcd.com/1399/)
 ## Background: Kuramoto Oscillator
 
 ## Background: Array Systems
-
-## Background: Stochasticity and noise
+<div>
+<video width="700" height="500" loop style="display: block; margin-left: auto; margin-right: auto;">
+  <source src="figures/BG2/Chaotic_pendulum_array.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+</div>
 
 # Neural Network control of chaos
 ## Foundation
@@ -412,7 +424,7 @@ XKCD comic by [Randall Munroe](https://xkcd.com/1399/)
 ![](figures/Result2/NN_controlled_kuramoto_dynamics_noisy_0.1.png){fig-alt="NN controlled Kuramoto dynamics with noise" fig-align="bottom" width=100%}
 :::
 
-## Results (Pendulum Array)
+## Results: (Pendulum Array)
 ![](figures/Result2/controlled_pendulum_dynamics.png){fig-alt="Controlled Pendulum dynamics" fig-align="center" width=100%}
 
 
@@ -455,4 +467,39 @@ XKCD comic by [Randall Munroe](https://xkcd.com/1399/)
 
 ## Deliverables
 
-## Acknowledgements
+## Acknowledgements {background-image="assets/ks_pretty.png" background-size="contain" background-position="center" background-repeat="no-repeat}
+
+:::{.attribution}
+Background image from [Jacqueline Doan](https://community.wolfram.com/groups/-/m/t/2509110)
+:::
+
+# Backup slides {.unnumbered .unlisted visibility="uncounted"}
+
+## Universal approximation theorem {.unnumbered .unlisted visibility="uncounted"}
+
+## Stochastic gradient descent {.unnumbered .unlisted visibility="uncounted"}
+
+## Neural ODEs {.unnumbered .unlisted visibility="uncounted"}
+
+## HJB Derivation Sketch {.unnumbered .unlisted visibility="uncounted"}
+Bellman optimality equation:
+$$
+V(x(t_0),t_0,t_f) = V(x(t_0),t_0,t) + V(x(t),t,t_f)
+$$
+$$
+\begin{align*}
+  \dfrac{dV(x(t),t,t_f)}{dt} &= \dfrac{\partial V}{\partial t} + \dfrac{\partial V}{\partial x}^T \frac{dx}{dt}\\
+  &= \min_{u(t)} \dfrac{d}{dt} \left[ \int_0^{t_f}\mathcal{L}(x(\tau),u(\tau))d\tau + Q(x(t_f), t_f) \right]\\
+  &= \min_{u(t)} \left[ \dfrac{d}{dt}\int_0^{t_f}\mathcal{L}(x(\tau),u(\tau))d\tau \right] \\
+\end{align*}
+$$
+
+$$
+\implies \boxed{-\dfrac{\partial V}{\partial t} = \min_{u(t)} \left[ \mathcal{L}(x(t),u(t)) + \dfrac{\partial V}{\partial x}^T f(x(t),u(t)) \right]}
+$$
+
+## Stochasticity and noise {.unnumbered .unlisted visibility="uncounted"}
+
+## Delay coordinates and noise {.unnumbered .unlisted visibility="uncounted"}
+
+## Neural network architectures {.unnumbered .unlisted visibility="uncounted"}

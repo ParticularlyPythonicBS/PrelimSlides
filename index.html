@@ -13,7 +13,7 @@
   <meta name="generator" content="quarto-1.4.553">
 
   <meta name="author" content="Anil Radhakrishnan">
-  <meta name="dcterms.date" content="2024-04-15">
+  <meta name="dcterms.date" content="2024-04-16">
   <title>Nonlinear dynamics with neural networks</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -327,15 +327,6 @@
       margin-right: 0; 
     }
   </style>
-  <style>
-  .center-xy {
-    margin: 0;
-    position: absolute;
-    top: 0%;
-    -ms-transform: translateY(20%);
-    transform: translateY(20%);
-  }
-  </style>
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -351,12 +342,12 @@
 Anil Radhakrishnan 
 </div>
         <p class="quarto-title-affiliation">
-            North Carolina State University
+            Nonlinear Artificial Intelligence laboratory, North Carolina State University
           </p>
     </div>
 </div>
 
-  <p class="date">2024-04-15</p>
+  <p class="date">2024-04-16</p>
 </section><section id="TOC">
 <nav role="doc-toc"> 
 <h2 id="toc-title">Table of contents</h2>
@@ -781,8 +772,15 @@ d\theta_{t} = - \nabla \mathcal{L}(\theta_{t})\, dt + \sqrt{2\mathbf{D}} \cdot d
 XKCD comic by [Randall Munroe](https://xkcd.com/1399/)
 ::: -->
 </section>
-<section id="background-hamilton-jacobi-bellman-equation" class="slide level2">
-<h2>Background: Hamilton Jacobi Bellman Equation</h2>
+<section id="background-hamilton-jacobi-bellmanhjb-equation" class="slide level2">
+<h2>Background: Hamilton Jacobi Bellman(HJB) Equation</h2>
+<p>Extension of Hamilton Jacobi equation/ Continous time analog of Dynamic Programming.</p>
+<p><span class="math display">\[
+\dfrac{dx}{dt} = f(x(t),u(t))dt \\
+J(x,u,t_0,t_f) = Q(x(t_f), t_f) + \int_{t_0}^{t_f} \mathcal{L}(x(\tau),u(\tau))d\tau\\
+V(x(t_0),t_0,t_f) = \min_{u(t))} J(x(t_0),u(t),t_0,t_f)\\
+-\dfrac{\partial V}{\partial t} = \min_{u(t)} \left[ \mathcal{L}(x(t),u(t)) + \dfrac{\partial V}{\partial x}^T f(x(t),u(t)) \right]
+\]</span></p>
 </section>
 <section id="background-pontryagins-maximum-principle" class="slide level2">
 <h2>Background: Pontryagin’s Maximum Principle</h2>
@@ -805,9 +803,11 @@ XKCD comic by [Randall Munroe](https://xkcd.com/1399/)
 </section>
 <section id="background-array-systems" class="slide level2">
 <h2>Background: Array Systems</h2>
-</section>
-<section id="background-stochasticity-and-noise" class="slide level2">
-<h2>Background: Stochasticity and noise</h2>
+<div>
+<video width="700" height="500" loop="" style="display: block; margin-left: auto; margin-right: auto;">
+<source src="figures/BG2/Chaotic_pendulum_array.mp4" type="video/mp4">
+Your browser does not support the video tag. </video>
+</div>
 </section></section>
 <section>
 <section id="neural-network-control-of-chaos" class="title-slide slide level1 center">
@@ -867,7 +867,7 @@ XKCD comic by [Randall Munroe](https://xkcd.com/1399/)
 </div>
 </section>
 <section id="results-pendulum-array" class="slide level2">
-<h2>Results (Pendulum Array)</h2>
+<h2>Results: (Pendulum Array)</h2>
 
 <img data-src="figures/Result2/controlled_pendulum_dynamics.png" class="quarto-figure quarto-figure-center r-stretch" style="width:100.0%" alt="Controlled Pendulum dynamics"></section>
 <section id="future-work-exotic-dynamics" class="slide level2">
@@ -932,10 +932,51 @@ Your browser does not support the video tag. </video>
 <section id="deliverables" class="slide level2">
 <h2>Deliverables</h2>
 </section>
-<section id="acknowledgements" class="slide level2">
+<section id="acknowledgements" class="slide level2" data-background-image="assets/ks_pretty.png" data-background-size="contain" data-background-position="center" data-background-repeat="&quot;no-repeat">
 <h2>Acknowledgements</h2>
+<div class="attribution">
+<p>Background image from <a href="https://community.wolfram.com/groups/-/m/t/2509110">Jacqueline Doan</a></p>
+</div>
+</section></section>
+<section>
+<section id="backup-slides" class="title-slide slide level1 unnumbered unlisted center" data-visibility="uncounted">
+<h1>Backup slides</h1>
+
+</section>
+<section id="universal-approximation-theorem" class="slide level2 unnumbered unlisted" data-visibility="uncounted">
+<h2>Universal approximation theorem</h2>
+</section>
+<section id="stochastic-gradient-descent" class="slide level2 unnumbered unlisted" data-visibility="uncounted">
+<h2>Stochastic gradient descent</h2>
+</section>
+<section id="neural-odes" class="slide level2 unnumbered unlisted" data-visibility="uncounted">
+<h2>Neural ODEs</h2>
+</section>
+<section id="hjb-derivation-sketch" class="slide level2 unnumbered unlisted" data-visibility="uncounted">
+<h2>HJB Derivation Sketch</h2>
+<p>Bellman optimality equation: <span class="math display">\[
+V(x(t_0),t_0,t_f) = V(x(t_0),t_0,t) + V(x(t),t,t_f)
+\]</span> <span class="math display">\[
+\begin{align*}
+  \dfrac{dV(x(t),t,t_f)}{dt} &amp;= \dfrac{\partial V}{\partial t} + \dfrac{\partial V}{\partial x}^T \frac{dx}{dt}\\
+  &amp;= \min_{u(t)} \dfrac{d}{dt} \left[ \int_0^{t_f}\mathcal{L}(x(\tau),u(\tau))d\tau + Q(x(t_f), t_f) \right]\\
+  &amp;= \min_{u(t)} \left[ \dfrac{d}{dt}\int_0^{t_f}\mathcal{L}(x(\tau),u(\tau))d\tau \right] \\
+\end{align*}
+\]</span></p>
+<p><span class="math display">\[
+\implies \boxed{-\dfrac{\partial V}{\partial t} = \min_{u(t)} \left[ \mathcal{L}(x(t),u(t)) + \dfrac{\partial V}{\partial x}^T f(x(t),u(t)) \right]}
+\]</span></p>
+</section>
+<section id="stochasticity-and-noise" class="slide level2 unnumbered unlisted" data-visibility="uncounted">
+<h2>Stochasticity and noise</h2>
+</section>
+<section id="delay-coordinates-and-noise" class="slide level2 unnumbered unlisted" data-visibility="uncounted">
+<h2>Delay coordinates and noise</h2>
+</section>
+<section id="neural-network-architectures" class="slide level2 unnumbered unlisted" data-visibility="uncounted">
+<h2>Neural network architectures</h2>
 <div class="quarto-auto-generated-content">
-<p><img src="assets/ncstate_red_letter_logo.png" class="slide-logo"></p>
+<p><img src="assets/NAIL_state.png" class="slide-logo"></p>
 <div class="footer footer-default">
 
 </div>
