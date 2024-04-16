@@ -357,6 +357,20 @@ Anil Radhakrishnan
 </div>
 
   <p class="date">2024-04-15</p>
+</section><section id="TOC">
+<nav role="doc-toc"> 
+<h2 id="toc-title">Table of contents</h2>
+<ul>
+<li><a href="#/motivation" id="/toc-motivation">Motivation</a></li>
+<li><a href="#/neural-networks-and-optimization" id="/toc-neural-networks-and-optimization">Neural Networks and optimization</a></li>
+<li><a href="#/metalearning-activation-functions" id="/toc-metalearning-activation-functions">Metalearning Activation functions</a></li>
+<li><a href="#/control-and-chaos" id="/toc-control-and-chaos">Control and Chaos</a></li>
+<li><a href="#/neural-network-control-of-chaos" id="/toc-neural-network-control-of-chaos">Neural Network control of chaos</a></li>
+<li><a href="#/dynamics-symmetries-and-introspection" id="/toc-dynamics-symmetries-and-introspection">Dynamics, symmetries, and introspection</a></li>
+<li><a href="#/symmetries-of-controllers" id="/toc-symmetries-of-controllers">Symmetries of controllers</a></li>
+<li><a href="#/conclusions-1" id="/toc-conclusions-1">Conclusions</a></li>
+</ul>
+</nav>
 </section>
 <section>
 <section id="motivation" class="title-slide slide level1 center">
@@ -481,9 +495,8 @@ Anil Radhakrishnan
 </div>
 </section></section>
 <section>
-<section id="background" class="title-slide slide level1 center">
-<h1>Background</h1>
-<p>Neural Networks and optimization</p>
+<section id="neural-networks-and-optimization" class="title-slide slide level1 center">
+<h1>Neural Networks and optimization</h1>
 <!-- ![](assets/machine_learning_xkcd.png){fig-alt="Machine Learning XKCD" fig-align="center" height="350px"}
 
 ::: {.attribution}
@@ -760,23 +773,19 @@ d\theta_{t} = - \nabla \mathcal{L}(\theta_{t})\, dt + \sqrt{2\mathbf{D}} \cdot d
 
 <img data-src="figures/Result1/learned_act_insight.png" class="quarto-figure quarto-figure-center r-stretch" style="width:80.0%" alt="spanning sets"></section></section>
 <section>
-<section id="background-deux" class="title-slide slide level1 center">
-<h1>Background Deux</h1>
-<p>Control and Dynamics <!-- ![](assets/chaos_xkcd.png){fig-alt="Machine Learning XKCD" fig-align="center" height="350px"}
+<section id="control-and-chaos" class="title-slide slide level1 center">
+<h1>Control and Chaos</h1>
+<!-- ![](assets/chaos_xkcd.png){fig-alt="Machine Learning XKCD" fig-align="center" height="350px"}
 
 ::: {.attribution}
 XKCD comic by [Randall Munroe](https://xkcd.com/1399/)
-::: --></p>
+::: -->
 </section>
-<section id="background-traditional-optimal-control-strategies" class="slide level2">
-<h2>Background: Traditional Optimal control strategies</h2>
-<p>There are two main approaches to general optimal control:</p>
-<ul>
-<li>Pontryagin’s maximum principle: (BVP) in hamiltonian framework
-<ul>
-<li>Explicitly</li>
-</ul></li>
-</ul>
+<section id="background-hamilton-jacobi-bellman-equation" class="slide level2">
+<h2>Background: Hamilton Jacobi Bellman Equation</h2>
+</section>
+<section id="background-pontryagins-maximum-principle" class="slide level2">
+<h2>Background: Pontryagin’s Maximum Principle</h2>
 </section>
 <section id="background-model-predictive-control" class="slide level2">
 <h2>Background: Model Predictive Control</h2>
@@ -861,15 +870,26 @@ XKCD comic by [Randall Munroe](https://xkcd.com/1399/)
 <h2>Results (Pendulum Array)</h2>
 
 <img data-src="figures/Result2/controlled_pendulum_dynamics.png" class="quarto-figure quarto-figure-center r-stretch" style="width:100.0%" alt="Controlled Pendulum dynamics"></section>
-<section id="future-work" class="slide level2">
-<h2>Future Work</h2>
+<section id="future-work-exotic-dynamics" class="slide level2">
+<h2>Future Work Exotic Dynamics</h2>
+<div>
+<video width="700" height="500" loop="" style="display: block; margin-left: auto; margin-right: auto;">
+<source src="figures/Result2/ks.mp4" type="video/mp4">
+Your browser does not support the video tag. </video>
+</div>
+<!-- <div>
+<video width="700" height="500" loop style="display: block; margin-left: auto; margin-right: auto;">
+  <source src="figures/Result2/ks_chimera.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+</div> -->
 </section>
 <section id="speculation" class="slide level2">
 <h2>Speculation</h2>
 </section></section>
 <section>
-<section id="background-for-the-last-time-i-promise" class="title-slide slide level1 center">
-<h1>Background (For the last time I promise)</h1>
+<section id="dynamics-symmetries-and-introspection" class="title-slide slide level1 center">
+<h1>Dynamics, symmetries, and introspection</h1>
 
 </section>
 <section id="background-symmetries" class="slide level2">

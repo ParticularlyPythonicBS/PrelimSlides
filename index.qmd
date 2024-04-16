@@ -10,6 +10,8 @@ format:
     logo: assets/ncstate_red_letter_logo.png
     css: assets/style.css
     slide-number: true
+    toc: true
+    toc-depth: 1
     show-slide-number: all
     chalkboard: true
     progress: true
@@ -98,8 +100,7 @@ The neural network consists of an input layer, a tanh nonlinearity, and an outpu
 Day and Night by [M.C. Escher](https://www.wikiart.org/en/m-c-escher/day-and-night)
 :::
 
-# Background
-Neural Networks and optimization
+# Neural Networks and optimization
 
 <!-- ![](assets/machine_learning_xkcd.png){fig-alt="Machine Learning XKCD" fig-align="center" height="350px"}
 
@@ -361,19 +362,16 @@ Since the noise term aligns with Hessian bear the minima, this suggests that the
 
 
 
-# Background Deux
-Control and Dynamics
+# Control and Chaos
 <!-- ![](assets/chaos_xkcd.png){fig-alt="Machine Learning XKCD" fig-align="center" height="350px"}
 
 ::: {.attribution}
 XKCD comic by [Randall Munroe](https://xkcd.com/1399/)
 ::: -->
 
-## Background: Traditional Optimal control strategies
-There are two main approaches to general optimal control:
+## Background: Hamilton Jacobi Bellman Equation
 
-- Pontryagin's maximum principle: (BVP) in hamiltonian framework
-  - Explicitly  
+## Background: Pontryagin's Maximum Principle
 
 ## Background: Model Predictive Control
 
@@ -418,11 +416,22 @@ There are two main approaches to general optimal control:
 ![](figures/Result2/controlled_pendulum_dynamics.png){fig-alt="Controlled Pendulum dynamics" fig-align="center" width=100%}
 
 
-## Future Work
-
+## Future Work Exotic Dynamics
+<div>
+<video width="700" height="500" loop style="display: block; margin-left: auto; margin-right: auto;">
+  <source src="figures/Result2/ks.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+</div>
+<!-- <div>
+<video width="700" height="500" loop style="display: block; margin-left: auto; margin-right: auto;">
+  <source src="figures/Result2/ks_chimera.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+</div> -->
 ## Speculation
 
-# Background (For the last time I promise)
+# Dynamics, symmetries, and introspection
 ## Background: Symmetries
 
 ## Background: Dynamical Systems
