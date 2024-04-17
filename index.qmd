@@ -371,10 +371,29 @@ $$
 
 ## Background: Model Predictive Control
 
-Control scheme where a model is used for predicting the future behavior of the system over finite time window
+Control scheme where a model is used for predicting the future behavior of the system over finite time window.
+
+<table style="width:100%; margin:0; padding:0;">
+  <tr>
+    <td style="vertical-align:top; padding-right:20px; width:65%">
+<video width="700" height="300" loop style="display: block; margin-left: auto; margin-right: auto; margin-bottom: 20px;">
+  <source src="figures/BG2/MPC.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+<video width="200" height="200" loop style="display: block; margin-left: auto; margin-right: auto;">
+  <source src="figures/BG2/disc_3d_ctrl_motor.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+    </td>
+    <td style="vertical-align:top; width:35%">
+![](figures/BG2/MPC_basic.png){fig-alt="Model Predictive control" fig-align="center" width=100%}
+    </td>
+  </tr>
+</table>
 
 
-<div>
+
+<!-- <div>
 <video width="700" height="300" loop style="display: block; margin-left: auto; margin-right: auto;">
   <source src="figures/BG2/MPC.mp4" type="video/mp4">
   Your browser does not support the video tag.
@@ -386,7 +405,7 @@ Control scheme where a model is used for predicting the future behavior of the s
   <source src="figures/BG2/disc_3d_ctrl_motor.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
-</div>
+</div> -->
 
 
 ::: {.attribution}
@@ -429,7 +448,14 @@ Let $X$ be a metric space. A continous map $f: X \rightarrow X$ is said to be ch
   </tr>
 </table>
 
-## Background: Chaos Control
+## Background: Traditional Chaos Control
+
+Relies on the ergodicity of chaotic systems.
+
+![](figures/BG2/OGY.png){fig-alt="Ott-Gerbogi-Yorke control" fig-align="center" width=80%}
+
+![](figures/BG2/UPO.png){fig-alt="Unstable periodic orbits" fig-align="center" width=40%}
+
 
 ## Background: Pendulum
 <!-- The career of a young theoretical physicist consists of treating the harmonic oscillator in ever-increasing levels of abstraction. - Sidney Coleman -->
@@ -461,7 +487,7 @@ $$
 
 ## Methodology
 
-![](figures/Result2/MPC.png){fig-alt="Model Predictive control" fig-align="center" width=100%}
+![](figures/Result2/MPC_NN.png){fig-alt="Model Predictive control" fig-align="center" width=100%}
 
 ## Results (Kuramoto Grid)
 
@@ -476,8 +502,13 @@ $$
 :::
 
 ## Results: (Pendulum Array)
-![](figures/Result2/controlled_pendulum_dynamics.png){fig-alt="Controlled Pendulum dynamics" fig-align="center" width=100%}
-
+![](figures/Result2/controlled_pendulum_dynamics.png){fig-alt="Controlled Pendulum dynamics" fig-align="center" width=70%}
+<div>
+<video width="700" height="400" style="display: block; margin-left: auto; margin-right: auto;">
+  <source src="figures/Result2/Pendulum_optimal.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+</div>
 
 ## Future Work: Exotic Dynamics
 <div>
@@ -495,9 +526,32 @@ $$
 ## Speculation
 
 # Dynamics, symmetries, and introspection
-## Background: Symmetries
+## Background: Group theory for Dynamical Systems
 
-## Background: Dynamical Systems
+Let $\Gamma$ act on $\mathbb{R}^n$ and $f: \mathbb{R}^n \rightarrow \mathbb{R}^m$ . Then $f$ is said to be $\Gamma$-equivariant if $f(\gamma x) = \gamma f(x)$ for all $x \in \mathbb{R}^n$ and $\gamma \in \Gamma$.
+
+For dynamical systems, for a fixed point $f(x\star)=0$ and $\gamma x\star$ is a fixed point as well.
+
+Isotropy subgroup:
+Let $v\in \mathbb{R}^n: \Sigma_v = \{\gamma \in \Gamma: \gamma v = v\}$
+
+Fixed pt subspace:
+Let $\Sigma \subseteq \Gamma$. $\text{Fix}(\Sigma)=\{v \in \mathbb{R}^n:\sigma v=v\}$
+
+Thm: Let $f: \mathbb{R}^n \rightarrow \mathbb{R}^m$ be a $\Gamma$-equivariant map and  $\Sigma \subseteq \Gamma$. Then $f(\text{Fix}(\Sigma))\subseteq\text{Fix}(\Sigma)$.
+
+:::{.notes}
+Cyclic group
+Dihedral group = Cyclic group + Flips
+Symmetric group = m!
+S^1 circle group
+O(n) Measure preserving transformations
+
+For ODEs that means if $f(x)$ is a solution, then so is $f(\gamma x)$ for all $gamma \in \Gamma$.
+So we can classify solutions upto their symmetry.
+
+If a system starts in a symmetric state, it will remain symmetric.
+:::
 
 ## Background: Controllers for Dynamical systems
 
@@ -528,6 +582,22 @@ Background image from [Jacqueline Doan](https://community.wolfram.com/groups/-/m
 
 ## Universal approximation theorem {.unnumbered .unlisted visibility="uncounted"}
 
+$$M(\sigma) = \text{span}\{\sigma(wx-\theta):w\in \mathbb{R}^n, \theta\in\mathbb{R}\}$$
+<!-- For which $\sigma$ is $\max_{x\in K}|f(x)-g(x)|<\epsilon$ true for any $f\in C(\mathbb{R}^n)$, any compact subset $K$ of $\mathbb{R}^n$, and $\epsilon >0$, and some $g \in M(\sigma)$? -->
+
+Theorem 1: Let $\sigma \in C(\mathbb{R})$. Then $M(\sigma)$ is dense in $C(\mathbb{R}^n)$, in the topology of uniform convergence on compacta, if and only if $\sigma$ is not a polynomial.
+
+For Neural Networks,
+
+Theorem 2: Let $\sigma$ be any continous sigmoidal function. Then finite sums of the form $G(x) = \sum_{i=1}^N \alpha_i \sigma(w_i^T x + b_i)$ are dense in $C(I_n)$.
+i.e. $\forall f\in C(I_n)$ and $\epsilon>0$, there is a sum $G(x)$ such that $\max_{x\in I_n}|f(x)-G(x)|<\epsilon$.
+
+Informally, at least one neural network exists that can approximate any continuous function on $I_n=[0,1]^n$ with arbitrary precision.
+
+:::{.attribution}
+Theorem 1 from [Leshno, Pinkus, et. al](https://doi.org/10.1016/S0893-6080(05)80131-5)
+Theorem 2 from [Cybenko](https://doi-org.prox.lib.ncsu.edu/10.1007/BF02551274)
+:::
 ## Stochastic gradient descent {.unnumbered .unlisted visibility="uncounted"}
 
 ## Neural ODEs {.unnumbered .unlisted visibility="uncounted"}

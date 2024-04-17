@@ -13,7 +13,7 @@
   <meta name="generator" content="quarto-1.4.553">
 
   <meta name="author" content="Anil Radhakrishnan">
-  <meta name="dcterms.date" content="2024-04-16">
+  <meta name="dcterms.date" content="2024-04-17">
   <title>Nonlinear dynamics with neural networks</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -356,7 +356,7 @@ Anil Radhakrishnan
     </div>
 </div>
 
-  <p class="date">2024-04-16</p>
+  <p class="date">2024-04-17</p>
 </section><section id="TOC">
 <nav role="doc-toc"> 
 <h2 id="toc-title">Table of contents</h2>
@@ -785,17 +785,32 @@ V(x(t_0),t_0,t_f) = \min_{u(t))} J(x(t_0),u(t),t_0,t_f)\\
 </section>
 <section id="background-model-predictive-control" class="slide level2">
 <h2>Background: Model Predictive Control</h2>
-<p>Control scheme where a model is used for predicting the future behavior of the system over finite time window</p>
-<div>
-<video width="700" height="300" loop="" style="display: block; margin-left: auto; margin-right: auto;">
+<p>Control scheme where a model is used for predicting the future behavior of the system over finite time window.</p>
+<table style="width:100%; margin:0; padding:0;">
+<tbody><tr>
+<td style="vertical-align:top; padding-right:20px; width:65%">
+<video width="700" height="300" loop="" style="display: block; margin-left: auto; margin-right: auto; margin-bottom: 20px;">
 <source src="figures/BG2/MPC.mp4" type="video/mp4">
-Your browser does not support the video tag. </video>
+Your browser does not support the video tag. </video> <video width="200" height="200" loop="" style="display: block; margin-left: auto; margin-right: auto;"> <source src="figures/BG2/disc_3d_ctrl_motor.mp4" type="video/mp4"> Your browser does not support the video tag. </video>
+</td>
+<td style="vertical-align:top; width:35%">
+<img data-src="figures/BG2/MPC_basic.png" class="quarto-figure quarto-figure-center" style="width:100.0%" alt="Model Predictive control">
+</td>
+</tr>
+</tbody></table>
+<!-- <div>
+<video width="700" height="300" loop style="display: block; margin-left: auto; margin-right: auto;">
+  <source src="figures/BG2/MPC.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
 </div>
+
 <div>
-<video width="200" height="200" loop="" style="display: block; margin-left: auto; margin-right: auto;">
-<source src="figures/BG2/disc_3d_ctrl_motor.mp4" type="video/mp4">
-Your browser does not support the video tag. </video>
-</div>
+<video width="200" height="200" loop style="display: block; margin-left: auto; margin-right: auto;">
+  <source src="figures/BG2/disc_3d_ctrl_motor.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+</div> -->
 <div class="attribution">
 <p>Animations from <a href="https://www.do-mpc.com/en/latest/theory_mpc.html">do-mpc documentation</a></p>
 </div>
@@ -837,8 +852,19 @@ Your browser does not support the video tag. </video>
 </tbody></table>
 
 </section>
-<section id="background-chaos-control" class="slide level2">
-<h2>Background: Chaos Control</h2>
+<section id="background-traditional-chaos-control" class="slide level2">
+<h2>Background: Traditional Chaos Control</h2>
+<p>Relies on the ergodicity of chaotic systems.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="figures/BG2/OGY.png" class="quarto-figure quarto-figure-center" style="width:80.0%" alt="Ott-Gerbogi-Yorke control"></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="figures/BG2/UPO.png" class="quarto-figure quarto-figure-center" style="width:40.0%" alt="Unstable periodic orbits"></p>
+</figure>
+</div>
 </section>
 <section id="background-pendulum" class="slide level2">
 <h2>Background: Pendulum</h2>
@@ -880,7 +906,7 @@ l_n^2\ddot\theta_n =-\gamma\dot\theta_n\nonumber-l_n\sin{\theta_n}\nonumber +\ta
 <section id="methodology-1" class="slide level2">
 <h2>Methodology</h2>
 
-<img data-src="figures/Result2/MPC.png" class="quarto-figure quarto-figure-center r-stretch" style="width:100.0%" alt="Model Predictive control"></section>
+<img data-src="figures/Result2/MPC_NN.png" class="quarto-figure quarto-figure-center r-stretch" style="width:100.0%" alt="Model Predictive control"></section>
 <section id="results-kuramoto-grid" class="slide level2">
 <h2>Results (Kuramoto Grid)</h2>
 <div class="quarto-layout-panel" data-layout-nrow="2">
@@ -920,8 +946,13 @@ l_n^2\ddot\theta_n =-\gamma\dot\theta_n\nonumber-l_n\sin{\theta_n}\nonumber +\ta
 </section>
 <section id="results-pendulum-array" class="slide level2">
 <h2>Results: (Pendulum Array)</h2>
-
-<img data-src="figures/Result2/controlled_pendulum_dynamics.png" class="quarto-figure quarto-figure-center r-stretch" style="width:100.0%" alt="Controlled Pendulum dynamics"></section>
+<img data-src="figures/Result2/controlled_pendulum_dynamics.png" class="quarto-figure quarto-figure-center" style="width:70.0%" alt="Controlled Pendulum dynamics">
+<div>
+<video width="700" height="400" style="display: block; margin-left: auto; margin-right: auto;">
+<source src="figures/Result2/Pendulum_optimal.mp4" type="video/mp4">
+Your browser does not support the video tag. </video>
+</div>
+</section>
 <section id="future-work-exotic-dynamics" class="slide level2">
 <h2>Future Work: Exotic Dynamics</h2>
 <div>
@@ -944,11 +975,28 @@ Your browser does not support the video tag. </video>
 <h1>Dynamics, symmetries, and introspection</h1>
 
 </section>
-<section id="background-symmetries" class="slide level2">
-<h2>Background: Symmetries</h2>
-</section>
-<section id="background-dynamical-systems" class="slide level2">
-<h2>Background: Dynamical Systems</h2>
+<section id="background-group-theory-for-dynamical-systems" class="slide level2">
+<h2>Background: Group theory for Dynamical Systems</h2>
+<p>Let <span class="math inline">\(\Gamma\)</span> act on <span class="math inline">\(\mathbb{R}^n\)</span> and <span class="math inline">\(f: \mathbb{R}^n \rightarrow \mathbb{R}^m\)</span> . Then <span class="math inline">\(f\)</span> is said to be <span class="math inline">\(\Gamma\)</span>-equivariant if <span class="math inline">\(f(\gamma x) = \gamma f(x)\)</span> for all <span class="math inline">\(x \in \mathbb{R}^n\)</span> and <span class="math inline">\(\gamma \in \Gamma\)</span>.</p>
+<p>For dynamical systems, for a fixed point <span class="math inline">\(f(x\star)=0\)</span> and <span class="math inline">\(\gamma x\star\)</span> is a fixed point as well.</p>
+<p>Isotropy subgroup: Let <span class="math inline">\(v\in \mathbb{R}^n: \Sigma_v = \{\gamma \in \Gamma: \gamma v = v\}\)</span></p>
+<p>Fixed pt subspace: Let <span class="math inline">\(\Sigma \subseteq \Gamma\)</span>. <span class="math inline">\(\text{Fix}(\Sigma)=\{v \in \mathbb{R}^n:\sigma v=v\}\)</span></p>
+<p>Thm: Let <span class="math inline">\(f: \mathbb{R}^n \rightarrow \mathbb{R}^m\)</span> be a <span class="math inline">\(\Gamma\)</span>-equivariant map and <span class="math inline">\(\Sigma \subseteq \Gamma\)</span>. Then <span class="math inline">\(f(\text{Fix}(\Sigma))\subseteq\text{Fix}(\Sigma)\)</span>.</p>
+<aside class="notes">
+<p>Cyclic group Dihedral group = Cyclic group + Flips Symmetric group = m! S^1 circle group O(n) Measure preserving transformations</p>
+<p>For ODEs that means if <span class="math inline">\(f(x)\)</span> is a solution, then so is <span class="math inline">\(f(\gamma x)\)</span> for all <span class="math inline">\(gamma \in \Gamma\)</span>. So we can classify solutions upto their symmetry.</p>
+<p>If a system starts in a symmetric state, it will remain symmetric.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="background-controllers-for-dynamical-systems" class="slide level2">
 <h2>Background: Controllers for Dynamical systems</h2>
@@ -997,6 +1045,14 @@ Your browser does not support the video tag. </video>
 </section>
 <section id="universal-approximation-theorem" class="slide level2 unnumbered unlisted" data-visibility="uncounted">
 <h2>Universal approximation theorem</h2>
+<p><span class="math display">\[M(\sigma) = \text{span}\{\sigma(wx-\theta):w\in \mathbb{R}^n, \theta\in\mathbb{R}\}\]</span> <!-- For which $\sigma$ is $\max_{x\in K}|f(x)-g(x)|<\epsilon$ true for any $f\in C(\mathbb{R}^n)$, any compact subset $K$ of $\mathbb{R}^n$, and $\epsilon >0$, and some $g \in M(\sigma)$? --></p>
+<p>Theorem 1: Let <span class="math inline">\(\sigma \in C(\mathbb{R})\)</span>. Then <span class="math inline">\(M(\sigma)\)</span> is dense in <span class="math inline">\(C(\mathbb{R}^n)\)</span>, in the topology of uniform convergence on compacta, if and only if <span class="math inline">\(\sigma\)</span> is not a polynomial.</p>
+<p>For Neural Networks,</p>
+<p>Theorem 2: Let <span class="math inline">\(\sigma\)</span> be any continous sigmoidal function. Then finite sums of the form <span class="math inline">\(G(x) = \sum_{i=1}^N \alpha_i \sigma(w_i^T x + b_i)\)</span> are dense in <span class="math inline">\(C(I_n)\)</span>. i.e.&nbsp;<span class="math inline">\(\forall f\in C(I_n)\)</span> and <span class="math inline">\(\epsilon&gt;0\)</span>, there is a sum <span class="math inline">\(G(x)\)</span> such that <span class="math inline">\(\max_{x\in I_n}|f(x)-G(x)|&lt;\epsilon\)</span>.</p>
+<p>Informally, at least one neural network exists that can approximate any continuous function on <span class="math inline">\(I_n=[0,1]^n\)</span> with arbitrary precision.</p>
+<div class="attribution">
+<p>Theorem 1 from <a href="https://doi.org/10.1016/S0893-6080(05)80131-5">Leshno, Pinkus, et. al</a> Theorem 2 from <a href="https://doi-org.prox.lib.ncsu.edu/10.1007/BF02551274">Cybenko</a></p>
+</div>
 </section>
 <section id="stochastic-gradient-descent" class="slide level2 unnumbered unlisted" data-visibility="uncounted">
 <h2>Stochastic gradient descent</h2>
