@@ -492,7 +492,6 @@ Synchronizing fireflies video from [Robin Meier](http://robinmeier.net/?p=2279)
 :::
 
 # Neural Network control of chaos
-## Foundation
 
 ## Insight
 - Optimal control of network dynamics involves minimizing a cost functional.
@@ -552,7 +551,8 @@ $$\dot{\theta}_i = \omega_i + \lambda\sum_{j=1}^N A_{ij}\sin(\theta_j - \theta_i
 </table>
 </div>
 
-## Speculation
+## Future Work: Recurrence matrices and granular control
+![](figures/Result2/recurrence_matrix_lorenz.png){fig-alt="Controlled Pendulum dynamics" fig-align="center" width=70%}
 
 # Dynamics, symmetries, and introspection
 ## Background: Group theory for Dynamical Systems
