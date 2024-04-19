@@ -93,12 +93,12 @@ The neural network consists of an input layer, a tanh nonlinearity, and an outpu
 - Paradigm of solution as an element of a distribution translates naturally to neural networks.
 - Data-driven methods accommodate realistic complexity.
 
-<img src="assets/escher_day_night.png" alt="Escher's day and night wood blood painting" style="display: block; width: 30%; margin-top: -25px; margin-left: auto; margin-right: auto;">
+<!-- <img src="assets/escher_day_night.png" alt="Escher's day and night wood blood painting" style="display: block; width: 30%; margin-top: -25px; margin-left: auto; margin-right: auto;">
 
   
 ::: {.attribution}
 Day and Night by [M.C. Escher](https://www.wikiart.org/en/m-c-escher/day-and-night)
-:::
+::: -->
 
 # Neural Networks and optimization
 
@@ -113,28 +113,30 @@ Day and Night by [M.C. Escher](https://www.wikiart.org/en/m-c-escher/day-and-nig
 ## Background: Neural Networks
 
 ![](figures/BG1/NN.png){fig-alt="Neural Network diagram" width=80%}
+<div style="margin-top: -20px;">
 $$
 \newcommand{\defeq}{\mathrel{\mathop:}=}
 \newcommand{\R}{\mathbb{R}}
-\newcommand{\Param}{\mathcal{P}}
+\newcommand{\Param}{\theta}
+\newcommand{\Loss}{\mathcal{L}}
 $$
 
-$$\varphi: \R^d \rightarrow \R^N_L \qquad T^l: \R^{N_{l-1}}\rightarrow \R^{N_{l}} \qquad \rho: \R\rightarrow \R$$
+$$\varphi: \R^d \rightarrow \R^N_L \qquad T^l: \R^{N_{l-1}}\rightarrow \R^{N_{l}} \qquad \sigma: \R\rightarrow \R$$
 $$x \in \R^d \qquad W^l \in \R^{N_l\times N_{l-1}} \qquad b^l \in \R^{N_l}$$
 
 ## Background: Backpropagation
 
-Consider a differentiable cost function $C$,
+Consider a differentiable loss function $\Loss$,
 
 :::: {layout="[ 40, 60 ]"}
 
 ::: {#first-column}
 $$
 \begin{eqnarray*}
-\delta^L =& \nabla_{\varphi}C\odot\rho'(T^L)\\
-\delta^l =& ((w^{l+1})^\intercal \delta^{l+1} ))\odot\rho'(T^l)\\
-\dfrac{\partial C}{\partial b^l_j} =& \delta_j^l \\
-\dfrac{\partial C}{\partial w^l_{jk}} =& T^{l-1}_k\delta_j^l \\
+\delta^L =& \nabla_{\varphi}\Loss\odot\sigma'(T^L)\\
+\delta^l =& ((w^{l+1})^\intercal \delta^{l+1} ))\odot\sigma'(T^l)\\
+\dfrac{\partial \Loss}{\partial b^l_j} =& \delta_j^l \\
+\dfrac{\partial \Loss}{\partial w^l_{jk}} =& T^{l-1}_k\delta_j^l \\
 \end{eqnarray*}
 $$
 :::
@@ -144,22 +146,22 @@ $$
 :::
 ::::
 The tunable parameters can then be updated by:
-$\Param\gets \Param -\eta \nabla_{\Param}C$
+$\Param\gets \Param -\eta \nabla_{\Param}\Loss$
 
 ## Background: Loss Functions
 - Neural networks compute a probability distribution on the data space. 
 - Our objective is maximize the likihood the assigned to emperical data.
 - Constructing a suitable differentiable loss function gives the path to optimization of a neural network.
 Common loss functions include:
-  - Mean Squared Error $\mathcal{L}(\theta) = \sum_{i=1}^N (y_i - f(x_i;\theta))^2$
-  - Cross Entropy $\mathcal{L}(\theta) = -\sum_{i=1}^N y_i \log(f(x_i;\theta))$
-  - Kullback-Leibler Divergence $\mathcal{L}(\theta) = \sum_{i=1}^N y_i \log\left(\dfrac{y_i}{f(x_i;\theta)}\right)$
+  - Mean Squared Error $\Loss(\theta) = \sum_{i=1}^N (y_i - f(x_i;\theta))^2$
+  - Cross Entropy $\Loss(\theta) = -\sum_{i=1}^N y_i \log(f(x_i;\theta))$
+  - Kullback-Leibler Divergence $\Loss(\theta) = \sum_{i=1}^N y_i \log\left(\dfrac{y_i}{f(x_i;\theta)}\right)$
   
 Loss functions are combined and regularized to balance the tradeoff between model complexity and data fit.
 
 ## Background: Optimization
 - To find the best model parametrization, we minimize the loss function with respect to the model parameters. 
-- That is we compute, $\mathcal{L^\star} \defeq \inf_{\theta \in \Theta} \mathcal{L}(\theta)$ assuming an infimum exists.
+- That is we compute, $\mathcal{L^\star} \defeq \inf_{\theta \in \Theta} \Loss(\theta)$ assuming an infimum exists.
 - To converge to a minima the optimizer needs an oracle $\mathcal{O}$, i.e. evaluation of the Loss function, its gradients, or higher order derivatives.
 Then, for an algortihm $\mathcal{A}$,
 $$
@@ -196,10 +198,10 @@ Figure by [Dr. John Lindner ](https://www.nature.com/articles/s41598-023-40766-6
 - Physics as a weak constraint in a composite loss function or a hard constraint with architectural choices.
 - Symplectic constraints to the loss function gives Hamiltonian Neural Networks.
 
-<img src="figures/BG1/HNN_schema.png" alt="HNN schema" style="display: block; width: 30%; margin-top: -25px; margin-left: auto; margin-right: auto;">
+<img src="figures/BG1/HNN.png" alt="HNN schema" style="display: block; width: 30%; margin-top: -25px; margin-left: auto; margin-right: auto;">
 
 ::: {.attribution}
-Figure by [Greydanus et al.](https://arxiv.org/abs/2006.08656)
+HNN by [Greydanus et al.](https://arxiv.org/abs/2006.08656)
 :::
 
 ## Background: Coordinates matter
@@ -220,7 +222,7 @@ Adapted from Heliocentrism and Geocentrism by [Malin Christersson
 
 
 # Metalearning Activation functions 
-(Published and Patented)
+(Published, US and International Patent Pending)
 <script type="text/javascript" src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script><div class="altmetric-embed" data-badge-type="large-donut" data-altmetric-id="126463806"></div>
 
 ## Foundation
@@ -228,8 +230,6 @@ Adapted from Heliocentrism and Geocentrism by [Malin Christersson
 - Most complex systems showcase diversity in populations.
 - Artificial neural network architectures are traditionally layerwise-homogenous
 - Will neurons diversify if given the opportunity?
-
-
 
 ## Insight
 :::: {layout="[ 65, 35 ]"}
@@ -282,7 +282,7 @@ Figure from [Publication](https://www.nature.com/articles/s41598-023-40766-6)
 Figure from [Publication](https://www.nature.com/articles/s41598-023-40766-6)
 :::
 
-## Results Real World Data
+## Results: Real World Data
 ![](figures/Result1/real_pendulum.png){fig-alt="real world example" fig-align="center" width=80%}
 
 ::: {.attribution}
@@ -336,17 +336,26 @@ Typically, $1 < \mathcal{R} < N$, and $\mathcal{R}$ corresponds to the number of
 - Due to the nature of metalearning, the memory overhead is significant concern for scaling.
 
 ## Speculations: Achieving stable minima
-Optimization of a neural network with shuffled data is akin to noisy descent in the loss landscape.
-This can me modeled with the Langevin equation:
+
+<div style="margin-bottom: 30px;">
+![](figures/Result1/Noisy_descent.png){fig-alt="Noisy descent" fig-align="center" width=30%}
+</div>
+
+&nbsp;
+
+Optimization of a neural network with shuffled data is a noisy descent.
+
+This can be modeled with the Langevin equation:
+
 $$
 \DeclareMathOperator{\Tr}{Tr}
-d\theta_{t} = - \nabla \mathcal{L}(\theta_{t})\, dt + \sqrt{2\mathbf{D}} \cdot d\mathcal{W}_{t}
+d\theta_{t} = - \nabla \Loss(\theta_{t})\, dt + \sqrt{2\mathbf{D}} \cdot d\mathcal{W}_{t}
 $$
-with noise intensity $\mathbf{D} = (\eta / B) \mathcal{L}(\theta) \mathbf{H}(\theta^*)$
+with noise intensity $\mathbf{D} = (\eta / B) \Loss(\theta) \mathbf{H}(\theta\star)$
 
-Resulting minima from diverse neurons is flatter than from homogeneous ones, as measured by both the trace $\Tr\mathbf{H}$ of the Hessian and the fraction $f$ of its eigenvalues near zero: $\Tr \mathbf{H}_1 >  \Tr \mathbf{H}_2 > \Tr \mathbf{H}_{12}$ and $f_1 < f_2 < f_{12}$
+<!-- Resulting minima from diverse neurons is flatter than from homogeneous ones, as measured by both the trace $\Tr\mathbf{H}$ of the Hessian and the fraction $f$ of its eigenvalues near zero: $\Tr \mathbf{H}_1 >  \Tr \mathbf{H}_2 > \Tr \mathbf{H}_{12}$ and $f_1 < f_2 < f_{12}$
 
-Since the noise term aligns with Hessian bear the minima, this suggests that the minima found by diverse neurons are flatter and more stable.
+Since the noise term aligns with Hessian bear the minima, this suggests that the minima found by diverse neurons are flatter and more stable. -->
 
 ## Speculations: Structure and universality to diverse activations
 
@@ -364,9 +373,9 @@ Extension of Hamilton Jacobi equation/ Continous time analog of Dynamic Programm
 
 $$
 \dfrac{dx}{dt} = f(x(t),u(t))dt \\
-J(x,u,t_0,t_f) = Q(x(t_f), t_f) + \int_{t_0}^{t_f} \mathcal{L}(x(\tau),u(\tau))d\tau\\
-V(x(t_0),t_0,t_f) = \min_{u(t))} J(x(t_0),u(t),t_0,t_f)\\
--\dfrac{\partial V}{\partial t} = \min_{u(t)} \left[ \mathcal{L}(x(t),u(t)) + \dfrac{\partial V}{\partial x}^T f(x(t),u(t)) \right]
+J(x,u,t_0,t_f) = Q(x(t_f), t_f) + \int_{t_0}^{t_f} \Loss(x(\tau),u(\tau))d\tau\\
+V(x(t_0),t_0,t_f) = \min_{u(t)} J(x(t_0),u(t),t_0,t_f)\\
+-\dfrac{\partial V}{\partial t} = \min_{u(t)} \left[ \Loss(x(t),u(t)) + \dfrac{\partial V}{\partial x}^T f(x(t),u(t)) \right]
 $$
 
 ## Background: Model Predictive Control
@@ -391,21 +400,6 @@ Control scheme where a model is used for predicting the future behavior of the s
   </tr>
 </table>
 
-
-
-<!-- <div>
-<video width="700" height="300" loop style="display: block; margin-left: auto; margin-right: auto;">
-  <source src="figures/BG2/MPC.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
-</div>
-
-<div>
-<video width="200" height="200" loop style="display: block; margin-left: auto; margin-right: auto;">
-  <source src="figures/BG2/disc_3d_ctrl_motor.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
-</div> -->
 
 
 ::: {.attribution}
@@ -457,15 +451,8 @@ Relies on the ergodicity of chaotic systems.
 ![](figures/BG2/UPO.png){fig-alt="Unstable periodic orbits" fig-align="center" width=40%}
 
 
-## Background: Pendulum
-<!-- The career of a young theoretical physicist consists of treating the harmonic oscillator in ever-increasing levels of abstraction. - Sidney Coleman -->
-$$
-  ml^2\ddot\theta =-\gamma\dot\theta\nonumber-mgl\sin{\theta}\nonumber+\tau_{0}+\tau_{1}\sin{\omega t}
-$$
 
-## Background: Kuramoto Oscillator
-
-## Background: Array Systems
+## Background: Chaotic Pendulum Array
 <div>
 <video width="700" height="400" loop style="display: block; margin-left: auto; margin-right: auto;">
   <source src="figures/BG2/Chaotic_pendulum_array.mp4" type="video/mp4">
@@ -476,6 +463,33 @@ $$
 $$
 l_n^2\ddot\theta_n =-\gamma\dot\theta_n\nonumber-l_n\sin{\theta_n}\nonumber +\tau_{0}+\tau_{1}\sin{\omega t}\nonumber +\kappa(\theta_{n-1}+\theta_{n+1}-2\theta_n)
 $$
+
+## Background: Kuramoto Oscillator
+
+<div>
+<table style="width:100%; margin:0; padding:0;">
+  <tr>
+    <td style="vertical-align:top; padding-right:20px; width:65%">
+<video width="300" height="600" loop style="display: block; margin-left: auto; margin-right: auto; margin-bottom: 20px;">
+  <source src="figures/BG2/fireflies.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+    </td>
+    <td style="vertical-align:top; width:35%">
+<video width="700" height="300" loop style="display: block; margin-left: auto; margin-right: auto;">
+  <source src="figures/BG2/firefly_vid.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+$$\dot{\theta}_i = \omega_i + \lambda\sum_{j=1}^N \sin(\theta_j - \theta_i)$$
+    </td>
+  </tr>
+</table>
+</div>
+
+
+:::{.attribution}
+Synchronizing fireflies video from [Robin Meier](http://robinmeier.net/?p=2279)
+:::
 
 # Neural Network control of chaos
 ## Foundation
@@ -489,9 +503,12 @@ $$
 
 ![](figures/Result2/MPC_NN.png){fig-alt="Model Predictive control" fig-align="center" width=100%}
 
-## Results (Kuramoto Grid)
+## Results: Kuramoto Grid
 
-::: {layout-nrow=2}
+![](figures/Result2/kuramoto_control.png){fig-alt="Controlled kuramoto dynamics" fig-align="center" width=100%}
+
+
+<!-- ::: {layout-nrow=2}
 ![](figures/Result2/Uncontrolled_kuramoto_dynamics.png){fig-alt="Uncontrolled Kuramoto dynamics" fig-align="top" width=100%}
 
 ![](figures/Result2/NN_controlled_kuramoto_dynamics.png){fig-alt="NN controlled Kuramoto dynamics" fig-align="top" width=100%}
@@ -499,11 +516,13 @@ $$
 ![](figures/Result2/Uncontrolled_kuramoto_dynamics_noisy_0.1.png){fig-alt="Uncontrolled Kuramoto dynamics with noise" fig-align="bottom" width=100%}
 
 ![](figures/Result2/NN_controlled_kuramoto_dynamics_noisy_0.1.png){fig-alt="NN controlled Kuramoto dynamics with noise" fig-align="bottom" width=100%}
-:::
+::: -->
 
-## Results: (Pendulum Array)
+## Results: Pendulum Array
+
 ![](figures/Result2/controlled_pendulum_dynamics.png){fig-alt="Controlled Pendulum dynamics" fig-align="center" width=70%}
-<div>
+
+<div style="margin-top: 30px;">
 <video width="700" height="400" style="display: block; margin-left: auto; margin-right: auto;">
   <source src="figures/Result2/Pendulum_optimal.mp4" type="video/mp4">
   Your browser does not support the video tag.
@@ -511,18 +530,28 @@ $$
 </div>
 
 ## Future Work: Exotic Dynamics
+::: {style="font-size: 70%;"}
+$$\dot{\theta}_i = \omega_i + \lambda\sum_{j=1}^N A_{ij}\sin(\theta_j - \theta_i-\alpha)$$
+:::
 <div>
-<video width="700" height="500" loop style="display: block; margin-left: auto; margin-right: auto;">
-  <source src="figures/Result2/ks.mp4" type="video/mp4">
+<table style="width:100%; margin:0; padding:0; margin-top:-65px;">
+  <tr>
+    <td style="vertical-align:top; padding-right:20px; width:50%">
+<video width="300" height="600" loop style="display: block; margin-left: auto; margin-right: auto; margin-bottom: 20px;">
+  <source src="figures/Result2/ks_basic.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
-</div>
-<!-- <div>
-<video width="700" height="500" loop style="display: block; margin-left: auto; margin-right: auto;">
+    </td>
+    <td style="vertical-align:top; padding-right:20px; width:50%">
+<video width="300" height="600" loop style="display: block; margin-left: auto; margin-right: auto; margin-bottom: 20px;">
   <source src="figures/Result2/ks_chimera.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
-</div> -->
+    </td>
+  </tr>
+</table>
+</div>
+
 ## Speculation
 
 # Dynamics, symmetries, and introspection
@@ -585,11 +614,11 @@ Background image from [Jacqueline Doan](https://community.wolfram.com/groups/-/m
 $$M(\sigma) = \text{span}\{\sigma(wx-\theta):w\in \mathbb{R}^n, \theta\in\mathbb{R}\}$$
 <!-- For which $\sigma$ is $\max_{x\in K}|f(x)-g(x)|<\epsilon$ true for any $f\in C(\mathbb{R}^n)$, any compact subset $K$ of $\mathbb{R}^n$, and $\epsilon >0$, and some $g \in M(\sigma)$? -->
 
-Theorem 1: Let $\sigma \in C(\mathbb{R})$. Then $M(\sigma)$ is dense in $C(\mathbb{R}^n)$, in the topology of uniform convergence on compacta, if and only if $\sigma$ is not a polynomial.
+*Theorem 1*: Let $\sigma \in C(\mathbb{R})$. Then $M(\sigma)$ is dense in $C(\mathbb{R}^n)$, in the topology of uniform convergence on compacta, if and only if $\sigma$ is not a polynomial.
 
 For Neural Networks,
 
-Theorem 2: Let $\sigma$ be any continous sigmoidal function. Then finite sums of the form $G(x) = \sum_{i=1}^N \alpha_i \sigma(w_i^T x + b_i)$ are dense in $C(I_n)$.
+*Theorem 2*: Let $\sigma$ be any continous sigmoidal function. Then finite sums of the form $G(x) = \sum_{i=1}^N \alpha_i \sigma(w_i^T x + b_i)$ are dense in $C(I_n)$.
 i.e. $\forall f\in C(I_n)$ and $\epsilon>0$, there is a sum $G(x)$ such that $\max_{x\in I_n}|f(x)-G(x)|<\epsilon$.
 
 Informally, at least one neural network exists that can approximate any continuous function on $I_n=[0,1]^n$ with arbitrary precision.
@@ -610,13 +639,13 @@ $$
 $$
 \begin{align*}
   \dfrac{dV(x(t),t,t_f)}{dt} &= \dfrac{\partial V}{\partial t} + \dfrac{\partial V}{\partial x}^T \frac{dx}{dt}\\
-  &= \min_{u(t)} \dfrac{d}{dt} \left[ \int_0^{t_f}\mathcal{L}(x(\tau),u(\tau))d\tau + Q(x(t_f), t_f) \right]\\
-  &= \min_{u(t)} \left[ \dfrac{d}{dt}\int_0^{t_f}\mathcal{L}(x(\tau),u(\tau))d\tau \right] \\
+  &= \min_{u(t)} \dfrac{d}{dt} \left[ \int_0^{t_f}\Loss(x(\tau),u(\tau))d\tau + Q(x(t_f), t_f) \right]\\
+  &= \min_{u(t)} \left[ \dfrac{d}{dt}\int_0^{t_f}\Loss(x(\tau),u(\tau))d\tau \right] \\
 \end{align*}
 $$
 
 $$
-\implies \boxed{-\dfrac{\partial V}{\partial t} = \min_{u(t)} \left[ \mathcal{L}(x(t),u(t)) + \dfrac{\partial V}{\partial x}^T f(x(t),u(t)) \right]}
+\implies \boxed{-\dfrac{\partial V}{\partial t} = \min_{u(t)} \left[ \Loss(x(t),u(t)) + \dfrac{\partial V}{\partial x}^T f(x(t),u(t)) \right]}
 $$
 
 ## Pontryagin's Maximum Principle {.unnumbered .unlisted visibility="uncounted"}

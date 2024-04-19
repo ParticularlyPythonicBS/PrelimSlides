@@ -13,7 +13,7 @@
   <meta name="generator" content="quarto-1.4.553">
 
   <meta name="author" content="Anil Radhakrishnan">
-  <meta name="dcterms.date" content="2024-04-17">
+  <meta name="dcterms.date" content="2024-04-19">
   <title>Nonlinear dynamics with neural networks</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -356,7 +356,7 @@ Anil Radhakrishnan
     </div>
 </div>
 
-  <p class="date">2024-04-17</p>
+  <p class="date">2024-04-19</p>
 </section><section id="TOC">
 <nav role="doc-toc"> 
 <h2 id="toc-title">Table of contents</h2>
@@ -489,10 +489,12 @@ Anil Radhakrishnan
 <li>Paradigm of solution as an element of a distribution translates naturally to neural networks.</li>
 <li>Data-driven methods accommodate realistic complexity.</li>
 </ul>
+<!-- <img src="assets/escher_day_night.png" alt="Escher's day and night wood blood painting" style="display: block; width: 30%; margin-top: -25px; margin-left: auto; margin-right: auto;">
 
-<img src="assets/escher_day_night.png" alt="Escher's day and night wood blood painting" style="display: block; width: 30%; margin-top: -25px; margin-left: auto; margin-right: auto;" class="r-stretch"><div class="attribution">
-<p>Day and Night by <a href="https://www.wikiart.org/en/m-c-escher/day-and-night">M.C. Escher</a></p>
-</div>
+  
+::: {.attribution}
+Day and Night by [M.C. Escher](https://www.wikiart.org/en/m-c-escher/day-and-night)
+::: -->
 </section></section>
 <section>
 <section id="neural-networks-and-optimization" class="title-slide slide level1 center">
@@ -509,25 +511,28 @@ Anil Radhakrishnan
 </section>
 <section id="background-neural-networks" class="slide level2">
 <h2>Background: Neural Networks</h2>
-<p><img data-src="figures/BG1/NN.png" style="width:80.0%" alt="Neural Network diagram"> <span class="math display">\[
+<img data-src="figures/BG1/NN.png" style="width:80.0%" alt="Neural Network diagram">
+<div style="margin-top: -20px;">
+<p><span class="math display">\[
 \newcommand{\defeq}{\mathrel{\mathop:}=}
 \newcommand{\R}{\mathbb{R}}
-\newcommand{\Param}{\mathcal{P}}
+\newcommand{\Param}{\theta}
+\newcommand{\Loss}{\mathcal{L}}
 \]</span></p>
-<p><span class="math display">\[\varphi: \R^d \rightarrow \R^N_L \qquad T^l: \R^{N_{l-1}}\rightarrow \R^{N_{l}} \qquad \rho: \R\rightarrow \R\]</span> <span class="math display">\[x \in \R^d \qquad W^l \in \R^{N_l\times N_{l-1}} \qquad b^l \in \R^{N_l}\]</span></p>
-</section>
+<p><span class="math display">\[\varphi: \R^d \rightarrow \R^N_L \qquad T^l: \R^{N_{l-1}}\rightarrow \R^{N_{l}} \qquad \sigma: \R\rightarrow \R\]</span> <span class="math display">\[x \in \R^d \qquad W^l \in \R^{N_l\times N_{l-1}} \qquad b^l \in \R^{N_l}\]</span></p>
+</div></section>
 <section id="background-backpropagation" class="slide level2">
 <h2>Background: Backpropagation</h2>
-<p>Consider a differentiable cost function <span class="math inline">\(C\)</span>,</p>
+<p>Consider a differentiable loss function <span class="math inline">\(\Loss\)</span>,</p>
 <div class="quarto-layout-panel" data-layout="[ 40, 60 ]">
 <div class="quarto-layout-row">
 <div id="first-column" class="quarto-layout-cell" style="flex-basis: 40.0%;justify-content: flex-start;">
 <p><span class="math display">\[
 \begin{eqnarray*}
-\delta^L =&amp; \nabla_{\varphi}C\odot\rho'(T^L)\\
-\delta^l =&amp; ((w^{l+1})^\intercal \delta^{l+1} ))\odot\rho'(T^l)\\
-\dfrac{\partial C}{\partial b^l_j} =&amp; \delta_j^l \\
-\dfrac{\partial C}{\partial w^l_{jk}} =&amp; T^{l-1}_k\delta_j^l \\
+\delta^L =&amp; \nabla_{\varphi}\Loss\odot\sigma'(T^L)\\
+\delta^l =&amp; ((w^{l+1})^\intercal \delta^{l+1} ))\odot\sigma'(T^l)\\
+\dfrac{\partial \Loss}{\partial b^l_j} =&amp; \delta_j^l \\
+\dfrac{\partial \Loss}{\partial w^l_{jk}} =&amp; T^{l-1}_k\delta_j^l \\
 \end{eqnarray*}
 \]</span></p>
 </div>
@@ -540,7 +545,7 @@ Anil Radhakrishnan
 </div>
 </div>
 </div>
-<p>The tunable parameters can then be updated by: <span class="math inline">\(\Param\gets \Param -\eta \nabla_{\Param}C\)</span></p>
+<p>The tunable parameters can then be updated by: <span class="math inline">\(\Param\gets \Param -\eta \nabla_{\Param}\Loss\)</span></p>
 </section>
 <section id="background-loss-functions" class="slide level2">
 <h2>Background: Loss Functions</h2>
@@ -549,9 +554,9 @@ Anil Radhakrishnan
 <li>Our objective is maximize the likihood the assigned to emperical data.</li>
 <li>Constructing a suitable differentiable loss function gives the path to optimization of a neural network. Common loss functions include:
 <ul>
-<li>Mean Squared Error <span class="math inline">\(\mathcal{L}(\theta) = \sum_{i=1}^N (y_i - f(x_i;\theta))^2\)</span></li>
-<li>Cross Entropy <span class="math inline">\(\mathcal{L}(\theta) = -\sum_{i=1}^N y_i \log(f(x_i;\theta))\)</span></li>
-<li>Kullback-Leibler Divergence <span class="math inline">\(\mathcal{L}(\theta) = \sum_{i=1}^N y_i \log\left(\dfrac{y_i}{f(x_i;\theta)}\right)\)</span></li>
+<li>Mean Squared Error <span class="math inline">\(\Loss(\theta) = \sum_{i=1}^N (y_i - f(x_i;\theta))^2\)</span></li>
+<li>Cross Entropy <span class="math inline">\(\Loss(\theta) = -\sum_{i=1}^N y_i \log(f(x_i;\theta))\)</span></li>
+<li>Kullback-Leibler Divergence <span class="math inline">\(\Loss(\theta) = \sum_{i=1}^N y_i \log\left(\dfrac{y_i}{f(x_i;\theta)}\right)\)</span></li>
 </ul></li>
 </ul>
 <p>Loss functions are combined and regularized to balance the tradeoff between model complexity and data fit.</p>
@@ -560,7 +565,7 @@ Anil Radhakrishnan
 <h2>Background: Optimization</h2>
 <ul>
 <li>To find the best model parametrization, we minimize the loss function with respect to the model parameters.</li>
-<li>That is we compute, <span class="math inline">\(\mathcal{L^\star} \defeq \inf_{\theta \in \Theta} \mathcal{L}(\theta)\)</span> assuming an infimum exists.</li>
+<li>That is we compute, <span class="math inline">\(\mathcal{L^\star} \defeq \inf_{\theta \in \Theta} \Loss(\theta)\)</span> assuming an infimum exists.</li>
 <li>To converge to a minima the optimizer needs an oracle <span class="math inline">\(\mathcal{O}\)</span>, i.e.&nbsp;evaluation of the Loss function, its gradients, or higher order derivatives. Then, for an algortihm <span class="math inline">\(\mathcal{A}\)</span>, <span class="math display">\[
 \theta ^ {t+1}
 \defeq \mathcal{A}(\theta ^ 0, \ldots, \theta ^ t,
@@ -602,8 +607,8 @@ Anil Radhakrishnan
 <li>Symplectic constraints to the loss function gives Hamiltonian Neural Networks.</li>
 </ul>
 
-<img src="figures/BG1/HNN_schema.png" alt="HNN schema" style="display: block; width: 30%; margin-top: -25px; margin-left: auto; margin-right: auto;" class="r-stretch"><div class="attribution">
-<p>Figure by <a href="https://arxiv.org/abs/2006.08656">Greydanus et al.</a></p>
+<img src="figures/BG1/HNN.png" alt="HNN schema" style="display: block; width: 30%; margin-top: -25px; margin-left: auto; margin-right: auto;" class="r-stretch"><div class="attribution">
+<p>HNN by <a href="https://arxiv.org/abs/2006.08656">Greydanus et al.</a></p>
 </div>
 </section>
 <section id="background-coordinates-matter" class="slide level2">
@@ -622,7 +627,7 @@ Your browser does not support the video tag. </video>
 <section>
 <section id="metalearning-activation-functions" class="title-slide slide level1 center">
 <h1>Metalearning Activation functions</h1>
-(Published and Patented)
+(Published, US and International Patent Pending)
 <script type="text/javascript" src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script>
 <div class="altmetric-embed" data-badge-type="large-donut" data-altmetric-id="126463806">
 
@@ -695,7 +700,7 @@ Your browser does not support the video tag. </video>
 </div>
 </section>
 <section id="results-real-world-data" class="slide level2">
-<h2>Results Real World Data</h2>
+<h2>Results: Real World Data</h2>
 
 <img data-src="figures/Result1/real_pendulum.png" class="quarto-figure quarto-figure-center r-stretch" style="width:80.0%" alt="real world example"><div class="attribution">
 <p>Figure from <a href="https://www.nature.com/articles/s41598-023-40766-6">Publication</a></p>
@@ -753,12 +758,23 @@ Nr = \mathcal{R}
 </section>
 <section id="speculations-achieving-stable-minima" class="slide level2">
 <h2>Speculations: Achieving stable minima</h2>
-<p>Optimization of a neural network with shuffled data is akin to noisy descent in the loss landscape. This can me modeled with the Langevin equation: <span class="math display">\[
+<div style="margin-bottom: 30px;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="figures/Result1/Noisy_descent.png" class="quarto-figure quarto-figure-center" style="width:30.0%" alt="Noisy descent"></p>
+</figure>
+</div>
+</div>
+<p>&nbsp;</p>
+<p>Optimization of a neural network with shuffled data is a noisy descent.</p>
+<p>This can be modeled with the Langevin equation:</p>
+<p><span class="math display">\[
 \DeclareMathOperator{\Tr}{Tr}
-d\theta_{t} = - \nabla \mathcal{L}(\theta_{t})\, dt + \sqrt{2\mathbf{D}} \cdot d\mathcal{W}_{t}
-\]</span> with noise intensity <span class="math inline">\(\mathbf{D} = (\eta / B) \mathcal{L}(\theta) \mathbf{H}(\theta^*)\)</span></p>
-<p>Resulting minima from diverse neurons is flatter than from homogeneous ones, as measured by both the trace <span class="math inline">\(\Tr\mathbf{H}\)</span> of the Hessian and the fraction <span class="math inline">\(f\)</span> of its eigenvalues near zero: <span class="math inline">\(\Tr \mathbf{H}_1 &gt;  \Tr \mathbf{H}_2 &gt; \Tr \mathbf{H}_{12}\)</span> and <span class="math inline">\(f_1 &lt; f_2 &lt; f_{12}\)</span></p>
-<p>Since the noise term aligns with Hessian bear the minima, this suggests that the minima found by diverse neurons are flatter and more stable.</p>
+d\theta_{t} = - \nabla \Loss(\theta_{t})\, dt + \sqrt{2\mathbf{D}} \cdot d\mathcal{W}_{t}
+\]</span> with noise intensity <span class="math inline">\(\mathbf{D} = (\eta / B) \Loss(\theta) \mathbf{H}(\theta\star)\)</span></p>
+<!-- Resulting minima from diverse neurons is flatter than from homogeneous ones, as measured by both the trace $\Tr\mathbf{H}$ of the Hessian and the fraction $f$ of its eigenvalues near zero: $\Tr \mathbf{H}_1 >  \Tr \mathbf{H}_2 > \Tr \mathbf{H}_{12}$ and $f_1 < f_2 < f_{12}$
+
+Since the noise term aligns with Hessian bear the minima, this suggests that the minima found by diverse neurons are flatter and more stable. -->
 </section>
 <section id="speculations-structure-and-universality-to-diverse-activations" class="slide level2">
 <h2>Speculations: Structure and universality to diverse activations</h2>
@@ -778,9 +794,9 @@ d\theta_{t} = - \nabla \mathcal{L}(\theta_{t})\, dt + \sqrt{2\mathbf{D}} \cdot d
 <p>Extension of Hamilton Jacobi equation/ Continous time analog of Dynamic Programming.</p>
 <p><span class="math display">\[
 \dfrac{dx}{dt} = f(x(t),u(t))dt \\
-J(x,u,t_0,t_f) = Q(x(t_f), t_f) + \int_{t_0}^{t_f} \mathcal{L}(x(\tau),u(\tau))d\tau\\
-V(x(t_0),t_0,t_f) = \min_{u(t))} J(x(t_0),u(t),t_0,t_f)\\
--\dfrac{\partial V}{\partial t} = \min_{u(t)} \left[ \mathcal{L}(x(t),u(t)) + \dfrac{\partial V}{\partial x}^T f(x(t),u(t)) \right]
+J(x,u,t_0,t_f) = Q(x(t_f), t_f) + \int_{t_0}^{t_f} \Loss(x(\tau),u(\tau))d\tau\\
+V(x(t_0),t_0,t_f) = \min_{u(t)} J(x(t_0),u(t),t_0,t_f)\\
+-\dfrac{\partial V}{\partial t} = \min_{u(t)} \left[ \Loss(x(t),u(t)) + \dfrac{\partial V}{\partial x}^T f(x(t),u(t)) \right]
 \]</span></p>
 </section>
 <section id="background-model-predictive-control" class="slide level2">
@@ -798,19 +814,6 @@ Your browser does not support the video tag. </video> <video width="200" height=
 </td>
 </tr>
 </tbody></table>
-<!-- <div>
-<video width="700" height="300" loop style="display: block; margin-left: auto; margin-right: auto;">
-  <source src="figures/BG2/MPC.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
-</div>
-
-<div>
-<video width="200" height="200" loop style="display: block; margin-left: auto; margin-right: auto;">
-  <source src="figures/BG2/disc_3d_ctrl_motor.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
-</div> -->
 <div class="attribution">
 <p>Animations from <a href="https://www.do-mpc.com/en/latest/theory_mpc.html">do-mpc documentation</a></p>
 </div>
@@ -866,18 +869,8 @@ Your browser does not support the video tag. </video> <video width="200" height=
 </figure>
 </div>
 </section>
-<section id="background-pendulum" class="slide level2">
-<h2>Background: Pendulum</h2>
-<!-- The career of a young theoretical physicist consists of treating the harmonic oscillator in ever-increasing levels of abstraction. - Sidney Coleman -->
-<p><span class="math display">\[
-  ml^2\ddot\theta =-\gamma\dot\theta\nonumber-mgl\sin{\theta}\nonumber+\tau_{0}+\tau_{1}\sin{\omega t}
-\]</span></p>
-</section>
-<section id="background-kuramoto-oscillator" class="slide level2">
-<h2>Background: Kuramoto Oscillator</h2>
-</section>
-<section id="background-array-systems" class="slide level2">
-<h2>Background: Array Systems</h2>
+<section id="background-chaotic-pendulum-array" class="slide level2">
+<h2>Background: Chaotic Pendulum Array</h2>
 <div>
 <video width="700" height="400" loop="" style="display: block; margin-left: auto; margin-right: auto;">
 <source src="figures/BG2/Chaotic_pendulum_array.mp4" type="video/mp4">
@@ -886,6 +879,28 @@ Your browser does not support the video tag. </video>
 <p><span class="math display">\[
 l_n^2\ddot\theta_n =-\gamma\dot\theta_n\nonumber-l_n\sin{\theta_n}\nonumber +\tau_{0}+\tau_{1}\sin{\omega t}\nonumber +\kappa(\theta_{n-1}+\theta_{n+1}-2\theta_n)
 \]</span></p>
+</section>
+<section id="background-kuramoto-oscillator" class="slide level2">
+<h2>Background: Kuramoto Oscillator</h2>
+<div>
+<table style="width:100%; margin:0; padding:0;">
+<tbody><tr>
+<td style="vertical-align:top; padding-right:20px; width:65%">
+<video width="300" height="600" loop="" style="display: block; margin-left: auto; margin-right: auto; margin-bottom: 20px;">
+<source src="figures/BG2/fireflies.mp4" type="video/mp4">
+Your browser does not support the video tag. </video>
+</td>
+<td style="vertical-align:top; width:35%">
+<video width="700" height="300" loop="" style="display: block; margin-left: auto; margin-right: auto;">
+<source src="figures/BG2/firefly_vid.mp4" type="video/mp4">
+Your browser does not support the video tag. </video> <span class="math display">\[\dot{\theta}_i = \omega_i + \lambda\sum_{j=1}^N \sin(\theta_j - \theta_i)\]</span>
+</td>
+</tr>
+</tbody></table>
+</div>
+<div class="attribution">
+<p>Synchronizing fireflies video from <a href="http://robinmeier.net/?p=2279">Robin Meier</a></p>
+</div>
 </section></section>
 <section>
 <section id="neural-network-control-of-chaos" class="title-slide slide level1 center">
@@ -908,46 +923,22 @@ l_n^2\ddot\theta_n =-\gamma\dot\theta_n\nonumber-l_n\sin{\theta_n}\nonumber +\ta
 
 <img data-src="figures/Result2/MPC_NN.png" class="quarto-figure quarto-figure-center r-stretch" style="width:100.0%" alt="Model Predictive control"></section>
 <section id="results-kuramoto-grid" class="slide level2">
-<h2>Results (Kuramoto Grid)</h2>
-<div class="quarto-layout-panel" data-layout-nrow="2">
-<div class="quarto-layout-row">
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<div class="quarto-figure quarto-figure-top">
-<figure>
-<p><img data-src="figures/Result2/Uncontrolled_kuramoto_dynamics.png" class="quarto-figure quarto-figure-top" style="width:100.0%" alt="Uncontrolled Kuramoto dynamics"></p>
-</figure>
-</div>
-</div>
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<div class="quarto-figure quarto-figure-top">
-<figure>
-<p><img data-src="figures/Result2/NN_controlled_kuramoto_dynamics.png" class="quarto-figure quarto-figure-top" style="width:100.0%" alt="NN controlled Kuramoto dynamics"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="quarto-layout-row">
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<div class="quarto-figure quarto-figure-bottom">
-<figure>
-<p><img data-src="figures/Result2/Uncontrolled_kuramoto_dynamics_noisy_0.1.png" class="quarto-figure quarto-figure-bottom" style="width:100.0%" alt="Uncontrolled Kuramoto dynamics with noise"></p>
-</figure>
-</div>
-</div>
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<div class="quarto-figure quarto-figure-bottom">
-<figure>
-<p><img data-src="figures/Result2/NN_controlled_kuramoto_dynamics_noisy_0.1.png" class="quarto-figure quarto-figure-bottom" style="width:100.0%" alt="NN controlled Kuramoto dynamics with noise"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-</section>
+<h2>Results: Kuramoto Grid</h2>
+
+<!-- ::: {layout-nrow=2}
+![](figures/Result2/Uncontrolled_kuramoto_dynamics.png){fig-alt="Uncontrolled Kuramoto dynamics" fig-align="top" width=100%}
+
+![](figures/Result2/NN_controlled_kuramoto_dynamics.png){fig-alt="NN controlled Kuramoto dynamics" fig-align="top" width=100%}
+
+![](figures/Result2/Uncontrolled_kuramoto_dynamics_noisy_0.1.png){fig-alt="Uncontrolled Kuramoto dynamics with noise" fig-align="bottom" width=100%}
+
+![](figures/Result2/NN_controlled_kuramoto_dynamics_noisy_0.1.png){fig-alt="NN controlled Kuramoto dynamics with noise" fig-align="bottom" width=100%}
+::: -->
+<img data-src="figures/Result2/kuramoto_control.png" class="quarto-figure quarto-figure-center r-stretch" style="width:100.0%" alt="Controlled kuramoto dynamics"></section>
 <section id="results-pendulum-array" class="slide level2">
-<h2>Results: (Pendulum Array)</h2>
-<img data-src="figures/Result2/controlled_pendulum_dynamics.png" class="quarto-figure quarto-figure-center" style="width:70.0%" alt="Controlled Pendulum dynamics">
-<div>
+<h2>Results: Pendulum Array</h2>
+
+<img data-src="figures/Result2/controlled_pendulum_dynamics.png" class="quarto-figure quarto-figure-center r-stretch" style="width:70.0%" alt="Controlled Pendulum dynamics"><div style="margin-top: 30px;">
 <video width="700" height="400" style="display: block; margin-left: auto; margin-right: auto;">
 <source src="figures/Result2/Pendulum_optimal.mp4" type="video/mp4">
 Your browser does not support the video tag. </video>
@@ -955,17 +946,25 @@ Your browser does not support the video tag. </video>
 </section>
 <section id="future-work-exotic-dynamics" class="slide level2">
 <h2>Future Work: Exotic Dynamics</h2>
-<div>
-<video width="700" height="500" loop="" style="display: block; margin-left: auto; margin-right: auto;">
-<source src="figures/Result2/ks.mp4" type="video/mp4">
-Your browser does not support the video tag. </video>
+<div style="font-size: 70%;">
+<p><span class="math display">\[\dot{\theta}_i = \omega_i + \lambda\sum_{j=1}^N A_{ij}\sin(\theta_j - \theta_i-\alpha)\]</span></p>
 </div>
-<!-- <div>
-<video width="700" height="500" loop style="display: block; margin-left: auto; margin-right: auto;">
-  <source src="figures/Result2/ks_chimera.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
-</div> -->
+<div>
+<table style="width:100%; margin:0; padding:0; margin-top:-65px;">
+<tbody><tr>
+<td style="vertical-align:top; padding-right:20px; width:50%">
+<video width="300" height="600" loop="" style="display: block; margin-left: auto; margin-right: auto; margin-bottom: 20px;">
+<source src="figures/Result2/ks_basic.mp4" type="video/mp4">
+Your browser does not support the video tag. </video>
+</td>
+<td style="vertical-align:top; padding-right:20px; width:50%">
+<video width="300" height="600" loop="" style="display: block; margin-left: auto; margin-right: auto; margin-bottom: 20px;">
+<source src="figures/Result2/ks_chimera.mp4" type="video/mp4">
+Your browser does not support the video tag. </video>
+</td>
+</tr>
+</tbody></table>
+</div>
 </section>
 <section id="speculation" class="slide level2">
 <h2>Speculation</h2>
@@ -1046,9 +1045,9 @@ Your browser does not support the video tag. </video>
 <section id="universal-approximation-theorem" class="slide level2 unnumbered unlisted" data-visibility="uncounted">
 <h2>Universal approximation theorem</h2>
 <p><span class="math display">\[M(\sigma) = \text{span}\{\sigma(wx-\theta):w\in \mathbb{R}^n, \theta\in\mathbb{R}\}\]</span> <!-- For which $\sigma$ is $\max_{x\in K}|f(x)-g(x)|<\epsilon$ true for any $f\in C(\mathbb{R}^n)$, any compact subset $K$ of $\mathbb{R}^n$, and $\epsilon >0$, and some $g \in M(\sigma)$? --></p>
-<p>Theorem 1: Let <span class="math inline">\(\sigma \in C(\mathbb{R})\)</span>. Then <span class="math inline">\(M(\sigma)\)</span> is dense in <span class="math inline">\(C(\mathbb{R}^n)\)</span>, in the topology of uniform convergence on compacta, if and only if <span class="math inline">\(\sigma\)</span> is not a polynomial.</p>
+<p><em>Theorem 1</em>: Let <span class="math inline">\(\sigma \in C(\mathbb{R})\)</span>. Then <span class="math inline">\(M(\sigma)\)</span> is dense in <span class="math inline">\(C(\mathbb{R}^n)\)</span>, in the topology of uniform convergence on compacta, if and only if <span class="math inline">\(\sigma\)</span> is not a polynomial.</p>
 <p>For Neural Networks,</p>
-<p>Theorem 2: Let <span class="math inline">\(\sigma\)</span> be any continous sigmoidal function. Then finite sums of the form <span class="math inline">\(G(x) = \sum_{i=1}^N \alpha_i \sigma(w_i^T x + b_i)\)</span> are dense in <span class="math inline">\(C(I_n)\)</span>. i.e.&nbsp;<span class="math inline">\(\forall f\in C(I_n)\)</span> and <span class="math inline">\(\epsilon&gt;0\)</span>, there is a sum <span class="math inline">\(G(x)\)</span> such that <span class="math inline">\(\max_{x\in I_n}|f(x)-G(x)|&lt;\epsilon\)</span>.</p>
+<p><em>Theorem 2</em>: Let <span class="math inline">\(\sigma\)</span> be any continous sigmoidal function. Then finite sums of the form <span class="math inline">\(G(x) = \sum_{i=1}^N \alpha_i \sigma(w_i^T x + b_i)\)</span> are dense in <span class="math inline">\(C(I_n)\)</span>. i.e.&nbsp;<span class="math inline">\(\forall f\in C(I_n)\)</span> and <span class="math inline">\(\epsilon&gt;0\)</span>, there is a sum <span class="math inline">\(G(x)\)</span> such that <span class="math inline">\(\max_{x\in I_n}|f(x)-G(x)|&lt;\epsilon\)</span>.</p>
 <p>Informally, at least one neural network exists that can approximate any continuous function on <span class="math inline">\(I_n=[0,1]^n\)</span> with arbitrary precision.</p>
 <div class="attribution">
 <p>Theorem 1 from <a href="https://doi.org/10.1016/S0893-6080(05)80131-5">Leshno, Pinkus, et. al</a> Theorem 2 from <a href="https://doi-org.prox.lib.ncsu.edu/10.1007/BF02551274">Cybenko</a></p>
@@ -1067,12 +1066,12 @@ V(x(t_0),t_0,t_f) = V(x(t_0),t_0,t) + V(x(t),t,t_f)
 \]</span> <span class="math display">\[
 \begin{align*}
   \dfrac{dV(x(t),t,t_f)}{dt} &amp;= \dfrac{\partial V}{\partial t} + \dfrac{\partial V}{\partial x}^T \frac{dx}{dt}\\
-  &amp;= \min_{u(t)} \dfrac{d}{dt} \left[ \int_0^{t_f}\mathcal{L}(x(\tau),u(\tau))d\tau + Q(x(t_f), t_f) \right]\\
-  &amp;= \min_{u(t)} \left[ \dfrac{d}{dt}\int_0^{t_f}\mathcal{L}(x(\tau),u(\tau))d\tau \right] \\
+  &amp;= \min_{u(t)} \dfrac{d}{dt} \left[ \int_0^{t_f}\Loss(x(\tau),u(\tau))d\tau + Q(x(t_f), t_f) \right]\\
+  &amp;= \min_{u(t)} \left[ \dfrac{d}{dt}\int_0^{t_f}\Loss(x(\tau),u(\tau))d\tau \right] \\
 \end{align*}
 \]</span></p>
 <p><span class="math display">\[
-\implies \boxed{-\dfrac{\partial V}{\partial t} = \min_{u(t)} \left[ \mathcal{L}(x(t),u(t)) + \dfrac{\partial V}{\partial x}^T f(x(t),u(t)) \right]}
+\implies \boxed{-\dfrac{\partial V}{\partial t} = \min_{u(t)} \left[ \Loss(x(t),u(t)) + \dfrac{\partial V}{\partial x}^T f(x(t),u(t)) \right]}
 \]</span></p>
 </section>
 <section id="pontryagins-maximum-principle" class="slide level2 unnumbered unlisted" data-visibility="uncounted">
