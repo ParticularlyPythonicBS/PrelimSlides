@@ -203,9 +203,6 @@ Figure by [Dr. John Lindner ](https://www.nature.com/articles/s41598-023-40766-6
 
 <img src="figures/BG1/HNN.png" alt="HNN schema" style="display: block; width: 30%; margin-top: -25px; margin-left: auto; margin-right: auto;">
 
-::: {.attribution}
-HNN by [Greydanus et al.](https://arxiv.org/abs/2006.08656)
-:::
 
 ## Background: Coordinates matter
 
@@ -584,7 +581,7 @@ If a system starts in a symmetric state, it will remain symmetric.
 <img src="figures/BG3/lift_project.png" alt="Group equivariance works by lifting and projection" style="width: 50%;">
 </div>
 
-Group equivarient NN work through lifting convolutions to the _group_ space, and then projecting back to the original space @cohen_group_2016.
+Group equivariant NN work through lifting convolutions to the _group_ space, and then projecting back to the original space @cohen_group_2016.
 
 :::{.attribution}
 Figure adapted from [Bart Smets et al.](https://arxiv.org/abs/2001.09046)
