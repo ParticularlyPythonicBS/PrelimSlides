@@ -4,6 +4,9 @@ subtitle: Preliminary Examination
 author: Anil Radhakrishnan
 institute: Nonlinear Artificial Intelligence Laboratory, North Carolina State University
 date: last-modified
+bibliography: references.bib
+csl: nature.csl
+
 format:
   revealjs:
     theme: [default, assets/custom.scss]
@@ -41,7 +44,7 @@ revealjs-plugins:
 ## Motivation: Why Neural Networks?
 - The preeminent computational tool of the contemporary world.
 - Differentable, optimizable, and scalable.
-- Emergent uses in and out of Physics.
+- Emergent uses in and out of Physics @vicentini_netket_2022.
 
 ::: {layout-ncol=3}
 
@@ -73,7 +76,7 @@ Avalanche activity cascades in a sandpile automaton; a vortex street formed by f
 :::
 
 ## Motivation: Why Nonlinear Dynamics for Neural Networks?
-- Optimization is inescapably nonlinear.
+- Optimization is inescapably nonlinear @sohl-dickstein_boundary_2024.
 - Neural networks are inherently nonlinear.
 - Scope of nonlinearities in neural networks is underexplored.
   
@@ -104,7 +107,7 @@ Day and Night by [M.C. Escher](https://www.wikiart.org/en/m-c-escher/day-and-nig
 
 ## Background: Differentiable Computing
 
-- Paradigm where programs can be differentiated end-to-end automatically, enabling optimizatio of parameters of the program.
+- Paradigm where programs can be differentiated end-to-end automatically, enabling optimization of parameters of the program @blondel_elements_2024.
 - Techniques to differentiate through complex programs is more than just deep learning.
 - Can be interpreted probabilistically or as a dynamical system.
 ![](figures/BG1/autodiff.png){fig-alt="autodifferentiation diagram" width=80% }
@@ -196,7 +199,7 @@ Figure by [Dr. John Lindner ](https://www.nature.com/articles/s41598-023-40766-6
 ## Background: Physics-Informed Neural Networks(PiNNs)
 - Synthesyzing data with differential equation constraints.
 - Physics as a weak constraint in a composite loss function or a hard constraint with architectural choices.
-- Symplectic constraints to the loss function gives Hamiltonian Neural Networks.
+- Symplectic constraints to the loss function gives Hamiltonian Neural Networks @greydanus_hamiltonian_2019.
 
 <img src="figures/BG1/HNN.png" alt="HNN schema" style="display: block; width: 30%; margin-top: -25px; margin-left: auto; margin-right: auto;">
 
@@ -303,7 +306,7 @@ Nr = \mathcal{R}
 $$
 
 where $\lambda_n$ are the co-variance matrix $\bf C$'s eigenvalues for neuronal activity data matrix.
-The normalized participation ratio $r = \mathcal{R} / N$.
+The normalized participation ratio $r = \mathcal{R} / N$ @gao_theory_2017.
 
 :::
 
@@ -351,7 +354,7 @@ $$
 \DeclareMathOperator{\Tr}{Tr}
 d\theta_{t} = - \nabla \Loss(\theta_{t})\, dt + \sqrt{2\mathbf{D}} \cdot d\mathcal{W}_{t}
 $$
-with noise intensity $\mathbf{D} = (\eta / B) \Loss(\theta) \mathbf{H}(\theta\star)$
+with noise intensity $\mathbf{D} = (\eta / B) \Loss(\theta) \mathbf{H}(\theta\star)$ @mori_power-law_2022
 
 <!-- Resulting minima from diverse neurons is flatter than from homogeneous ones, as measured by both the trace $\Tr\mathbf{H}$ of the Hessian and the fraction $f$ of its eigenvalues near zero: $\Tr \mathbf{H}_1 >  \Tr \mathbf{H}_2 > \Tr \mathbf{H}_{12}$ and $f_1 < f_2 < f_{12}$
 
@@ -378,9 +381,14 @@ V(x(t_0),t_0,t_f) = \min_{u(t)} J(x(t_0),u(t),t_0,t_f)\\
 -\dfrac{\partial V}{\partial t} = \min_{u(t)} \left[ \Loss(x(t),u(t)) + \dfrac{\partial V}{\partial x}^T f(x(t),u(t)) \right]
 $$
 
+:::{.notes}
+V(x,t) is the value function, the minimum cost-to-go from state x at time t.
+If we can solve for V then we can find from it a control u that achieves the minimum cost.
+:::
+
 ## Background: Model Predictive Control
 
-Control scheme where a model is used for predicting the future behavior of the system over finite time window.
+Control scheme where a model is used for predicting the future behavior of the system over finite time window @fiedler_-mpc:_2023.
 
 <table style="width:100%; margin:0; padding:0;">
   <tr>
@@ -399,8 +407,6 @@ Control scheme where a model is used for predicting the future behavior of the s
     </td>
   </tr>
 </table>
-
-
 
 ::: {.attribution}
 Animations from [do-mpc documentation](https://www.do-mpc.com/en/latest/theory_mpc.html)
@@ -430,7 +436,7 @@ Let $X$ be a metric space. A continous map $f: X \rightarrow X$ is said to be ch
 
 - $f$ has sensitive dependence on initial conditions
 - is topologically transitive
-- and has dense periodic orbits
+- and has dense periodic orbits @devaney_introduction_2003
 
     </td>
     <td style="vertical-align:top">
@@ -444,7 +450,7 @@ Let $X$ be a metric space. A continous map $f: X \rightarrow X$ is said to be ch
 
 ## Background: Traditional Chaos Control
 
-Relies on the ergodicity of chaotic systems.
+Relies on the ergodicity of chaotic systems [@ott_controlling_1990; @ditto_experimental_1990].
 
 ![](figures/BG2/OGY.png){fig-alt="Ott-Gerbogi-Yorke control" fig-align="center" width=80%}
 
@@ -452,7 +458,7 @@ Relies on the ergodicity of chaotic systems.
 
 
 
-## Background: Chaotic Pendulum Array
+## Background: Chaotic Pendulum Array @braiman_taming_1995
 <div>
 <video width="700" height="400" loop style="display: block; margin-left: auto; margin-right: auto;">
   <source src="figures/BG2/Chaotic_pendulum_array.mp4" type="video/mp4">
@@ -464,7 +470,7 @@ $$
 l_n^2\ddot\theta_n =-\gamma\dot\theta_n\nonumber-l_n\sin{\theta_n}\nonumber +\tau_{0}+\tau_{1}\sin{\omega t}\nonumber +\kappa(\theta_{n-1}+\theta_{n+1}-2\theta_n)
 $$
 
-## Background: Kuramoto Oscillator
+## Background: Kuramoto Oscillator @kuramoto_international_1975
 
 <div>
 <table style="width:100%; margin:0; padding:0;">
@@ -496,7 +502,7 @@ Synchronizing fireflies video from [Robin Meier](http://robinmeier.net/?p=2279)
 ## Insight
 - Optimal control of network dynamics involves minimizing a cost functional.
 - Traditional control approaches like Pontryagin's maximum principle or Hamilton-Jacobi-Bellman equations are analytically and computationally intractable for complex systems.
-- Neural networks based on neural ODES can approximate the optimal control policy.
+- Neural networks based on neural ODES can approximate the optimal control policy @bottcher_ai_2022.
 
 ## Methodology
 
@@ -505,17 +511,6 @@ Synchronizing fireflies video from [Robin Meier](http://robinmeier.net/?p=2279)
 ## Results: Kuramoto Grid
 
 ![](figures/Result2/kuramoto_control.png){fig-alt="Controlled kuramoto dynamics" fig-align="center" width=100%}
-
-
-<!-- ::: {layout-nrow=2}
-![](figures/Result2/Uncontrolled_kuramoto_dynamics.png){fig-alt="Uncontrolled Kuramoto dynamics" fig-align="top" width=100%}
-
-![](figures/Result2/NN_controlled_kuramoto_dynamics.png){fig-alt="NN controlled Kuramoto dynamics" fig-align="top" width=100%}
-
-![](figures/Result2/Uncontrolled_kuramoto_dynamics_noisy_0.1.png){fig-alt="Uncontrolled Kuramoto dynamics with noise" fig-align="bottom" width=100%}
-
-![](figures/Result2/NN_controlled_kuramoto_dynamics_noisy_0.1.png){fig-alt="NN controlled Kuramoto dynamics with noise" fig-align="bottom" width=100%}
-::: -->
 
 ## Results: Pendulum Array
 
@@ -528,7 +523,7 @@ Synchronizing fireflies video from [Robin Meier](http://robinmeier.net/?p=2279)
 </video>
 </div>
 
-## Future Work: Exotic Dynamics
+## Future Work: Exotic Dynamics @abrams_chimera_2004
 ::: {style="font-size: 70%;"}
 $$\dot{\theta}_i = \omega_i + \lambda\sum_{j=1}^N A_{ij}\sin(\theta_j - \theta_i-\alpha)$$
 :::
@@ -551,13 +546,14 @@ $$\dot{\theta}_i = \omega_i + \lambda\sum_{j=1}^N A_{ij}\sin(\theta_j - \theta_i
 </table>
 </div>
 
-## Future Work: Recurrence matrices and granular control
-![](figures/Result2/recurrence_matrix_lorenz.png){fig-alt="Controlled Pendulum dynamics" fig-align="center" width=70%}
+## Future Work: Recurrence matrices in $\mathcal{L}$ @kennel_determining_1992
+
+![](figures/Result2/recurrence_matrix_lorenz.png){fig-alt="Recurrence matrix for lorenz attractor" fig-align="center" width=70%}
 
 # Dynamics, symmetries, and introspection
 ## Background: Group theory for Dynamical Systems
 
-Let $\Gamma$ act on $\mathbb{R}^n$ and $f: \mathbb{R}^n \rightarrow \mathbb{R}^m$ . Then $f$ is said to be $\Gamma$-equivariant if $f(\gamma x) = \gamma f(x)$ for all $x \in \mathbb{R}^n$ and $\gamma \in \Gamma$.
+Let $\Gamma$ act on $\mathbb{R}^n$ and $f: \mathbb{R}^n \rightarrow \mathbb{R}^m$ . Then $f$ is said to be $\Gamma$-equivariant if $f(\gamma x) = \gamma f(x)$ for all $x \in \mathbb{R}^n$ and $\gamma \in \Gamma$ @zee_group_2016.
 
 For dynamical systems, for a fixed point $f(x\star)=0$ and $\gamma x\star$ is a fixed point as well.
 
@@ -582,22 +578,41 @@ So we can classify solutions upto their symmetry.
 If a system starts in a symmetric state, it will remain symmetric.
 :::
 
-## Background: Controllers for Dynamical systems
-
 ## Background: Group Equivariant Neural Networks
 
+<div style="margin-bottom: 40px; text-align: center;">
+<img src="figures/BG3/lift_project.png" alt="Group equivariance works by lifting and projection" style="width: 50%;">
+</div>
+
+Group equivarient NN work through lifting convolutions to the _group_ space, and then projecting back to the original space @cohen_group_2016.
+
+:::{.attribution}
+Figure adapted from [Bart Smets et al.](https://arxiv.org/abs/2001.09046)
+:::
+
 # Symmetries of controllers
-## Foundation
 
 ## Insight
 
+- Dynamical systems often obey symmetries.
+- Controllers are essentially dynamical systems.
+- Is there a computationally viable mapping between the symmetries of the system and the controller?
+
 ## Methodology
+
+- Analyze the controllers from the previous sections for symmetries using group equivariant autoencoders
+- Construct controllers that respect the symmetries of the system
+- Compare the performance of symmetric to conventional controllers.
 
 ## Expectation
 
-# Conclusions
+- Viability test for group equivariant neural networks in control systems.
+- Mapping between the symmetries of the system and the controller.
+- Performance analysis of symmetric controllers.
 
-## Conclusion
+# Conclusion
+
+## Summary
 
 ## Deliverables
 
@@ -607,6 +622,18 @@ If a system starts in a symmetric state, it will remain symmetric.
 Background image from [Jacqueline Doan](https://community.wolfram.com/groups/-/m/t/2509110)
 :::
 
+## References
+
+---
+nocite: |
+  @*
+---
+
+::: {#refs}
+:::
+
+
+
 # Backup slides {.unnumbered .unlisted visibility="uncounted"}
 
 ## Universal approximation theorem {.unnumbered .unlisted visibility="uncounted"}
@@ -614,19 +641,15 @@ Background image from [Jacqueline Doan](https://community.wolfram.com/groups/-/m
 $$M(\sigma) = \text{span}\{\sigma(wx-\theta):w\in \mathbb{R}^n, \theta\in\mathbb{R}\}$$
 <!-- For which $\sigma$ is $\max_{x\in K}|f(x)-g(x)|<\epsilon$ true for any $f\in C(\mathbb{R}^n)$, any compact subset $K$ of $\mathbb{R}^n$, and $\epsilon >0$, and some $g \in M(\sigma)$? -->
 
-*Theorem 1*: Let $\sigma \in C(\mathbb{R})$. Then $M(\sigma)$ is dense in $C(\mathbb{R}^n)$, in the topology of uniform convergence on compacta, if and only if $\sigma$ is not a polynomial.
+*Theorem 1*: Let $\sigma \in C(\mathbb{R})$. Then $M(\sigma)$ is dense in $C(\mathbb{R}^n)$, in the topology of uniform convergence on compacta, if and only if $\sigma$ is not a polynomial @leshno_multilayer_1993.
 
 For Neural Networks,
 
 *Theorem 2*: Let $\sigma$ be any continous sigmoidal function. Then finite sums of the form $G(x) = \sum_{i=1}^N \alpha_i \sigma(w_i^T x + b_i)$ are dense in $C(I_n)$.
-i.e. $\forall f\in C(I_n)$ and $\epsilon>0$, there is a sum $G(x)$ such that $\max_{x\in I_n}|f(x)-G(x)|<\epsilon$.
+i.e. $\forall f\in C(I_n)$ and $\epsilon>0$, there is a sum $G(x)$ such that $\max_{x\in I_n}|f(x)-G(x)|<\epsilon$ @cybenko_approximation_1989.
 
 Informally, at least one neural network exists that can approximate any continuous function on $I_n=[0,1]^n$ with arbitrary precision.
 
-:::{.attribution}
-Theorem 1 from [Leshno, Pinkus, et. al](https://doi.org/10.1016/S0893-6080(05)80131-5)
-Theorem 2 from [Cybenko](https://doi-org.prox.lib.ncsu.edu/10.1007/BF02551274)
-:::
 ## Stochastic gradient descent {.unnumbered .unlisted visibility="uncounted"}
 
 ## Neural ODEs {.unnumbered .unlisted visibility="uncounted"}
@@ -655,3 +678,4 @@ $$
 ## Delay coordinates and noise {.unnumbered .unlisted visibility="uncounted"}
 
 ## Neural network architectures {.unnumbered .unlisted visibility="uncounted"}
+

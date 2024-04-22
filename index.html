@@ -13,7 +13,7 @@
   <meta name="generator" content="quarto-1.4.553">
 
   <meta name="author" content="Anil Radhakrishnan">
-  <meta name="dcterms.date" content="2024-04-19">
+  <meta name="dcterms.date" content="2024-04-22">
   <title>Nonlinear dynamics with neural networks</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -32,7 +32,27 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
-  </style>
+    /* CSS for citations */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+      margin-bottom: 0em;
+    }
+    .hanging-indent div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }  </style>
   <link rel="stylesheet" href="index_files/libs/revealjs/dist/theme/quarto.css">
   <link rel="stylesheet" href="assets/style.css">
   <link href="index_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -356,7 +376,7 @@ Anil Radhakrishnan
     </div>
 </div>
 
-  <p class="date">2024-04-19</p>
+  <p class="date">2024-04-22</p>
 </section><section id="TOC">
 <nav role="doc-toc"> 
 <h2 id="toc-title">Table of contents</h2>
@@ -368,7 +388,7 @@ Anil Radhakrishnan
 <li><a href="#/neural-network-control-of-chaos" id="/toc-neural-network-control-of-chaos">Neural Network control of chaos</a></li>
 <li><a href="#/dynamics-symmetries-and-introspection" id="/toc-dynamics-symmetries-and-introspection">Dynamics, symmetries, and introspection</a></li>
 <li><a href="#/symmetries-of-controllers" id="/toc-symmetries-of-controllers">Symmetries of controllers</a></li>
-<li><a href="#/conclusions-1" id="/toc-conclusions-1">Conclusions</a></li>
+<li><a href="#/conclusion" id="/toc-conclusion">Conclusion</a></li>
 </ul>
 </nav>
 </section>
@@ -382,7 +402,7 @@ Anil Radhakrishnan
 <ul>
 <li>The preeminent computational tool of the contemporary world.</li>
 <li>Differentable, optimizable, and scalable.</li>
-<li>Emergent uses in and out of Physics.</li>
+<li>Emergent uses in and out of Physics<span class="citation" data-cites="vicentini_netket_2022"><sup><a href="#/references" role="doc-biblioref" onclick="">1</a></sup></span>.</li>
 </ul>
 <div class="quarto-layout-panel" data-layout-ncol="3">
 <div class="quarto-layout-row">
@@ -455,7 +475,7 @@ Anil Radhakrishnan
 <section id="motivation-why-nonlinear-dynamics-for-neural-networks" class="slide level2">
 <h2>Motivation: Why Nonlinear Dynamics for Neural Networks?</h2>
 <ul>
-<li>Optimization is inescapably nonlinear.</li>
+<li>Optimization is inescapably nonlinear<span class="citation" data-cites="sohl-dickstein_boundary_2024"><sup><a href="#/references" role="doc-biblioref" onclick="">2</a></sup></span>.</li>
 <li>Neural networks are inherently nonlinear.</li>
 <li>Scope of nonlinearities in neural networks is underexplored.</li>
 </ul>
@@ -504,7 +524,7 @@ Day and Night by [M.C. Escher](https://www.wikiart.org/en/m-c-escher/day-and-nig
 <section id="background-differentiable-computing" class="slide level2">
 <h2>Background: Differentiable Computing</h2>
 <ul>
-<li>Paradigm where programs can be differentiated end-to-end automatically, enabling optimizatio of parameters of the program.</li>
+<li>Paradigm where programs can be differentiated end-to-end automatically, enabling optimization of parameters of the program<span class="citation" data-cites="blondel_elements_2024"><sup><a href="#/references" role="doc-biblioref" onclick="">3</a></sup></span>.</li>
 <li>Techniques to differentiate through complex programs is more than just deep learning.</li>
 <li>Can be interpreted probabilistically or as a dynamical system. <img data-src="figures/BG1/autodiff.png" style="width:80.0%" alt="autodifferentiation diagram"></li>
 </ul>
@@ -604,7 +624,7 @@ Day and Night by [M.C. Escher](https://www.wikiart.org/en/m-c-escher/day-and-nig
 <ul>
 <li>Synthesyzing data with differential equation constraints.</li>
 <li>Physics as a weak constraint in a composite loss function or a hard constraint with architectural choices.</li>
-<li>Symplectic constraints to the loss function gives Hamiltonian Neural Networks.</li>
+<li>Symplectic constraints to the loss function gives Hamiltonian Neural Networks<span class="citation" data-cites="greydanus_hamiltonian_2019"><sup><a href="#/references" role="doc-biblioref" onclick="">4</a></sup></span>.</li>
 </ul>
 
 <img src="figures/BG1/HNN.png" alt="HNN schema" style="display: block; width: 30%; margin-top: -25px; margin-left: auto; margin-right: auto;" class="r-stretch"><div class="attribution">
@@ -717,7 +737,7 @@ Nr = \mathcal{R}
     = \frac{(\operatorname{tr}{\bf C})^2}{\operatorname{tr}{\bf C}^2}
     = \frac{\left(\sum_{n=1}^N\lambda_n \right)^2}{\sum_{n=1}^N \lambda_n^2}
 \]</span></p>
-<p>where <span class="math inline">\(\lambda_n\)</span> are the co-variance matrix <span class="math inline">\(\bf C\)</span>’s eigenvalues for neuronal activity data matrix. The normalized participation ratio <span class="math inline">\(r = \mathcal{R} / N\)</span>.</p>
+<p>where <span class="math inline">\(\lambda_n\)</span> are the co-variance matrix <span class="math inline">\(\bf C\)</span>’s eigenvalues for neuronal activity data matrix. The normalized participation ratio <span class="math inline">\(r = \mathcal{R} / N\)</span><span class="citation" data-cites="gao_theory_2017"><sup><a href="#/references" role="doc-biblioref" onclick="">5</a></sup></span>.</p>
 </div>
 <div id="second-column" class="quarto-layout-cell" style="flex-basis: 35.0%;justify-content: center;">
 <div class="quarto-figure quarto-figure-center">
@@ -771,7 +791,7 @@ Nr = \mathcal{R}
 <p><span class="math display">\[
 \DeclareMathOperator{\Tr}{Tr}
 d\theta_{t} = - \nabla \Loss(\theta_{t})\, dt + \sqrt{2\mathbf{D}} \cdot d\mathcal{W}_{t}
-\]</span> with noise intensity <span class="math inline">\(\mathbf{D} = (\eta / B) \Loss(\theta) \mathbf{H}(\theta\star)\)</span></p>
+\]</span> with noise intensity <span class="math inline">\(\mathbf{D} = (\eta / B) \Loss(\theta) \mathbf{H}(\theta\star)\)</span><span class="citation" data-cites="mori_power-law_2022"><sup><a href="#/references" role="doc-biblioref" onclick="">6</a></sup></span></p>
 <!-- Resulting minima from diverse neurons is flatter than from homogeneous ones, as measured by both the trace $\Tr\mathbf{H}$ of the Hessian and the fraction $f$ of its eigenvalues near zero: $\Tr \mathbf{H}_1 >  \Tr \mathbf{H}_2 > \Tr \mathbf{H}_{12}$ and $f_1 < f_2 < f_{12}$
 
 Since the noise term aligns with Hessian bear the minima, this suggests that the minima found by diverse neurons are flatter and more stable. -->
@@ -798,10 +818,23 @@ J(x,u,t_0,t_f) = Q(x(t_f), t_f) + \int_{t_0}^{t_f} \Loss(x(\tau),u(\tau))d\tau\\
 V(x(t_0),t_0,t_f) = \min_{u(t)} J(x(t_0),u(t),t_0,t_f)\\
 -\dfrac{\partial V}{\partial t} = \min_{u(t)} \left[ \Loss(x(t),u(t)) + \dfrac{\partial V}{\partial x}^T f(x(t),u(t)) \right]
 \]</span></p>
+<aside class="notes">
+<p>V(x,t) is the value function, the minimum cost-to-go from state x at time t. If we can solve for V then we can find from it a control u that achieves the minimum cost.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="background-model-predictive-control" class="slide level2">
 <h2>Background: Model Predictive Control</h2>
-<p>Control scheme where a model is used for predicting the future behavior of the system over finite time window.</p>
+<p>Control scheme where a model is used for predicting the future behavior of the system over finite time window<span class="citation" data-cites="fiedler_-mpc:_2023"><sup><a href="#/references" role="doc-biblioref" onclick="">7</a></sup></span>.</p>
 <table style="width:100%; margin:0; padding:0;">
 <tbody><tr>
 <td style="vertical-align:top; padding-right:20px; width:65%">
@@ -844,7 +877,7 @@ Your browser does not support the video tag. </video> <video width="200" height=
 <ul>
 <li><p><span class="math inline">\(f\)</span> has sensitive dependence on initial conditions</p></li>
 <li><p>is topologically transitive</p></li>
-<li><p>and has dense periodic orbits</p>
+<li><p>and has dense periodic orbits<span class="citation" data-cites="devaney_introduction_2003"><sup><a href="#/references" role="doc-biblioref" onclick="">8</a></sup></span></p>
 </li></ul></td>
 <td style="vertical-align:top">
 <video width="600" height="700" loop="" style="display: block; margin-left: auto; margin-right: auto;">
@@ -857,7 +890,7 @@ Your browser does not support the video tag. </video> <video width="200" height=
 </section>
 <section id="background-traditional-chaos-control" class="slide level2">
 <h2>Background: Traditional Chaos Control</h2>
-<p>Relies on the ergodicity of chaotic systems.</p>
+<p>Relies on the ergodicity of chaotic systems<span class="citation" data-cites="ott_controlling_1990 ditto_experimental_1990"><sup><a href="#/references" role="doc-biblioref" onclick="">9</a>,<a href="#/references" role="doc-biblioref" onclick="">10</a></sup></span>.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="figures/BG2/OGY.png" class="quarto-figure quarto-figure-center" style="width:80.0%" alt="Ott-Gerbogi-Yorke control"></p>
@@ -869,8 +902,8 @@ Your browser does not support the video tag. </video> <video width="200" height=
 </figure>
 </div>
 </section>
-<section id="background-chaotic-pendulum-array" class="slide level2">
-<h2>Background: Chaotic Pendulum Array</h2>
+<section id="background-chaotic-pendulum-array-braiman_taming_1995" class="slide level2">
+<h2>Background: Chaotic Pendulum Array<span class="citation" data-cites="braiman_taming_1995"><sup><a href="#/references" role="doc-biblioref" onclick="">11</a></sup></span></h2>
 <div>
 <video width="700" height="400" loop="" style="display: block; margin-left: auto; margin-right: auto;">
 <source src="figures/BG2/Chaotic_pendulum_array.mp4" type="video/mp4">
@@ -880,8 +913,8 @@ Your browser does not support the video tag. </video>
 l_n^2\ddot\theta_n =-\gamma\dot\theta_n\nonumber-l_n\sin{\theta_n}\nonumber +\tau_{0}+\tau_{1}\sin{\omega t}\nonumber +\kappa(\theta_{n-1}+\theta_{n+1}-2\theta_n)
 \]</span></p>
 </section>
-<section id="background-kuramoto-oscillator" class="slide level2">
-<h2>Background: Kuramoto Oscillator</h2>
+<section id="background-kuramoto-oscillator-kuramoto_international_1975" class="slide level2">
+<h2>Background: Kuramoto Oscillator<span class="citation" data-cites="kuramoto_international_1975"><sup><a href="#/references" role="doc-biblioref" onclick="">12</a></sup></span></h2>
 <div>
 <table style="width:100%; margin:0; padding:0;">
 <tbody><tr>
@@ -907,15 +940,12 @@ Your browser does not support the video tag. </video> <span class="math display"
 <h1>Neural Network control of chaos</h1>
 
 </section>
-<section id="foundation-1" class="slide level2">
-<h2>Foundation</h2>
-</section>
 <section id="insight-1" class="slide level2">
 <h2>Insight</h2>
 <ul>
 <li>Optimal control of network dynamics involves minimizing a cost functional.</li>
 <li>Traditional control approaches like Pontryagin’s maximum principle or Hamilton-Jacobi-Bellman equations are analytically and computationally intractable for complex systems.</li>
-<li>Neural networks based on neural ODES can approximate the optimal control policy.</li>
+<li>Neural networks based on neural ODES can approximate the optimal control policy<span class="citation" data-cites="bottcher_ai_2022"><sup><a href="#/references" role="doc-biblioref" onclick="">13</a></sup></span>.</li>
 </ul>
 </section>
 <section id="methodology-1" class="slide level2">
@@ -925,15 +955,6 @@ Your browser does not support the video tag. </video> <span class="math display"
 <section id="results-kuramoto-grid" class="slide level2">
 <h2>Results: Kuramoto Grid</h2>
 
-<!-- ::: {layout-nrow=2}
-![](figures/Result2/Uncontrolled_kuramoto_dynamics.png){fig-alt="Uncontrolled Kuramoto dynamics" fig-align="top" width=100%}
-
-![](figures/Result2/NN_controlled_kuramoto_dynamics.png){fig-alt="NN controlled Kuramoto dynamics" fig-align="top" width=100%}
-
-![](figures/Result2/Uncontrolled_kuramoto_dynamics_noisy_0.1.png){fig-alt="Uncontrolled Kuramoto dynamics with noise" fig-align="bottom" width=100%}
-
-![](figures/Result2/NN_controlled_kuramoto_dynamics_noisy_0.1.png){fig-alt="NN controlled Kuramoto dynamics with noise" fig-align="bottom" width=100%}
-::: -->
 <img data-src="figures/Result2/kuramoto_control.png" class="quarto-figure quarto-figure-center r-stretch" style="width:100.0%" alt="Controlled kuramoto dynamics"></section>
 <section id="results-pendulum-array" class="slide level2">
 <h2>Results: Pendulum Array</h2>
@@ -944,8 +965,8 @@ Your browser does not support the video tag. </video> <span class="math display"
 Your browser does not support the video tag. </video>
 </div>
 </section>
-<section id="future-work-exotic-dynamics" class="slide level2">
-<h2>Future Work: Exotic Dynamics</h2>
+<section id="future-work-exotic-dynamics-abrams_chimera_2004" class="slide level2">
+<h2>Future Work: Exotic Dynamics<span class="citation" data-cites="abrams_chimera_2004"><sup><a href="#/references" role="doc-biblioref" onclick="">14</a></sup></span></h2>
 <div style="font-size: 70%;">
 <p><span class="math display">\[\dot{\theta}_i = \omega_i + \lambda\sum_{j=1}^N A_{ij}\sin(\theta_j - \theta_i-\alpha)\]</span></p>
 </div>
@@ -966,10 +987,10 @@ Your browser does not support the video tag. </video>
 </tbody></table>
 </div>
 </section>
-<section id="future-work-recurrence-matrices-and-granular-control" class="slide level2">
-<h2>Future Work: Recurrence matrices and granular control</h2>
+<section id="future-work-recurrence-matrices-in-mathcall-kennel_determining_1992" class="slide level2">
+<h2>Future Work: Recurrence matrices in <span class="math inline">\(\mathcal{L}\)</span><span class="citation" data-cites="kennel_determining_1992"><sup><a href="#/references" role="doc-biblioref" onclick="">15</a></sup></span></h2>
 
-<img data-src="figures/Result2/recurrence_matrix_lorenz.png" class="quarto-figure quarto-figure-center r-stretch" style="width:70.0%" alt="Controlled Pendulum dynamics"></section></section>
+<img data-src="figures/Result2/recurrence_matrix_lorenz.png" class="quarto-figure quarto-figure-center r-stretch" style="width:70.0%" alt="Recurrence matrix for lorenz attractor"></section></section>
 <section>
 <section id="dynamics-symmetries-and-introspection" class="title-slide slide level1 center">
 <h1>Dynamics, symmetries, and introspection</h1>
@@ -977,7 +998,7 @@ Your browser does not support the video tag. </video>
 </section>
 <section id="background-group-theory-for-dynamical-systems" class="slide level2">
 <h2>Background: Group theory for Dynamical Systems</h2>
-<p>Let <span class="math inline">\(\Gamma\)</span> act on <span class="math inline">\(\mathbb{R}^n\)</span> and <span class="math inline">\(f: \mathbb{R}^n \rightarrow \mathbb{R}^m\)</span> . Then <span class="math inline">\(f\)</span> is said to be <span class="math inline">\(\Gamma\)</span>-equivariant if <span class="math inline">\(f(\gamma x) = \gamma f(x)\)</span> for all <span class="math inline">\(x \in \mathbb{R}^n\)</span> and <span class="math inline">\(\gamma \in \Gamma\)</span>.</p>
+<p>Let <span class="math inline">\(\Gamma\)</span> act on <span class="math inline">\(\mathbb{R}^n\)</span> and <span class="math inline">\(f: \mathbb{R}^n \rightarrow \mathbb{R}^m\)</span> . Then <span class="math inline">\(f\)</span> is said to be <span class="math inline">\(\Gamma\)</span>-equivariant if <span class="math inline">\(f(\gamma x) = \gamma f(x)\)</span> for all <span class="math inline">\(x \in \mathbb{R}^n\)</span> and <span class="math inline">\(\gamma \in \Gamma\)</span><span class="citation" data-cites="zee_group_2016"><sup><a href="#/references" role="doc-biblioref" onclick="">16</a></sup></span>.</p>
 <p>For dynamical systems, for a fixed point <span class="math inline">\(f(x\star)=0\)</span> and <span class="math inline">\(\gamma x\star\)</span> is a fixed point as well.</p>
 <p>Isotropy subgroup: Let <span class="math inline">\(v\in \mathbb{R}^n: \Sigma_v = \{\gamma \in \Gamma: \gamma v = v\}\)</span></p>
 <p>Fixed pt subspace: Let <span class="math inline">\(\Sigma \subseteq \Gamma\)</span>. <span class="math inline">\(\text{Fix}(\Sigma)=\{v \in \mathbb{R}^n:\sigma v=v\}\)</span></p>
@@ -998,36 +1019,52 @@ Your browser does not support the video tag. </video>
           display:block!important;
       }</style></aside>
 </section>
-<section id="background-controllers-for-dynamical-systems" class="slide level2">
-<h2>Background: Controllers for Dynamical systems</h2>
-</section>
 <section id="background-group-equivariant-neural-networks" class="slide level2">
 <h2>Background: Group Equivariant Neural Networks</h2>
+<div style="margin-bottom: 40px; text-align: center;">
+<p><img src="figures/BG3/lift_project.png" alt="Group equivariance works by lifting and projection" style="width: 50%;"></p>
+</div>
+<p>Group equivarient NN work through lifting convolutions to the <em>group</em> space, and then projecting back to the original space<span class="citation" data-cites="cohen_group_2016"><sup><a href="#/references" role="doc-biblioref" onclick="">17</a></sup></span>.</p>
+<div class="attribution">
+<p>Figure adapted from <a href="https://arxiv.org/abs/2001.09046">Bart Smets et al.</a></p>
+</div>
 </section></section>
 <section>
 <section id="symmetries-of-controllers" class="title-slide slide level1 center">
 <h1>Symmetries of controllers</h1>
 
 </section>
-<section id="foundation-2" class="slide level2">
-<h2>Foundation</h2>
-</section>
 <section id="insight-2" class="slide level2">
 <h2>Insight</h2>
+<ul>
+<li>Dynamical systems often obey symmetries.</li>
+<li>Controllers are essentially dynamical systems.</li>
+<li>Is there a computationally viable mapping between the symmetries of the system and the controller?</li>
+</ul>
 </section>
 <section id="methodology-2" class="slide level2">
 <h2>Methodology</h2>
+<ul>
+<li>Analyze the controllers from the previous sections for symmetries using group equivariant autoencoders</li>
+<li>Construct controllers that respect the symmetries of the system</li>
+<li>Compare the performance of symmetric to conventional controllers.</li>
+</ul>
 </section>
 <section id="expectation" class="slide level2">
 <h2>Expectation</h2>
+<ul>
+<li>Viability test for group equivariant neural networks in control systems.</li>
+<li>Mapping between the symmetries of the system and the controller.</li>
+<li>Performance analysis of symmetric controllers.</li>
+</ul>
 </section></section>
 <section>
-<section id="conclusions-1" class="title-slide slide level1 center">
-<h1>Conclusions</h1>
+<section id="conclusion" class="title-slide slide level1 center">
+<h1>Conclusion</h1>
 
 </section>
-<section id="conclusion" class="slide level2">
-<h2>Conclusion</h2>
+<section id="summary" class="slide level2">
+<h2>Summary</h2>
 </section>
 <section id="deliverables" class="slide level2">
 <h2>Deliverables</h2>
@@ -1036,6 +1073,74 @@ Your browser does not support the video tag. </video>
 <h2>Acknowledgements</h2>
 <div class="attribution">
 <p>Background image from <a href="https://community.wolfram.com/groups/-/m/t/2509110">Jacqueline Doan</a></p>
+</div>
+</section>
+<section id="references" class="slide level2 smaller scrollable">
+<h2>References</h2>
+<div id="refs" class="references csl-bib-body" data-entry-spacing="0" data-line-spacing="2" role="list">
+<div id="ref-vicentini_netket_2022" class="csl-entry" role="listitem">
+<div class="csl-left-margin">1. </div><div class="csl-right-inline">Vicentini, F. <em>et al.</em> <span>NetKet</span> 3: <span>Machine</span> <span>Learning</span> <span>Toolbox</span> for <span>Many</span>-<span>Body</span> <span>Quantum</span> <span>Systems</span>. <em>SciPost Physics Codebases</em> 007 (2022) doi:<a href="https://doi.org/10.21468/SciPostPhysCodeb.7">10.21468/SciPostPhysCodeb.7</a>.</div>
+</div>
+<div id="ref-sohl-dickstein_boundary_2024" class="csl-entry" role="listitem">
+<div class="csl-left-margin">2. </div><div class="csl-right-inline">Sohl-Dickstein, J. The boundary of neural network trainability is fractal. (2024) doi:<a href="https://doi.org/10.48550/arXiv.2402.06184">10.48550/arXiv.2402.06184</a>.</div>
+</div>
+<div id="ref-blondel_elements_2024" class="csl-entry" role="listitem">
+<div class="csl-left-margin">3. </div><div class="csl-right-inline">Blondel, M. &amp; Roulet, V. The <span>Elements</span> of <span>Differentiable</span> <span>Programming</span>. (2024) doi:<a href="https://doi.org/10.48550/arXiv.2403.14606">10.48550/arXiv.2403.14606</a>.</div>
+</div>
+<div id="ref-greydanus_hamiltonian_2019" class="csl-entry" role="listitem">
+<div class="csl-left-margin">4. </div><div class="csl-right-inline">Greydanus, S., Dzamba, M. &amp; Yosinski, J. Hamiltonian <span>Neural</span> <span>Networks</span>. (2019) doi:<a href="https://doi.org/10.48550/arXiv.1906.01563">10.48550/arXiv.1906.01563</a>.</div>
+</div>
+<div id="ref-gao_theory_2017" class="csl-entry" role="listitem">
+<div class="csl-left-margin">5. </div><div class="csl-right-inline">Gao, P. <em>et al.</em> A theory of multineuronal dimensionality, dynamics and measurement. (2017) doi:<a href="https://doi.org/10.1101/214262">10.1101/214262</a>.</div>
+</div>
+<div id="ref-mori_power-law_2022" class="csl-entry" role="listitem">
+<div class="csl-left-margin">6. </div><div class="csl-right-inline">Mori, T., Ziyin, L., Liu, K. &amp; Ueda, M. Power-law escape rate of <span>SGD</span>. (2022) doi:<a href="https://doi.org/10.48550/arXiv.2105.09557">10.48550/arXiv.2105.09557</a>.</div>
+</div>
+<div id="ref-fiedler_-mpc:_2023" class="csl-entry" role="listitem">
+<div class="csl-left-margin">7. </div><div class="csl-right-inline">Fiedler, F. <em>et al.</em> <a href="https://doi.org/10.1016/j.conengprac.2023.105676">Do-mpc: <span>Towards</span> <span>FAIR</span> nonlinear and robust model predictive control</a>. <em>Control Engineering Practice</em> <strong>140</strong>, 105676 (2023).</div>
+</div>
+<div id="ref-devaney_introduction_2003" class="csl-entry" role="listitem">
+<div class="csl-left-margin">8. </div><div class="csl-right-inline">Devaney, R. L. <em>An Introduction to Chaotic Dynamical Systems</em>. (Westview Press, Boulder, Colo, 2003).</div>
+</div>
+<div id="ref-ott_controlling_1990" class="csl-entry" role="listitem">
+<div class="csl-left-margin">9. </div><div class="csl-right-inline">Ott, E., Grebogi, C. &amp; Yorke, J. A. <a href="https://doi.org/10.1103/PhysRevLett.64.1196">Controlling chaos</a>. <em>Physical Review Letters</em> <strong>64</strong>, 1196–1199 (1990).</div>
+</div>
+<div id="ref-ditto_experimental_1990" class="csl-entry" role="listitem">
+<div class="csl-left-margin">10. </div><div class="csl-right-inline">Ditto, W. L., Rauseo, S. N. &amp; Spano, M. L. <a href="https://doi.org/10.1103/PhysRevLett.65.3211">Experimental control of chaos</a>. <em>Physical Review Letters</em> <strong>65</strong>, 3211–3214 (1990).</div>
+</div>
+<div id="ref-braiman_taming_1995" class="csl-entry" role="listitem">
+<div class="csl-left-margin">11. </div><div class="csl-right-inline">Braiman, Y., Lindner, J. F. &amp; Ditto, W. L. <a href="https://doi.org/10.1038/378465a0">Taming spatiotemporal chaos with disorder</a>. <em>Nature</em> <strong>378</strong>, 465–467 (1995).</div>
+</div>
+<div id="ref-kuramoto_international_1975" class="csl-entry" role="listitem">
+<div class="csl-left-margin">12. </div><div class="csl-right-inline">Kuramoto, Y. <a href="https://api.semanticscholar.org/CorpusID:53832482">In <span>International</span> <span>Symposium</span> on <span>Mathematical</span> <span>Problems</span> in <span>Theoretical</span> <span>Physics</span></a>. in (1975).</div>
+</div>
+<div id="ref-bottcher_ai_2022" class="csl-entry" role="listitem">
+<div class="csl-left-margin">13. </div><div class="csl-right-inline">Böttcher, L., Antulov-Fantulin, N. &amp; Asikis, T. <a href="https://doi.org/10.1038/s41467-021-27590-0"><span>AI</span> <span>Pontryagin</span> or how artificial neural networks learn to control dynamical systems</a>. <em>Nature Communications</em> <strong>13</strong>, 333 (2022).</div>
+</div>
+<div id="ref-abrams_chimera_2004" class="csl-entry" role="listitem">
+<div class="csl-left-margin">14. </div><div class="csl-right-inline">Abrams, D. M. &amp; Strogatz, S. H. <a href="https://doi.org/10.1103/PhysRevLett.93.174102">Chimera <span>States</span> for <span>Coupled</span> <span>Oscillators</span></a>. <em>Physical Review Letters</em> <strong>93</strong>, 174102 (2004).</div>
+</div>
+<div id="ref-kennel_determining_1992" class="csl-entry" role="listitem">
+<div class="csl-left-margin">15. </div><div class="csl-right-inline">Kennel, M. B., Brown, R. &amp; Abarbanel, H. D. I. <a href="https://doi.org/10.1103/PhysRevA.45.3403">Determining embedding dimension for phase-space reconstruction using a geometrical construction</a>. <em>Physical Review A</em> <strong>45</strong>, 3403–3411 (1992).</div>
+</div>
+<div id="ref-zee_group_2016" class="csl-entry" role="listitem">
+<div class="csl-left-margin">16. </div><div class="csl-right-inline">Zee, A. <em>Group Theory in a Nutshell for Physicists</em>. (Princeton University Press, Princeton, 2016).</div>
+</div>
+<div id="ref-cohen_group_2016" class="csl-entry" role="listitem">
+<div class="csl-left-margin">17. </div><div class="csl-right-inline">Cohen, T. &amp; Welling, M. <a href="https://proceedings.mlr.press/v48/cohenc16.html">Group <span>Equivariant</span> <span>Convolutional</span> <span>Networks</span></a>. in <em>Proceedings of <span>The</span> 33rd <span>International</span> <span>Conference</span> on <span>Machine</span> <span>Learning</span></em> 2990–2999 (PMLR, 2016).</div>
+</div>
+<div id="ref-leshno_multilayer_1993" class="csl-entry" role="listitem">
+<div class="csl-left-margin">18. </div><div class="csl-right-inline">Leshno, M., Lin, V. Ya., Pinkus, A. &amp; Schocken, S. <a href="https://doi.org/10.1016/S0893-6080(05)80131-5">Multilayer feedforward networks with a nonpolynomial activation function can approximate any function</a>. <em>Neural Networks</em> <strong>6</strong>, 861–867 (1993).</div>
+</div>
+<div id="ref-cybenko_approximation_1989" class="csl-entry" role="listitem">
+<div class="csl-left-margin">19. </div><div class="csl-right-inline">Cybenko, G. <a href="https://doi.org/10.1007/BF02551274">Approximation by superpositions of a sigmoidal function</a>. <em>Mathematics of Control, Signals and Systems</em> <strong>2</strong>, 303–314 (1989).</div>
+</div>
+<div id="ref-choudhary_neuronal_2023" class="csl-entry" role="listitem">
+<div class="csl-left-margin">20. </div><div class="csl-right-inline">Choudhary, A., Radhakrishnan, A., Lindner, J. F., Sinha, S. &amp; Ditto, W. L. <a href="https://doi.org/10.1038/s41598-023-40766-6">Neuronal diversity can improve machine learning for physics and beyond</a>. <em>Scientific Reports</em> <strong>13</strong>, 13962 (2023).</div>
+</div>
+<div id="ref-smets_pde-based_2023" class="csl-entry" role="listitem">
+<div class="csl-left-margin">21. </div><div class="csl-right-inline">Smets, B., Portegies, J., Bekkers, E. &amp; Duits, R. <a href="https://doi.org/10.1007/s10851-022-01114-x"><span>PDE</span>-based <span>Group</span> <span>Equivariant</span> <span>Convolutional</span> <span>Neural</span> <span>Networks</span></a>. <em>Journal of Mathematical Imaging and Vision</em> <strong>65</strong>, 209–239 (2023).</div>
+</div>
 </div>
 </section></section>
 <section>
@@ -1046,13 +1151,10 @@ Your browser does not support the video tag. </video>
 <section id="universal-approximation-theorem" class="slide level2 unnumbered unlisted" data-visibility="uncounted">
 <h2>Universal approximation theorem</h2>
 <p><span class="math display">\[M(\sigma) = \text{span}\{\sigma(wx-\theta):w\in \mathbb{R}^n, \theta\in\mathbb{R}\}\]</span> <!-- For which $\sigma$ is $\max_{x\in K}|f(x)-g(x)|<\epsilon$ true for any $f\in C(\mathbb{R}^n)$, any compact subset $K$ of $\mathbb{R}^n$, and $\epsilon >0$, and some $g \in M(\sigma)$? --></p>
-<p><em>Theorem 1</em>: Let <span class="math inline">\(\sigma \in C(\mathbb{R})\)</span>. Then <span class="math inline">\(M(\sigma)\)</span> is dense in <span class="math inline">\(C(\mathbb{R}^n)\)</span>, in the topology of uniform convergence on compacta, if and only if <span class="math inline">\(\sigma\)</span> is not a polynomial.</p>
+<p><em>Theorem 1</em>: Let <span class="math inline">\(\sigma \in C(\mathbb{R})\)</span>. Then <span class="math inline">\(M(\sigma)\)</span> is dense in <span class="math inline">\(C(\mathbb{R}^n)\)</span>, in the topology of uniform convergence on compacta, if and only if <span class="math inline">\(\sigma\)</span> is not a polynomial<span class="citation" data-cites="leshno_multilayer_1993"><sup><a href="#/references" role="doc-biblioref" onclick="">18</a></sup></span>.</p>
 <p>For Neural Networks,</p>
-<p><em>Theorem 2</em>: Let <span class="math inline">\(\sigma\)</span> be any continous sigmoidal function. Then finite sums of the form <span class="math inline">\(G(x) = \sum_{i=1}^N \alpha_i \sigma(w_i^T x + b_i)\)</span> are dense in <span class="math inline">\(C(I_n)\)</span>. i.e.&nbsp;<span class="math inline">\(\forall f\in C(I_n)\)</span> and <span class="math inline">\(\epsilon&gt;0\)</span>, there is a sum <span class="math inline">\(G(x)\)</span> such that <span class="math inline">\(\max_{x\in I_n}|f(x)-G(x)|&lt;\epsilon\)</span>.</p>
+<p><em>Theorem 2</em>: Let <span class="math inline">\(\sigma\)</span> be any continous sigmoidal function. Then finite sums of the form <span class="math inline">\(G(x) = \sum_{i=1}^N \alpha_i \sigma(w_i^T x + b_i)\)</span> are dense in <span class="math inline">\(C(I_n)\)</span>. i.e.&nbsp;<span class="math inline">\(\forall f\in C(I_n)\)</span> and <span class="math inline">\(\epsilon&gt;0\)</span>, there is a sum <span class="math inline">\(G(x)\)</span> such that <span class="math inline">\(\max_{x\in I_n}|f(x)-G(x)|&lt;\epsilon\)</span><span class="citation" data-cites="cybenko_approximation_1989"><sup><a href="#/references" role="doc-biblioref" onclick="">19</a></sup></span>.</p>
 <p>Informally, at least one neural network exists that can approximate any continuous function on <span class="math inline">\(I_n=[0,1]^n\)</span> with arbitrary precision.</p>
-<div class="attribution">
-<p>Theorem 1 from <a href="https://doi.org/10.1016/S0893-6080(05)80131-5">Leshno, Pinkus, et. al</a> Theorem 2 from <a href="https://doi-org.prox.lib.ncsu.edu/10.1007/BF02551274">Cybenko</a></p>
-</div>
 </section>
 <section id="stochastic-gradient-descent" class="slide level2 unnumbered unlisted" data-visibility="uncounted">
 <h2>Stochastic gradient descent</h2>
