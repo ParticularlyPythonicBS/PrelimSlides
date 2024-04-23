@@ -10,10 +10,10 @@
 <link href="index_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="index_files/libs/quarto-contrib/videojs/video.min.js"></script>
 <link href="index_files/libs/quarto-contrib/videojs/video-js.css" rel="stylesheet"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.4.553">
+  <meta name="generator" content="quarto-1.4.551">
 
   <meta name="author" content="Anil Radhakrishnan">
-  <meta name="dcterms.date" content="2024-04-22">
+  <meta name="dcterms.date" content="2024-04-23">
   <title>Nonlinear dynamics with neural networks</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -376,7 +376,7 @@ Anil Radhakrishnan
     </div>
 </div>
 
-  <p class="date">2024-04-22</p>
+  <p class="date">2024-04-23</p>
 </section><section id="TOC">
 <nav role="doc-toc"> 
 <h2 id="toc-title">Table of contents</h2>
@@ -616,7 +616,7 @@ Day and Night by [M.C. Escher](https://www.wikiart.org/en/m-c-escher/day-and-nig
 </div>
 <p>Algorithms for meta-learning are still in a nascent stage with significant computational overhead.</p>
 <div class="attribution">
-<p>Figure by <a href="https://www.nature.com/articles/s41598-023-40766-6">Dr.&nbsp;John Lindner</a></p>
+<p>Figure by <a href="https://www.nature.com/articles/s41598-023-40766-6">John Lindner</a></p>
 </div>
 </section>
 <section id="background-physics-informed-neural-networkspinns" class="slide level2">
@@ -996,10 +996,10 @@ Your browser does not support the video tag. </video>
 <section id="background-group-theory-for-dynamical-systems" class="slide level2">
 <h2>Background: Group theory for Dynamical Systems</h2>
 <p>Let <span class="math inline">\(\Gamma\)</span> act on <span class="math inline">\(\mathbb{R}^n\)</span> and <span class="math inline">\(f: \mathbb{R}^n \rightarrow \mathbb{R}^m\)</span> . Then <span class="math inline">\(f\)</span> is said to be <span class="math inline">\(\Gamma\)</span>-equivariant if <span class="math inline">\(f(\gamma x) = \gamma f(x)\)</span> for all <span class="math inline">\(x \in \mathbb{R}^n\)</span> and <span class="math inline">\(\gamma \in \Gamma\)</span><span class="citation" data-cites="zee_group_2016"><sup><a href="#/references" role="doc-biblioref" onclick="">16</a></sup></span>.</p>
-<p>For dynamical systems, for a fixed point <span class="math inline">\(f(x\star)=0\)</span> and <span class="math inline">\(\gamma x\star\)</span> is a fixed point as well.</p>
+<p>For dynamical systems, for a fixed point <span class="math inline">\(f(x\star)=0\)</span>, <span class="math inline">\(\gamma x\star\)</span> is also a fixed point.</p>
 <p>Isotropy subgroup: Let <span class="math inline">\(v\in \mathbb{R}^n: \Sigma_v = \{\gamma \in \Gamma: \gamma v = v\}\)</span></p>
 <p>Fixed pt subspace: Let <span class="math inline">\(\Sigma \subseteq \Gamma\)</span>. <span class="math inline">\(\text{Fix}(\Sigma)=\{v \in \mathbb{R}^n:\sigma v=v\}\)</span></p>
-<p>Thm: Let <span class="math inline">\(f: \mathbb{R}^n \rightarrow \mathbb{R}^m\)</span> be a <span class="math inline">\(\Gamma\)</span>-equivariant map and <span class="math inline">\(\Sigma \subseteq \Gamma\)</span>. Then <span class="math inline">\(f(\text{Fix}(\Sigma))\subseteq\text{Fix}(\Sigma)\)</span>.</p>
+<p><em>Thm</em>: Let <span class="math inline">\(f: \mathbb{R}^n \rightarrow \mathbb{R}^m\)</span> be a <span class="math inline">\(\Gamma\)</span>-equivariant map and <span class="math inline">\(\Sigma \subseteq \Gamma\)</span>. Then <span class="math inline">\(f(\text{Fix}(\Sigma))\subseteq\text{Fix}(\Sigma)\)</span>.</p>
 <aside class="notes">
 <p>Cyclic group Dihedral group = Cyclic group + Flips Symmetric group = m! S^1 circle group O(n) Measure preserving transformations</p>
 <p>For ODEs that means if <span class="math inline">\(f(x)\)</span> is a solution, then so is <span class="math inline">\(f(\gamma x)\)</span> for all <span class="math inline">\(gamma \in \Gamma\)</span>. So we can classify solutions upto their symmetry.</p>
@@ -1167,8 +1167,68 @@ Your browser does not support the video tag. </video>
 <p><em>Theorem 2</em>: Let <span class="math inline">\(\sigma\)</span> be any continous sigmoidal function. Then finite sums of the form <span class="math inline">\(G(x) = \sum_{i=1}^N \alpha_i \sigma(w_i^T x + b_i)\)</span> are dense in <span class="math inline">\(C(I_n)\)</span>. i.e.&nbsp;<span class="math inline">\(\forall f\in C(I_n)\)</span> and <span class="math inline">\(\epsilon&gt;0\)</span>, there is a sum <span class="math inline">\(G(x)\)</span> such that <span class="math inline">\(\max_{x\in I_n}|f(x)-G(x)|&lt;\epsilon\)</span><span class="citation" data-cites="cybenko_approximation_1989"><sup><a href="#/references" role="doc-biblioref" onclick="">19</a></sup></span>.</p>
 <p>Informally, at least one neural network exists that can approximate any continuous function on <span class="math inline">\(I_n=[0,1]^n\)</span> with arbitrary precision.</p>
 </section>
-<section id="stochastic-gradient-descent" class="slide level2 unnumbered unlisted" data-visibility="uncounted">
-<h2>Stochastic gradient descent</h2>
+<section id="sgd-via-gradient-flows" class="slide level2 unnumbered unlisted smaller" data-visibility="uncounted">
+<h2>SGD via gradient flows</h2>
+<div style="font-size: 78%;">
+<p>Gradient descent: <span class="math inline">\(x_{n+1} = x_n - \gamma\nabla f(x_n)\)</span> where <span class="math inline">\(\gamma &gt; 0\)</span> is the step-size. Gradient flow is the limit where <span class="math inline">\(\gamma\rightarrow 0\)</span>.</p>
+<p>There are two ways to treat SGD in this regime,</p>
+<p>Consider fixed times <span class="math inline">\(t=n\gamma\)</span> and <span class="math inline">\(s=m\gamma\)</span>.</p>
+<div class="quarto-layout-panel" data-layout="[ 45, 55 ]">
+<div class="quarto-layout-row">
+<div id="first-column" class="quarto-layout-cell" style="flex-basis: 45.0%;justify-content: flex-start;">
+<ul>
+<li>Convergence to gradient flow</li>
+</ul>
+<p>Given the recursion <span class="math inline">\(x_{n+1} = x_n-\gamma\nabla f(x_n) - \gamma\epsilon_n\)</span>,</p>
+<p>applying this <span class="math inline">\(m\)</span> times, we get:</p>
+<p><span class="math display">\[
+\begin{align*}
+X(t+s) - X(t) &amp;= x_{n+m}-x_n\\
+              &amp;= -\gamma \sum_{k=0}^{m-1}\nabla f(X(t+\frac{sk}{m})) - \gamma\sum_{k=0}^{m-1}ε_{k+n}
+\end{align*}
+\]</span> in the limit, <span class="math display">\[
+\begin{align*}
+X(t+s) - X(t) &amp;= -\int_t^{t+s}\nabla f(X(u))du + 0
+\end{align*}
+\]</span> which is just the gradient flow equation.</p>
+</div>
+<div id="second-column" class="quarto-layout-cell" style="flex-basis: 55.0%;justify-content: flex-start;">
+<ul>
+<li>Convergence to Langevin diffusion</li>
+</ul>
+<p>Given the recursion <span class="math inline">\(x_{n+1} = x_n-\gamma\nabla f(x_n) - \sqrt{2\gamma}\epsilon_n\)</span>,</p>
+<p>applying this <span class="math inline">\(m\)</span> times, we get:</p>
+<p><span class="math display">\[
+\begin{align*}
+X(t+s) - X(t) &amp;= x_{n+m}-x_n\\
+              &amp;= -\gamma \sum_{k=0}^{m-1}\nabla f(X(t+\frac{sk}{m}))- \sqrt{2\gamma}\sum_{k=0}^{m-1}ε_{k+n}
+\end{align*}
+\]</span> The second term has finite variance <span class="math inline">\(\propto 2s\)</span>. When <span class="math inline">\(m\)</span> tends to infinity,</p>
+<p><span class="math display">\[
+X(t+s) - X(t) =\\
+-\int_t^{t+s} \nabla f(X(u))du + \sqrt{2}[B(t+s)-B(t)]
+\]</span></p>
+<p>This limiting distribution is the Gibbs distribution with density <span class="math inline">\(\exp{(-f(x))}\)</span></p>
+</div>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>γ∑m−1k=0εk+n has zero expectation and variance equal to γ2m=γs times the variance of each εk+n and thus tends to 0</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<div class="attribution">
+<p>Argument from <a href="https://francisbach.com/gradient-flows/">Francis Bach</a></p>
+</div>
 </section>
 <section id="neural-odes" class="slide level2 unnumbered unlisted" data-visibility="uncounted">
 <h2>Neural ODEs</h2>

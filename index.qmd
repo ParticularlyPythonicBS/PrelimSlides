@@ -193,7 +193,7 @@ Stochastic Gradient Descent, Adam, and RMSProp are common optimization algorithm
 Algorithms for meta-learning are still in a nascent stage with significant computational overhead.
 
 ::: {.attribution}
-Figure by [Dr. John Lindner ](https://www.nature.com/articles/s41598-023-40766-6)
+Figure by [John Lindner ](https://www.nature.com/articles/s41598-023-40766-6)
 :::
 
 ## Background: Physics-Informed Neural Networks(PiNNs)
@@ -552,7 +552,7 @@ $$\dot{\theta}_i = \omega_i + \lambda\sum_{j=1}^N A_{ij}\sin(\theta_j - \theta_i
 
 Let $\Gamma$ act on $\mathbb{R}^n$ and $f: \mathbb{R}^n \rightarrow \mathbb{R}^m$ . Then $f$ is said to be $\Gamma$-equivariant if $f(\gamma x) = \gamma f(x)$ for all $x \in \mathbb{R}^n$ and $\gamma \in \Gamma$ @zee_group_2016.
 
-For dynamical systems, for a fixed point $f(x\star)=0$ and $\gamma x\star$ is a fixed point as well.
+For dynamical systems, for a fixed point $f(x\star)=0$, $\gamma x\star$ is also a fixed point.
 
 Isotropy subgroup:
 Let $v\in \mathbb{R}^n: \Sigma_v = \{\gamma \in \Gamma: \gamma v = v\}$
@@ -560,7 +560,7 @@ Let $v\in \mathbb{R}^n: \Sigma_v = \{\gamma \in \Gamma: \gamma v = v\}$
 Fixed pt subspace:
 Let $\Sigma \subseteq \Gamma$. $\text{Fix}(\Sigma)=\{v \in \mathbb{R}^n:\sigma v=v\}$
 
-Thm: Let $f: \mathbb{R}^n \rightarrow \mathbb{R}^m$ be a $\Gamma$-equivariant map and  $\Sigma \subseteq \Gamma$. Then $f(\text{Fix}(\Sigma))\subseteq\text{Fix}(\Sigma)$.
+*Thm*: Let $f: \mathbb{R}^n \rightarrow \mathbb{R}^m$ be a $\Gamma$-equivariant map and  $\Sigma \subseteq \Gamma$. Then $f(\text{Fix}(\Sigma))\subseteq\text{Fix}(\Sigma)$.
 
 :::{.notes}
 Cyclic group
@@ -662,7 +662,79 @@ i.e. $\forall f\in C(I_n)$ and $\epsilon>0$, there is a sum $G(x)$ such that $\m
 
 Informally, at least one neural network exists that can approximate any continuous function on $I_n=[0,1]^n$ with arbitrary precision.
 
-## Stochastic gradient descent {.unnumbered .unlisted visibility="uncounted"}
+## SGD via gradient flows {.unnumbered .unlisted visibility="uncounted" .smaller}
+
+::: {style="font-size: 78%;"}
+
+Gradient descent: $x_{n+1} = x_n - \gamma\nabla f(x_n)$ where $\gamma > 0$ is the step-size. Gradient flow is the limit where $\gamma\rightarrow 0$.
+
+There are two ways to treat SGD in this regime,
+
+Consider fixed times $t=n\gamma$ and $s=m\gamma$.
+
+:::: {layout="[ 45, 55 ]"}
+
+::: {#first-column}
+
+- Convergence to gradient flow
+  
+Given the recursion $x_{n+1} = x_n-\gamma\nabla f(x_n) - \gamma\epsilon_n$,
+
+applying this $m$ times, we get:
+
+$$
+\begin{align*}
+X(t+s) - X(t) &= x_{n+m}-x_n\\
+              &= -\gamma \sum_{k=0}^{m-1}\nabla f(X(t+\frac{sk}{m})) - \gamma\sum_{k=0}^{m-1}ε_{k+n}
+\end{align*}
+$$
+in the limit,
+$$
+\begin{align*}
+X(t+s) - X(t) &= -\int_t^{t+s}\nabla f(X(u))du + 0
+\end{align*}
+$$
+which is just the gradient flow equation.
+
+:::
+
+::: {#second-column}
+
+- Convergence to Langevin diffusion
+
+Given the recursion $x_{n+1} = x_n-\gamma\nabla f(x_n) - \sqrt{2\gamma}\epsilon_n$,
+
+applying this $m$ times, we get:
+
+$$
+\begin{align*}
+X(t+s) - X(t) &= x_{n+m}-x_n\\
+              &= -\gamma \sum_{k=0}^{m-1}\nabla f(X(t+\frac{sk}{m}))- \sqrt{2\gamma}\sum_{k=0}^{m-1}ε_{k+n}
+\end{align*}
+$$
+The second term has finite variance $\propto 2s$. When $m$ tends to infinity,
+
+$$
+X(t+s) - X(t) =\\
+ -\int_t^{t+s} \nabla f(X(u))du + \sqrt{2}[B(t+s)-B(t)]
+$$
+
+This limiting distribution is the Gibbs distribution with density $\exp{(-f(x))}$
+
+:::
+::: 
+
+:::
+
+:::{.notes}
+γ∑m−1k=0εk+n
+ has zero expectation and variance equal to γ2m=γs
+ times the variance of each εk+n and thus tends to 0
+:::
+
+:::{.attribution}
+Argument from [Francis Bach](https://francisbach.com/gradient-flows/)
+:::
 
 ## Neural ODEs {.unnumbered .unlisted visibility="uncounted"}
 
