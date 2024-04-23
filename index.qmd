@@ -608,12 +608,27 @@ Figure adapted from [Bart Smets et al.](https://arxiv.org/abs/2001.09046)
 - Performance analysis of symmetric controllers.
 
 # Conclusion
-
-## Summary
+- Non-traditional treatments of neural networks let us better capture nonlinearity.
+- Standard paradigms of Geometry, Statistics, and Algebra for understanding nonlinear systems are augmented by neural networks.
+- The interplay of Physics, Mathematics, and Computer Science gives us the best shot at understanding complex systems
 
 ## Deliverables
+- Publishable article on Neural Network Control of Chaos.
+- Thorough study of the symmetries of controllers.
+- Codebase for the above studies.
+- Dissertation detailing the discoveries and pitfalls found throughout.
+
+Estimated time of completion: August 2025
 
 ## Acknowledgements {background-image="assets/ks_pretty.png" background-size="contain" background-position="center" background-repeat="no-repeat}
+
+<!-- ![](assets/acknowledgements.png){fig-alt="Bill, John, Anshul" fig-align="center" width="250"}
+
+![](assets/Microsoft_365_Copilot_Icon.png){fig-alt="CoPilot" fig-align="center" width="250"} -->
+
+<div style="text-align: center; margin-top: 100px;">
+<img src="assets/acknowledgements.png" alt="Bill, John, Anshul" style="width: 400px;">
+</div>
 
 :::{.attribution}
 Background image from [Jacqueline Doan](https://community.wolfram.com/groups/-/m/t/2509110)
