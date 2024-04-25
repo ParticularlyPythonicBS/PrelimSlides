@@ -373,8 +373,8 @@ Extension of Hamilton Jacobi equation/ Continous time analog of Dynamic Programm
 
 $$
 \dfrac{dx}{dt} = f(x(t),u(t))dt \\
-J(x,u,t_0,t_f) = Q(x(t_f), t_f) + \int_{t_0}^{t_f} \Loss(x(\tau),u(\tau))d\tau\\
-V(x(t_0),t_0,t_f) = \min_{u(t)} J(x(t_0),u(t),t_0,t_f)\\
+\mathcal{H}(x,u,t_0,t_f) = Q(x(t_f), t_f) + \int_{t_0}^{t_f} \Loss(x(\tau),u(\tau))d\tau\\
+V(x(t_0),t_0,t_f) = \min_{u(t)} \mathcal{H}(x(t_0),u(t),t_0,t_f)\\
 -\dfrac{\partial V}{\partial t} = \min_{u(t)} \left[ \Loss(x(t),u(t)) + \dfrac{\partial V}{\partial x}^T f(x(t),u(t)) \right]
 $$
 
@@ -498,7 +498,7 @@ Synchronizing fireflies video from [Robin Meier](http://robinmeier.net/?p=2279)
 
 ## Insight
 - Optimal control of network dynamics involves minimizing a cost functional.
-- Traditional control approaches like Pontryagin's maximum principle or Hamilton-Jacobi-Bellman equations are analytically and computationally intractable for complex systems.
+- Traditional control approaches like Pontryagin's (maximum) principle or Hamilton-Jacobi-Bellman equations are analytically and computationally intractable for complex systems.
 - Neural networks based on neural ODES can approximate the optimal control policy @bottcher_ai_2022.
 
 ## Methodology
@@ -622,10 +622,6 @@ Estimated time of completion: August 2025
 
 ## Acknowledgements {background-image="assets/ks_pretty.png" background-size="contain" background-position="center" background-repeat="no-repeat}
 
-<!-- ![](assets/acknowledgements.png){fig-alt="Bill, John, Anshul" fig-align="center" width="250"}
-
-![](assets/Microsoft_365_Copilot_Icon.png){fig-alt="CoPilot" fig-align="center" width="250"} -->
-
 <div style="text-align: center; margin-top: 100px;">
 <img src="assets/acknowledgements.png" alt="Bill, John, Anshul" style="width: 400px;">
 </div>
@@ -647,6 +643,26 @@ nocite: |
 
 
 # Backup slides {.unnumbered .unlisted visibility="uncounted"}
+
+## Hyperparameters, integrators, and tolerances {.unnumbered .unlisted visibility="uncounted"}
+
+Metalearning Activation functions:
+
+MNIST1D: 1 hidden layer of 100 neurons, activation of 50 hidden neurons. 100 initializations averaged. RMSprop, Real Pendulum: same other than 50 initializations. Pytorch and Jax frameworks used.
+
+Neural Network control of chaos:
+
+Control and dynamics integration via diffrax Jax library for neural ODEs. *TSit5* algorithm for ODE integration with PID controller with rtol 1e-7 and atol 1e-9. *Stratanovich Milstein* solver for SDE integrartion with PID controller with rtol 1e-7 and atol 1e-9. 1000 epochs Controller training with only 1/5 data for the first half. Implemented in Jax.
+
+:::{.notes}
+RMSProp addresses the issue of a global learning rate by maintaining a moving average of the squares of gradients for each weight and dividing the learning rate by this average. This ensures that the learning rate is adapted for each weight in the model, allowing for more nuanced updates.
+The general idea is to dampen the oscillations in directions with steep gradients while allowing for faster movement in flat regions of the loss landscape.
+
+Tsit5 - Tsitouras 5/4 Runge-Kutta method. (free 4th order interpolant). Basically Dormand Prince with better coefficients.
+
+Stratanovich Milstein - order 1 strong Taylor scheme
+:::
+
 
 ## Universal approximation theorem {.unnumbered .unlisted visibility="uncounted"}
 
@@ -755,7 +771,19 @@ $$
 \implies \boxed{-\dfrac{\partial V}{\partial t} = \min_{u(t)} \left[ \Loss(x(t),u(t)) + \dfrac{\partial V}{\partial x}^T f(x(t),u(t)) \right]}
 $$
 
-## Pontryagin's Maximum Principle {.unnumbered .unlisted visibility="uncounted"}
+## Pontryagin's Principle {.unnumbered .unlisted visibility="uncounted"}
+Let $(x\star,u\star)$ be an optimal trajectory-control pair. Then there exists a $\lambda\star$ such that,
+$$
+\lambda\star =-\dfrac{\partial \mathcal{H}}{\partial x}
+$$
+and
+$$
+\mathcal{H}(x\star,u\star,\lambda\star, t) = \min_{u} \mathcal{H}(x\star,u,\lambda\star, t)
+$$
+and by definition,
+$$
+x\star = \dfrac{\partial \mathcal{H}}{\partial \lambda}
+$$
 
 ## Stochasticity and noise {.unnumbered .unlisted visibility="uncounted"}
 

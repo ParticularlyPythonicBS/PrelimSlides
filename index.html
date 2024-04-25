@@ -10,10 +10,10 @@
 <link href="index_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="index_files/libs/quarto-contrib/videojs/video.min.js"></script>
 <link href="index_files/libs/quarto-contrib/videojs/video-js.css" rel="stylesheet"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.4.551">
+  <meta name="generator" content="quarto-1.4.553">
 
   <meta name="author" content="Anil Radhakrishnan">
-  <meta name="dcterms.date" content="2024-04-23">
+  <meta name="dcterms.date" content="2024-04-25">
   <title>Nonlinear dynamics with neural networks</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -376,7 +376,7 @@ Anil Radhakrishnan
     </div>
 </div>
 
-  <p class="date">2024-04-23</p>
+  <p class="date">2024-04-25</p>
 </section><section id="TOC">
 <nav role="doc-toc"> 
 <h2 id="toc-title">Table of contents</h2>
@@ -811,8 +811,8 @@ Since the noise term aligns with Hessian bear the minima, this suggests that the
 <p>Extension of Hamilton Jacobi equation/ Continous time analog of Dynamic Programming.</p>
 <p><span class="math display">\[
 \dfrac{dx}{dt} = f(x(t),u(t))dt \\
-J(x,u,t_0,t_f) = Q(x(t_f), t_f) + \int_{t_0}^{t_f} \Loss(x(\tau),u(\tau))d\tau\\
-V(x(t_0),t_0,t_f) = \min_{u(t)} J(x(t_0),u(t),t_0,t_f)\\
+\mathcal{H}(x,u,t_0,t_f) = Q(x(t_f), t_f) + \int_{t_0}^{t_f} \Loss(x(\tau),u(\tau))d\tau\\
+V(x(t_0),t_0,t_f) = \min_{u(t)} \mathcal{H}(x(t_0),u(t),t_0,t_f)\\
 -\dfrac{\partial V}{\partial t} = \min_{u(t)} \left[ \Loss(x(t),u(t)) + \dfrac{\partial V}{\partial x}^T f(x(t),u(t)) \right]
 \]</span></p>
 <aside class="notes">
@@ -1076,9 +1076,6 @@ Your browser does not support the video tag. </video>
 </section>
 <section id="acknowledgements" class="slide level2" data-background-image="assets/ks_pretty.png" data-background-size="contain" data-background-position="center" data-background-repeat="&quot;no-repeat">
 <h2>Acknowledgements</h2>
-<!-- ![](assets/acknowledgements.png){fig-alt="Bill, John, Anshul" fig-align="center" width="250"}
-
-![](assets/Microsoft_365_Copilot_Icon.png){fig-alt="CoPilot" fig-align="center" width="250"} -->
 <div style="text-align: center; margin-top: 100px;">
 <p><img src="assets/acknowledgements.png" alt="Bill, John, Anshul" style="width: 400px;"></p>
 </div>
@@ -1158,6 +1155,28 @@ Your browser does not support the video tag. </video>
 <section id="backup-slides" class="title-slide slide level1 unnumbered unlisted center" data-visibility="uncounted">
 <h1>Backup slides</h1>
 
+</section>
+<section id="hyperparameters-integrators-and-tolerances" class="slide level2 unnumbered unlisted" data-visibility="uncounted">
+<h2>Hyperparameters, integrators, and tolerances</h2>
+<p>Metalearning Activation functions:</p>
+<p>MNIST1D: 1 hidden layer of 100 neurons, activation of 50 hidden neurons. 100 initializations averaged. RMSprop, Real Pendulum: same other than 50 initializations. Pytorch and Jax frameworks used.</p>
+<p>Neural Network control of chaos:</p>
+<p>Control and dynamics integration via diffrax Jax library for neural ODEs. <em>TSit5</em> algorithm for ODE integration with PID controller with rtol 1e-7 and atol 1e-9. <em>Stratanovich Milstein</em> solver for SDE integrartion with PID controller with rtol 1e-7 and atol 1e-9. 1000 epochs Controller training with only 1/5 data for the first half. Implemented in Jax.</p>
+<aside class="notes">
+<p>RMSProp addresses the issue of a global learning rate by maintaining a moving average of the squares of gradients for each weight and dividing the learning rate by this average. This ensures that the learning rate is adapted for each weight in the model, allowing for more nuanced updates. The general idea is to dampen the oscillations in directions with steep gradients while allowing for faster movement in flat regions of the loss landscape.</p>
+<p>Tsit5 - Tsitouras 5/4 Runge-Kutta method. (free 4th order interpolant). Basically Dormand Prince with better coefficients.</p>
+<p>Stratanovich Milstein - order 1 strong Taylor scheme</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="universal-approximation-theorem" class="slide level2 unnumbered unlisted" data-visibility="uncounted">
 <h2>Universal approximation theorem</h2>
@@ -1248,8 +1267,15 @@ V(x(t_0),t_0,t_f) = V(x(t_0),t_0,t) + V(x(t),t,t_f)
 \implies \boxed{-\dfrac{\partial V}{\partial t} = \min_{u(t)} \left[ \Loss(x(t),u(t)) + \dfrac{\partial V}{\partial x}^T f(x(t),u(t)) \right]}
 \]</span></p>
 </section>
-<section id="pontryagins-maximum-principle" class="slide level2 unnumbered unlisted" data-visibility="uncounted">
-<h2>Pontryagin’s Maximum Principle</h2>
+<section id="pontryagins-principle" class="slide level2 unnumbered unlisted" data-visibility="uncounted">
+<h2>Pontryagin’s Principle</h2>
+<p>Let <span class="math inline">\((x\star,u\star)\)</span> be an optimal trajectory-control pair. Then there exists a <span class="math inline">\(\lambda\star\)</span> such that, <span class="math display">\[
+\lambda\star =-\dfrac{\partial \mathcal{H}}{\partial x}
+\]</span> and <span class="math display">\[
+\mathcal{H}(x\star,u\star,\lambda\star, t) = \min_{u} \mathcal{H}(x\star,u,\lambda\star, t)
+\]</span> and by definition, <span class="math display">\[
+x\star = \dfrac{\partial \mathcal{H}}{\partial \lambda}
+\]</span></p>
 </section>
 <section id="stochasticity-and-noise" class="slide level2 unnumbered unlisted" data-visibility="uncounted">
 <h2>Stochasticity and noise</h2>
