@@ -40,7 +40,9 @@ revealjs-plugins:
   - attribution
     
 ---
+
 # Motivation
+
 ## Motivation: Why Neural Networks?
 - The preeminent computational tool of the contemporary world.
 - Differentiable, optimizable, and scalable.
@@ -66,29 +68,48 @@ revealjs-plugins:
   
 ## Motivation: Why Nonlinear Dynamics?
 - Captures complexity.
-- Formal, well established framework.
+- Formal, well-established framework.
 - Emergent uses in and out of Physics.
 
 <div style="padding:50% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/739921904?h=f803d0bbff&autoplay=1&loop=1&title=0&byline=0&portrait=0" style="position:absolute;top:0;left:5%;width:90%;height:90%;" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
 
 ::: {.attribution}
-Animation by [Wliiam Gilpin](https://github.com/williamgilpin/cphy)
+Animation by [William Gilpin](https://github.com/williamgilpin/cphy)
 :::
 
 ::: {.notes}
 
-Nonlinear dynamics is a powerful paradigm for understanding complex systems. And more and more systems are bocoming more and more complex as we move forward.
+Nonlinear dynamics is a powerful paradigm for understanding complex systems. And more and more systems are becoming more and more complex as we move forward.
 
 Avalanche activity cascades in a sandpile automaton; a vortex street formed by flow past a cylinder; and Turing patterns in a reaction-diffusion model.
 
 :::
 
 ## Motivation: Why Nonlinear Dynamics for Neural Networks?
+
+  
+<!-- <div style="padding:90% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/903855670?h=ca2b077023&autoplay=1&loop=1&title=0&byline=0&portrait=0" style="position:absolute;top:0;left:30%;width:40%;height:40%;" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div><script src="https://player.vimeo.com/api/player.js"></script> -->
+
 - Optimization is inescapably nonlinear @sohl-dickstein_boundary_2024.
 - Neural networks are inherently nonlinear.
 - Scope of nonlinearities in neural networks is underexplored.
-  
-<div style="padding:90% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/903855670?h=ca2b077023&autoplay=1&loop=1&title=0&byline=0&portrait=0" style="position:absolute;top:0;left:30%;width:40%;height:40%;" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
+
+<table style="width:100%; margin:0; padding:0;">
+  <tr>
+    <td style="vertical-align:top; padding-right:20px; width:80%">
+
+<video width="700" height="300" loop style="display: block; margin-left: auto; margin-right: auto; margin-bottom: 20px;">
+  <source src="assets/neural_network_fractals_tanh.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+    </td>
+    <td style="vertical-align:top; width:20%">
+![](assets/chaos_cm.png){fig-alt="Model Predictive control" fig-align="center" width=50%}
+    </td>
+  </tr>
+</table>
+
 
 ::: {.attribution}
 Trainability fractal by [Jascha Sohl-Dickstein](https://sohl-dickstein.github.io/2024/02/12/fractal.html)
@@ -109,7 +130,7 @@ The neural network consists of an input layer, a tanh nonlinearity, and an outpu
 
 :::
 
-# Neural Networks and optimization
+# Background Neural Networks and optimization
 
 ## Background: Differentiable Computing
 
@@ -192,7 +213,7 @@ Loss functions are combined and regularized to balance the tradeoff between mode
 ::: {.notes}
 
 - The art of crafting the loss function can make or break a model.
-- The loss needs to be compuationally efficient, and smooth enough to allow for stable gradient based optimization. 
+- The loss needs to be computationally efficient, and smooth enough to allow for stable gradient based optimization. 
 
 :::
 
@@ -230,7 +251,7 @@ If you are training a model with many parameters and are experiencing issues wit
 :::: {layout="[ 50, 50 ]"}
 
 ::: {#first-column}
-- Improve the learning algorithm itself given the experience of mutiple learning episodes.
+- Improve the learning algorithm itself given the experience of multiple learning episodes.
 - Base learning: an inner learning algorithm solves a task defined by a dataset and objective. 
 - Meta-learning: an outer algorithm updates the inner learning algorithm.
 :::
@@ -284,7 +305,8 @@ Adapted from Heliocentrism and Geocentrism by [Malin Christersson
 As with any data driven modelling, the way you represent the data can have a significant impact on the performance of the model.
 :::
 
-# Metalearning Activation functions 
+# Metalearning Activation functions
+
 (Published, US and International Patent Pending)
 <script type="text/javascript" src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script><div class="altmetric-embed" data-badge-type="large-donut" data-altmetric-id="126463806"></div>
 
@@ -315,6 +337,7 @@ Figure from [Publication](https://www.nature.com/articles/s41598-023-40766-6)
 :::
 
 ## Methodology
+
 :::: {layout="[ 60, 40 ]"}
 
 ::: {#first-column}
@@ -338,6 +361,7 @@ Figure from [Publication](https://www.nature.com/articles/s41598-023-40766-6)
 :::
 
 ## Results: Scaling
+
 ![](figures/Result1/meta_div_scaling.png){fig-alt="scaling" fig-align="center" width=80%}
 
 
@@ -351,6 +375,7 @@ These results are averaged over 100 initializations.
 :::
 
 ## Results: Real World Data
+
 ![](figures/Result1/real_pendulum.png){fig-alt="real world example" fig-align="center" width=80%}
 
 ::: {.attribution}
@@ -450,7 +475,7 @@ There can be future work to explore the universality of this with multidimension
 
 :::
 
-# Control and Chaos
+# Background: Control and Chaos
 
 ## Background: Hamilton Jacobi Bellman(HJB) Equation
 
@@ -465,7 +490,7 @@ $$
 V(x,t) is the value function, the minimum cost-to-go from state x at time t.
 If we can solve for V then we can find from it a control u that achieves the minimum cost.
 
-Extension of Hamilton Jacobi equation/ Continous time analog of Dynamic Programming.
+Extension of Hamilton Jacobi equation/ Continuous time analog of Dynamic Programming.
 :::
 
 ## Background: Model Predictive Control
@@ -512,7 +537,7 @@ This simulation uses moving horizon estimation with the problem discretized by o
 
 ## Background: Chaos
 
-Let $X$ be a metric space. A continous map $f: X \rightarrow X$ is said to be chaotic on $X$ if:
+Let $X$ be a metric space. A continuous map $f: X \rightarrow X$ is said to be chaotic on $X$ if:
 
 <table style="width:100%">
   <tr>
@@ -533,7 +558,7 @@ Let $X$ be a metric space. A continous map $f: X \rightarrow X$ is said to be ch
 </table>
 
 :::{.notes}
-Devaney's definition of chaos is a general useful defintion for our purposes. Any two of the rules give the other in ℝ.
+Devaney's definition of chaos is a general useful definition for our purposes. Any two of the rules give the other in ℝ.
 
 There is an equivalent definition where f is indecomposable and the periodic points are dense in X.
 :::
@@ -606,7 +631,7 @@ Synchronizing fireflies video from [Robin Meier](http://robinmeier.net/?p=2279)
 :::{.notes}
 Kuramoto can be thought of as a first order mean field theory of the complex Ginzburg-Landau equation.
 
-This model was initially proposed to capture synchronization in large weaky-coupled oscillator systems.
+This model was initially proposed to capture synchronization in large weakly-coupled oscillator systems.
 It found a lot of applications like josephson junction arrays, power grids, and even modelling fireflies.
 
 :::
@@ -625,7 +650,7 @@ It found a lot of applications like josephson junction arrays, power grids, and 
 :::{.notes}
 Instead of training a neural network with a predefined dataset, we train the network in situ with the network serving as the controller that is integrated in the dynamical system at each epoch.
 
-The time horizon for the integration is changed from the first half and seconf half of training by 5x to allow extrapolation of the controller.
+The time horizon for the integration is changed from the first half and second half of training by 5x to allow extrapolation of the controller.
 
 :::
 
@@ -635,7 +660,7 @@ The time horizon for the integration is changed from the first half and seconf h
 
 :::{.notes}
 
-The simplest test for this method was a grid of kuraomoto oscillators. The network was trained to control the phase of the oscillators to a desired state.
+The simplest test for this method was a grid of kuramoto oscillators. The network was trained to control the phase of the oscillators to a desired state.
 This works very well.
 Interestingly, this method also extends naturally to noisy kuramoto, which is not guaranteed by HJB.
 
@@ -702,11 +727,12 @@ Recurrence matrices are are way to capture the dynamics of a system by looking a
 This is similar to the notion of delay coordinate embeddings used for approximating attractors.
 As you can see here the recurrence matrices are invariant to the delays.
 
-This can be used in the loss function to prescibe the exact dynamics to optimize towards,
+This can be used in the loss function to prescribe the exact dynamics to optimize towards,
 
 :::
 
-# Dynamics, symmetries, and introspection
+# Background: Dynamics and symmetries
+
 ## Background: Group theory for Dynamical Systems
 
 Let $\Gamma$ act on $\mathbb{R}^n$ and $f: \mathbb{R}^n \rightarrow \mathbb{R}^m$ . Then $f$ is said to be $\Gamma$-equivariant if $f(\gamma x) = \gamma f(x)$ for all $x \in \mathbb{R}^n$ and $\gamma \in \Gamma$ @zee_group_2016.
@@ -750,8 +776,8 @@ Figure adapted from [Bart Smets et al.](https://arxiv.org/abs/2001.09046)
 :::
 
 :::{.notes}
-One was thats groups ar integrated into neural networks are as an extension of the traditional convolutation neural network setup. 
-Instead of just lifting to some real space which preserves translationals as in traditional CNNs, we lift to a group space which preserves the group symmetries.
+One was thats groups ar integrated into neural networks are as an extension of the traditional convolution neural network setup. 
+Instead of just lifting to some real space which preserves translations as in traditional CNNs, we lift to a group space which preserves the group symmetries.
 :::
 
 # Symmetries of controllers
@@ -775,6 +801,7 @@ Instead of just lifting to some real space which preserves translationals as in 
 - Performance analysis of symmetric controllers.
 
 # Conclusion
+
 - Non-traditional treatments of neural networks let us better capture nonlinearity.
 - Standard paradigms of Geometry, Statistics, and Algebra for understanding nonlinear systems are augmented by neural networks.
 - The interplay of Physics, Mathematics, and Computer Science gives us the best shot at understanding complex systems
@@ -840,7 +867,7 @@ $$M(\sigma) = \text{span}\{\sigma(wx-\theta):w\in \mathbb{R}^n, \theta\in\mathbb
 
 For Neural Networks,
 
-*Theorem 2*: Let $\sigma$ be any continous sigmoidal function. Then finite sums of the form $G(x) = \sum_{i=1}^N \alpha_i \sigma(w_i^T x + b_i)$ are dense in $C(I_n)$.
+*Theorem 2*: Let $\sigma$ be any continuous sigmoidal function. Then finite sums of the form $G(x) = \sum_{i=1}^N \alpha_i \sigma(w_i^T x + b_i)$ are dense in $C(I_n)$.
 i.e. $\forall f\in C(I_n)$ and $\epsilon>0$, there is a sum $G(x)$ such that $\max_{x\in I_n}|f(x)-G(x)|<\epsilon$ @cybenko_approximation_1989.
 
 Informally, at least one neural network exists that can approximate any continuous function on $I_n=[0,1]^n$ with arbitrary precision.

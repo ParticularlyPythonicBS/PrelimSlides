@@ -382,11 +382,11 @@ Anil Radhakrishnan
 <h2 id="toc-title">Table of contents</h2>
 <ul>
 <li><a href="#/motivation" id="/toc-motivation">Motivation</a></li>
-<li><a href="#/neural-networks-and-optimization" id="/toc-neural-networks-and-optimization">Neural Networks and optimization</a></li>
+<li><a href="#/background-neural-networks-and-optimization" id="/toc-background-neural-networks-and-optimization">Background Neural Networks and optimization</a></li>
 <li><a href="#/metalearning-activation-functions" id="/toc-metalearning-activation-functions">Metalearning Activation functions</a></li>
-<li><a href="#/control-and-chaos" id="/toc-control-and-chaos">Control and Chaos</a></li>
+<li><a href="#/background-control-and-chaos" id="/toc-background-control-and-chaos">Background: Control and Chaos</a></li>
 <li><a href="#/neural-network-control-of-chaos" id="/toc-neural-network-control-of-chaos">Neural Network control of chaos</a></li>
-<li><a href="#/dynamics-symmetries-and-introspection" id="/toc-dynamics-symmetries-and-introspection">Dynamics, symmetries, and introspection</a></li>
+<li><a href="#/background-dynamics-and-symmetries" id="/toc-background-dynamics-and-symmetries">Background: Dynamics and symmetries</a></li>
 <li><a href="#/symmetries-of-controllers" id="/toc-symmetries-of-controllers">Symmetries of controllers</a></li>
 <li><a href="#/conclusion" id="/toc-conclusion">Conclusion</a></li>
 </ul>
@@ -451,7 +451,7 @@ Anil Radhakrishnan
 <h2>Motivation: Why Nonlinear Dynamics?</h2>
 <ul>
 <li>Captures complexity.</li>
-<li>Formal, well established framework.</li>
+<li>Formal, well-established framework.</li>
 <li>Emergent uses in and out of Physics.</li>
 </ul>
 <div style="padding:50% 0 0 0;position:relative;">
@@ -460,10 +460,10 @@ Anil Radhakrishnan
 </div>
 <script src="https://player.vimeo.com/api/player.js"></script>
 <div class="attribution">
-<p>Animation by <a href="https://github.com/williamgilpin/cphy">Wliiam Gilpin</a></p>
+<p>Animation by <a href="https://github.com/williamgilpin/cphy">William Gilpin</a></p>
 </div>
 <aside class="notes">
-<p>Nonlinear dynamics is a powerful paradigm for understanding complex systems. And more and more systems are bocoming more and more complex as we move forward.</p>
+<p>Nonlinear dynamics is a powerful paradigm for understanding complex systems. And more and more systems are becoming more and more complex as we move forward.</p>
 <p>Avalanche activity cascades in a sandpile automaton; a vortex street formed by flow past a cylinder; and Turing patterns in a reaction-diffusion model.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -479,16 +479,24 @@ Anil Radhakrishnan
 </section>
 <section id="motivation-why-nonlinear-dynamics-for-neural-networks" class="slide level2">
 <h2>Motivation: Why Nonlinear Dynamics for Neural Networks?</h2>
+<!-- <div style="padding:90% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/903855670?h=ca2b077023&autoplay=1&loop=1&title=0&byline=0&portrait=0" style="position:absolute;top:0;left:30%;width:40%;height:40%;" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div><script src="https://player.vimeo.com/api/player.js"></script> -->
 <ul>
 <li>Optimization is inescapably nonlinear<span class="citation" data-cites="sohl-dickstein_boundary_2024"><sup><a href="#/references" role="doc-biblioref" onclick="">2</a></sup></span>.</li>
 <li>Neural networks are inherently nonlinear.</li>
 <li>Scope of nonlinearities in neural networks is underexplored.</li>
 </ul>
-<div style="padding:90% 0 0 0;position:relative;">
-<iframe src="https://player.vimeo.com/video/903855670?h=ca2b077023&amp;autoplay=1&amp;loop=1&amp;title=0&amp;byline=0&amp;portrait=0" style="position:absolute;top:0;left:30%;width:40%;height:40%;" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen="">
-</iframe>
-</div>
-<script src="https://player.vimeo.com/api/player.js"></script>
+<table style="width:100%; margin:0; padding:0;">
+<tbody><tr>
+<td style="vertical-align:top; padding-right:20px; width:80%">
+<video width="700" height="300" loop="" style="display: block; margin-left: auto; margin-right: auto; margin-bottom: 20px;">
+<source src="assets/neural_network_fractals_tanh.mp4" type="video/mp4">
+<p>Your browser does not support the video tag. </p>
+</video></td>
+<td style="vertical-align:top; width:20%">
+<img data-src="assets/chaos_cm.png" class="quarto-figure quarto-figure-center" style="width:50.0%" alt="Model Predictive control">
+</td>
+</tr>
+</tbody></table>
 <div class="attribution">
 <p>Trainability fractal by <a href="https://sohl-dickstein.github.io/2024/02/12/fractal.html">Jascha Sohl-Dickstein</a></p>
 </div>
@@ -529,8 +537,8 @@ Anil Radhakrishnan
       }</style></aside>
 </section></section>
 <section>
-<section id="neural-networks-and-optimization" class="title-slide slide level1 center">
-<h1>Neural Networks and optimization</h1>
+<section id="background-neural-networks-and-optimization" class="title-slide slide level1 center">
+<h1>Background Neural Networks and optimization</h1>
 
 </section>
 <section id="background-differentiable-computing" class="slide level2">
@@ -641,7 +649,7 @@ Anil Radhakrishnan
 <aside class="notes">
 <ul>
 <li>The art of crafting the loss function can make or break a model.</li>
-<li>The loss needs to be compuationally efficient, and smooth enough to allow for stable gradient based optimization.</li>
+<li>The loss needs to be computationally efficient, and smooth enough to allow for stable gradient based optimization.</li>
 </ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -693,7 +701,7 @@ Anil Radhakrishnan
 <div class="quarto-layout-row">
 <div id="first-column" class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <ul>
-<li>Improve the learning algorithm itself given the experience of mutiple learning episodes.</li>
+<li>Improve the learning algorithm itself given the experience of multiple learning episodes.</li>
 <li>Base learning: an inner learning algorithm solves a task defined by a dataset and objective.</li>
 <li>Meta-learning: an outer algorithm updates the inner learning algorithm.</li>
 </ul>
@@ -984,8 +992,8 @@ d\theta_{t} = - \nabla \Loss(\theta_{t})\, dt + \sqrt{2\mathbf{D}} \cdot d\mathc
       }</style></aside>
 </section></section>
 <section>
-<section id="control-and-chaos" class="title-slide slide level1 center">
-<h1>Control and Chaos</h1>
+<section id="background-control-and-chaos" class="title-slide slide level1 center">
+<h1>Background: Control and Chaos</h1>
 
 </section>
 <section id="background-hamilton-jacobi-bellmanhjb-equation" class="slide level2">
@@ -998,7 +1006,7 @@ V(x(t_0),t_0,t_f) = \min_{u(t)} \mathcal{H}(x(t_0),u(t),t_0,t_f)\\
 \]</span></p>
 <aside class="notes">
 <p>V(x,t) is the value function, the minimum cost-to-go from state x at time t. If we can solve for V then we can find from it a control u that achieves the minimum cost.</p>
-<p>Extension of Hamilton Jacobi equation/ Continous time analog of Dynamic Programming.</p>
+<p>Extension of Hamilton Jacobi equation/ Continuous time analog of Dynamic Programming.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1050,7 +1058,7 @@ Your browser does not support the video tag. </video> <video width="200" height=
 </section>
 <section id="background-chaos" class="slide level2">
 <h2>Background: Chaos</h2>
-<p>Let <span class="math inline">\(X\)</span> be a metric space. A continous map <span class="math inline">\(f: X \rightarrow X\)</span> is said to be chaotic on <span class="math inline">\(X\)</span> if:</p>
+<p>Let <span class="math inline">\(X\)</span> be a metric space. A continuous map <span class="math inline">\(f: X \rightarrow X\)</span> is said to be chaotic on <span class="math inline">\(X\)</span> if:</p>
 <table style="width:100%">
 <tbody><tr>
 <td style="vertical-align:top">
@@ -1068,7 +1076,7 @@ Your browser does not support the video tag. </video> <video width="200" height=
 </tbody></table>
 
 <aside class="notes">
-<p>Devaney’s definition of chaos is a general useful defintion for our purposes. Any two of the rules give the other in ℝ.</p>
+<p>Devaney’s definition of chaos is a general useful definition for our purposes. Any two of the rules give the other in ℝ.</p>
 <p>There is an equivalent definition where f is indecomposable and the periodic points are dense in X.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -1159,7 +1167,7 @@ Your browser does not support the video tag. </video> <span class="math display"
 </div>
 <aside class="notes">
 <p>Kuramoto can be thought of as a first order mean field theory of the complex Ginzburg-Landau equation.</p>
-<p>This model was initially proposed to capture synchronization in large weaky-coupled oscillator systems. It found a lot of applications like josephson junction arrays, power grids, and even modelling fireflies.</p>
+<p>This model was initially proposed to capture synchronization in large weakly-coupled oscillator systems. It found a lot of applications like josephson junction arrays, power grids, and even modelling fireflies.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1190,7 +1198,7 @@ Your browser does not support the video tag. </video> <span class="math display"
 
 <img data-src="figures/Result2/MPC_NN.png" class="quarto-figure quarto-figure-center r-stretch" style="width:100.0%" alt="Model Predictive control"><aside class="notes">
 <p>Instead of training a neural network with a predefined dataset, we train the network in situ with the network serving as the controller that is integrated in the dynamical system at each epoch.</p>
-<p>The time horizon for the integration is changed from the first half and seconf half of training by 5x to allow extrapolation of the controller.</p>
+<p>The time horizon for the integration is changed from the first half and second half of training by 5x to allow extrapolation of the controller.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1207,7 +1215,7 @@ Your browser does not support the video tag. </video> <span class="math display"
 <h2>Results: Kuramoto Grid</h2>
 
 <img data-src="figures/Result2/kuramoto_control.png" class="quarto-figure quarto-figure-center r-stretch" style="width:100.0%" alt="Controlled kuramoto dynamics"><aside class="notes">
-<p>The simplest test for this method was a grid of kuraomoto oscillators. The network was trained to control the phase of the oscillators to a desired state. This works very well. Interestingly, this method also extends naturally to noisy kuramoto, which is not guaranteed by HJB.</p>
+<p>The simplest test for this method was a grid of kuramoto oscillators. The network was trained to control the phase of the oscillators to a desired state. This works very well. Interestingly, this method also extends naturally to noisy kuramoto, which is not guaranteed by HJB.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1284,7 +1292,7 @@ Your browser does not support the video tag. </video>
 
 <img data-src="figures/Result2/recurrence_matrix_lorenz.png" class="quarto-figure quarto-figure-center r-stretch" style="width:70.0%" alt="Recurrence matrix for lorenz attractor"><aside class="notes">
 <p>Recurrence matrices are are way to capture the dynamics of a system by looking at the recurrences of states. This is similar to the notion of delay coordinate embeddings used for approximating attractors. As you can see here the recurrence matrices are invariant to the delays.</p>
-<p>This can be used in the loss function to prescibe the exact dynamics to optimize towards,</p>
+<p>This can be used in the loss function to prescribe the exact dynamics to optimize towards,</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1298,8 +1306,8 @@ Your browser does not support the video tag. </video>
       }</style></aside>
 </section></section>
 <section>
-<section id="dynamics-symmetries-and-introspection" class="title-slide slide level1 center">
-<h1>Dynamics, symmetries, and introspection</h1>
+<section id="background-dynamics-and-symmetries" class="title-slide slide level1 center">
+<h1>Background: Dynamics and symmetries</h1>
 
 </section>
 <section id="background-group-theory-for-dynamical-systems" class="slide level2">
@@ -1336,7 +1344,7 @@ Your browser does not support the video tag. </video>
 <p>Figure adapted from <a href="https://arxiv.org/abs/2001.09046">Bart Smets et al.</a></p>
 </div>
 <aside class="notes">
-<p>One was thats groups ar integrated into neural networks are as an extension of the traditional convolutation neural network setup. Instead of just lifting to some real space which preserves translationals as in traditional CNNs, we lift to a group space which preserves the group symmetries.</p>
+<p>One was thats groups ar integrated into neural networks are as an extension of the traditional convolution neural network setup. Instead of just lifting to some real space which preserves translations as in traditional CNNs, we lift to a group space which preserves the group symmetries.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1506,7 +1514,7 @@ Your browser does not support the video tag. </video>
 <p><span class="math display">\[M(\sigma) = \text{span}\{\sigma(wx-\theta):w\in \mathbb{R}^n, \theta\in\mathbb{R}\}\]</span> <!-- For which $\sigma$ is $\max_{x\in K}|f(x)-g(x)|<\epsilon$ true for any $f\in C(\mathbb{R}^n)$, any compact subset $K$ of $\mathbb{R}^n$, and $\epsilon >0$, and some $g \in M(\sigma)$? --></p>
 <p><em>Theorem 1</em>: Let <span class="math inline">\(\sigma \in C(\mathbb{R})\)</span>. Then <span class="math inline">\(M(\sigma)\)</span> is dense in <span class="math inline">\(C(\mathbb{R}^n)\)</span>, in the topology of uniform convergence on compacta, if and only if <span class="math inline">\(\sigma\)</span> is not a polynomial<span class="citation" data-cites="leshno_multilayer_1993"><sup><a href="#/references" role="doc-biblioref" onclick="">18</a></sup></span>.</p>
 <p>For Neural Networks,</p>
-<p><em>Theorem 2</em>: Let <span class="math inline">\(\sigma\)</span> be any continous sigmoidal function. Then finite sums of the form <span class="math inline">\(G(x) = \sum_{i=1}^N \alpha_i \sigma(w_i^T x + b_i)\)</span> are dense in <span class="math inline">\(C(I_n)\)</span>. i.e.&nbsp;<span class="math inline">\(\forall f\in C(I_n)\)</span> and <span class="math inline">\(\epsilon&gt;0\)</span>, there is a sum <span class="math inline">\(G(x)\)</span> such that <span class="math inline">\(\max_{x\in I_n}|f(x)-G(x)|&lt;\epsilon\)</span><span class="citation" data-cites="cybenko_approximation_1989"><sup><a href="#/references" role="doc-biblioref" onclick="">19</a></sup></span>.</p>
+<p><em>Theorem 2</em>: Let <span class="math inline">\(\sigma\)</span> be any continuous sigmoidal function. Then finite sums of the form <span class="math inline">\(G(x) = \sum_{i=1}^N \alpha_i \sigma(w_i^T x + b_i)\)</span> are dense in <span class="math inline">\(C(I_n)\)</span>. i.e.&nbsp;<span class="math inline">\(\forall f\in C(I_n)\)</span> and <span class="math inline">\(\epsilon&gt;0\)</span>, there is a sum <span class="math inline">\(G(x)\)</span> such that <span class="math inline">\(\max_{x\in I_n}|f(x)-G(x)|&lt;\epsilon\)</span><span class="citation" data-cites="cybenko_approximation_1989"><sup><a href="#/references" role="doc-biblioref" onclick="">19</a></sup></span>.</p>
 <p>Informally, at least one neural network exists that can approximate any continuous function on <span class="math inline">\(I_n=[0,1]^n\)</span> with arbitrary precision.</p>
 </section>
 <section id="sgd-via-gradient-flows" class="slide level2 unnumbered unlisted smaller" data-visibility="uncounted">
