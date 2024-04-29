@@ -43,7 +43,7 @@ revealjs-plugins:
 # Motivation
 ## Motivation: Why Neural Networks?
 - The preeminent computational tool of the contemporary world.
-- Differentable, optimizable, and scalable.
+- Differentiable, optimizable, and scalable.
 - Emergent uses in and out of Physics @vicentini_netket_2022.
 
 ::: {layout-ncol=3}
@@ -180,7 +180,7 @@ $\Param\gets \Param -\eta \nabla_{\Param}\Loss$
 
 ## Background: Loss Functions
 - Neural networks compute a probability distribution on the data space. 
-- Our objective is maximize the likihood the assigned to emperical data.
+- Our objective is maximize the likelihood the assigned to empirical data.
 - Constructing a suitable differentiable loss function gives the path to optimization of a neural network.
 Common loss functions include:
   - Mean Squared Error $\Loss(\theta) = \sum_{i=1}^N (y_i - f(x_i;\theta))^2$
@@ -200,7 +200,7 @@ Loss functions are combined and regularized to balance the tradeoff between mode
 - To find the best model parametrization, we minimize the loss function with respect to the model parameters. 
 - That is we compute, $\mathcal{L^\star} \defeq \inf_{\theta \in \Theta} \Loss(\theta)$ assuming an infimum exists.
 - To converge to a minima the optimizer needs an oracle $\mathcal{O}$, i.e. evaluation of the Loss function, its gradients, or higher order derivatives.
-Then, for an algortihm $\mathcal{A}$,
+Then, for an algorithm $\mathcal{A}$,
 $$
   \theta ^ {t+1} 
   \defeq \mathcal{A}(\theta ^ 0, \ldots, \theta ^ t, 
@@ -252,7 +252,7 @@ Figure by [John Lindner ](https://www.nature.com/articles/s41598-023-40766-6)
 :::
 
 ## Background: Physics-Informed Neural Networks(PiNNs)
-- Synthesyzing data with differential equation constraints.
+- Synthesizing data with differential equation constraints.
 - Physics as a weak constraint in a composite loss function or a hard constraint with architectural choices.
 - Symplectic constraints to the loss function gives Hamiltonian Neural Networks @greydanus_hamiltonian_2019.
 
@@ -426,7 +426,7 @@ $$
 \DeclareMathOperator{\Tr}{Tr}
 d\theta_{t} = - \nabla \Loss(\theta_{t})\, dt + \sqrt{2\mathbf{D}} \cdot d\mathcal{W}_{t}
 $$
-with noise intensity $\mathbf{D} = (\eta / B) \Loss(\theta) \mathbf{H}(\theta\star)$ @mori_power-law_2022
+with noise intensity $\mathbf{D} = (\eta) \Loss(\theta) \mathbf{H}(\theta\star)$ @mori_power-law_2022
 
 ::: {.notes}
 

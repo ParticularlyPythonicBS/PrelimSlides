@@ -401,7 +401,7 @@ Anil Radhakrishnan
 <h2>Motivation: Why Neural Networks?</h2>
 <ul>
 <li>The preeminent computational tool of the contemporary world.</li>
-<li>Differentable, optimizable, and scalable.</li>
+<li>Differentiable, optimizable, and scalable.</li>
 <li>Emergent uses in and out of Physics<span class="citation" data-cites="vicentini_netket_2022"><sup><a href="#/references" role="doc-biblioref" onclick="">1</a></sup></span>.</li>
 </ul>
 <div class="quarto-layout-panel" data-layout-ncol="3">
@@ -629,7 +629,7 @@ Anil Radhakrishnan
 <h2>Background: Loss Functions</h2>
 <ul>
 <li>Neural networks compute a probability distribution on the data space.</li>
-<li>Our objective is maximize the likihood the assigned to emperical data.</li>
+<li>Our objective is maximize the likelihood the assigned to empirical data.</li>
 <li>Constructing a suitable differentiable loss function gives the path to optimization of a neural network. Common loss functions include:
 <ul>
 <li>Mean Squared Error <span class="math inline">\(\Loss(\theta) = \sum_{i=1}^N (y_i - f(x_i;\theta))^2\)</span></li>
@@ -660,7 +660,7 @@ Anil Radhakrishnan
 <ul>
 <li>To find the best model parametrization, we minimize the loss function with respect to the model parameters.</li>
 <li>That is we compute, <span class="math inline">\(\mathcal{L^\star} \defeq \inf_{\theta \in \Theta} \Loss(\theta)\)</span> assuming an infimum exists.</li>
-<li>To converge to a minima the optimizer needs an oracle <span class="math inline">\(\mathcal{O}\)</span>, i.e.&nbsp;evaluation of the Loss function, its gradients, or higher order derivatives. Then, for an algortihm <span class="math inline">\(\mathcal{A}\)</span>, <span class="math display">\[
+<li>To converge to a minima the optimizer needs an oracle <span class="math inline">\(\mathcal{O}\)</span>, i.e.&nbsp;evaluation of the Loss function, its gradients, or higher order derivatives. Then, for an algorithm <span class="math inline">\(\mathcal{A}\)</span>, <span class="math display">\[
 \theta ^ {t+1}
 \defeq \mathcal{A}(\theta ^ 0, \ldots, \theta ^ t,
   \mathcal{O}(\theta ^ 0), \ldots, \mathcal{O}(\theta ^ t), \lambda),
@@ -728,7 +728,7 @@ Anil Radhakrishnan
 <section id="background-physics-informed-neural-networkspinns" class="slide level2">
 <h2>Background: Physics-Informed Neural Networks(PiNNs)</h2>
 <ul>
-<li>Synthesyzing data with differential equation constraints.</li>
+<li>Synthesizing data with differential equation constraints.</li>
 <li>Physics as a weak constraint in a composite loss function or a hard constraint with architectural choices.</li>
 <li>Symplectic constraints to the loss function gives Hamiltonian Neural Networks<span class="citation" data-cites="greydanus_hamiltonian_2019"><sup><a href="#/references" role="doc-biblioref" onclick="">4</a></sup></span>.</li>
 </ul>
@@ -946,7 +946,7 @@ Nr = \mathcal{R}
 <p><span class="math display">\[
 \DeclareMathOperator{\Tr}{Tr}
 d\theta_{t} = - \nabla \Loss(\theta_{t})\, dt + \sqrt{2\mathbf{D}} \cdot d\mathcal{W}_{t}
-\]</span> with noise intensity <span class="math inline">\(\mathbf{D} = (\eta / B) \Loss(\theta) \mathbf{H}(\theta\star)\)</span><span class="citation" data-cites="mori_power-law_2022"><sup><a href="#/references" role="doc-biblioref" onclick="">6</a></sup></span></p>
+\]</span> with noise intensity <span class="math inline">\(\mathbf{D} = (\eta) \Loss(\theta) \mathbf{H}(\theta\star)\)</span><span class="citation" data-cites="mori_power-law_2022"><sup><a href="#/references" role="doc-biblioref" onclick="">6</a></sup></span></p>
 <aside class="notes">
 <p>Minima from diverse neurons is flatter than from homogeneous ones, as measured by both the trace <span class="math inline">\(\Tr\mathbf{H}\)</span> of the Hessian and the fraction <span class="math inline">\(f\)</span> of its eigenvalues near zero: <span class="math inline">\(\Tr \mathbf{H}_1 &gt;  \Tr \mathbf{H}_2 &gt; \Tr \mathbf{H}_{12}\)</span> and <span class="math inline">\(f_1 &lt; f_2 &lt; f_{12}\)</span></p>
 <p>Since the noise term aligns with Hessian bear the minima, this suggests that the minima found by diverse neurons are flatter and more stable.</p>
