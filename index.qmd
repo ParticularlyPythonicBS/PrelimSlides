@@ -57,7 +57,11 @@ revealjs-plugins:
 :::
 
 ::: {.notes}
-Speaker notes go here.
+
+- Neural networks have established themselves as a great tool for a variety of tasks. 
+- They are not an answer to everything, but their scalability makes them a great tool in the age of big compute, big data, and big models.
+- They have also found their place in fundamental science, both speeding up research and enabling new discoveries.
+
 :::
   
 ## Motivation: Why Nonlinear Dynamics?
@@ -72,7 +76,11 @@ Animation by [Wliiam Gilpin](https://github.com/williamgilpin/cphy)
 :::
 
 ::: {.notes}
+
+Nonlinear dynamics is a powerful paradigm for understanding complex systems. And more and more systems are bocoming more and more complex as we move forward.
+
 Avalanche activity cascades in a sandpile automaton; a vortex street formed by flow past a cylinder; and Turing patterns in a reaction-diffusion model.
+
 :::
 
 ## Motivation: Why Nonlinear Dynamics for Neural Networks?
@@ -85,6 +93,7 @@ Avalanche activity cascades in a sandpile automaton; a vortex street formed by f
 ::: {.attribution}
 Trainability fractal by [Jascha Sohl-Dickstein](https://sohl-dickstein.github.io/2024/02/12/fractal.html)
 :::
+
 ::: {.notes}
 Each pixel corresponds to training the same neural network from the same initialization on the same data — but with different hyperparameters. Blue-green colors mean that training converged for those hyperparameters, and the network successfully trained. Red-yellow colors mean that training diverged for those hyperparameters. The paler the color the faster the convergence or divergence
 
@@ -96,12 +105,9 @@ The neural network consists of an input layer, a tanh nonlinearity, and an outpu
 - Paradigm of solution as an element of a distribution translates naturally to neural networks.
 - Data-driven methods accommodate realistic complexity.
 
-<!-- <img src="assets/escher_day_night.png" alt="Escher's day and night wood blood painting" style="display: block; width: 30%; margin-top: -25px; margin-left: auto; margin-right: auto;">
+::: {.notes}
 
-  
-::: {.attribution}
-Day and Night by [M.C. Escher](https://www.wikiart.org/en/m-c-escher/day-and-night)
-::: -->
+:::
 
 # Neural Networks and optimization
 
@@ -112,6 +118,12 @@ Day and Night by [M.C. Escher](https://www.wikiart.org/en/m-c-escher/day-and-nig
 - Can be interpreted probabilistically or as a dynamical system.
 ![](figures/BG1/autodiff.png){fig-alt="autodifferentiation diagram" width=80% }
 
+::: {.notes}
+
+- For the purposes of this study, it is better to think of these algorithms through the lens of differentiability.
+- The large parameter space afforded by network structures are ripe for gradient based optimization.
+
+:::
 
 ## Background: Neural Networks
 
@@ -126,6 +138,13 @@ $$
 
 $$\varphi: \R^d \rightarrow \R^N_L \qquad T^l: \R^{N_{l-1}}\rightarrow \R^{N_{l}} \qquad \sigma: \R\rightarrow \R$$
 $$x \in \R^d \qquad W^l \in \R^{N_l\times N_{l-1}} \qquad b^l \in \R^{N_l}$$
+
+::: {.notes}
+
+The neural network is a composition of functions.
+We can swap out any of these components and and as long as its composable and differentiable, we can optimize it and call it a neural network.
+
+:::
 
 ## Background: Backpropagation
 
@@ -151,6 +170,14 @@ $$
 The tunable parameters can then be updated by:
 $\Param\gets \Param -\eta \nabla_{\Param}\Loss$
 
+::: {.notes}
+
+- Computational efficiency aside, backpropagation is essentially the chain rule.
+- We take the derivative of the loss with respect to the output of the network and then backpropagate the gradient through the network.
+- In the simplest case, we just subtract the gradient from the parameters to update them.
+
+:::
+
 ## Background: Loss Functions
 - Neural networks compute a probability distribution on the data space. 
 - Our objective is maximize the likihood the assigned to emperical data.
@@ -161,6 +188,13 @@ Common loss functions include:
   - Kullback-Leibler Divergence $\Loss(\theta) = \sum_{i=1}^N y_i \log\left(\dfrac{y_i}{f(x_i;\theta)}\right)$
   
 Loss functions are combined and regularized to balance the tradeoff between model complexity and data fit.
+
+::: {.notes}
+
+- The art of crafting the loss function can make or break a model.
+- The loss needs to be compuationally efficient, and smooth enough to allow for stable gradient based optimization. 
+
+:::
 
 ## Background: Optimization
 - To find the best model parametrization, we minimize the loss function with respect to the model parameters. 
@@ -175,6 +209,21 @@ $$
 where $\lambda \in \Lambda$ is a hyperparameter.
 
 Stochastic Gradient Descent, Adam, and RMSProp are common optimization algorithms for training neural networks.
+
+::: {.notes}
+
+- The optimizer is an important choice in the training process.
+- Optimizer takes in loss related info and updates the parameters.
+
+Adam stands for adaptive moment estimation and is a stochastic gradient descent optimization algorithm that uses an adaptive learning rate based on estimates of the first and second moments. It maintains exponential moving averages of the weights and gradients, which it uses to scale the learning rate. In other words, Adam uses estimates of the mean and variance of the gradients to adaptively scale the learning rate during training, which can improve the speed and stability of the optimization process.
+
+When you want a fast and efficient optimization algorithm: Adam requires relatively little memory and computation, making it a fast and efficient choice for training deep learning models.
+When you have noisy or sparse gradients: Adam is well-suited for optimizing models with noisy or sparse gradients, as it can use the additional information provided by the gradients to adapt the learning rate on the fly.
+
+The algorithm is an extension of the famous stochastic gradient descent (SGD) algorithm. The key idea behind RMSProp is to scale the gradient of each weight in the model by dividing it by the root mean square (RMS) of the gradients of that weight. This helps prevent weights with high gradients from learning too quickly while allowing weights with low gradients to continue learning faster.
+If you are training a model with many parameters and are experiencing issues with the model diverging or oscillating during training, RMSProp can help stabilize the training process by adjusting to the gradient.
+
+:::
 
 ## Background: Meta-Learning
 
@@ -192,6 +241,12 @@ Stochastic Gradient Descent, Adam, and RMSProp are common optimization algorithm
 ::::
 Algorithms for meta-learning are still in a nascent stage with significant computational overhead.
 
+::: {.notes}
+
+Meta-learning allows the learning algorithm to optimize itself by adding a further layer of abstraction.
+
+:::
+
 ::: {.attribution}
 Figure by [John Lindner ](https://www.nature.com/articles/s41598-023-40766-6)
 :::
@@ -203,6 +258,11 @@ Figure by [John Lindner ](https://www.nature.com/articles/s41598-023-40766-6)
 
 <img src="figures/BG1/HNN.png" alt="HNN schema" style="display: block; width: 30%; margin-top: -25px; margin-left: auto; margin-right: auto;">
 
+::: {.notes}
+
+One way to integrate physics into the neural network is to add the physics as a constraint to the loss function. This can be done by adding a term to the loss function that penalizes the network for not satisfying the physics. This is known as a weak constraint because the network is not required to satisfy the physics exactly, but rather to minimize the difference between the physics and the network's predictions.
+
+:::
 
 ## Background: Coordinates matter
 
@@ -220,6 +280,9 @@ Adapted from Heliocentrism and Geocentrism by [Malin Christersson
 ](https://www.malinc.se/math/)
 :::
 
+::: {.notes}
+As with any data driven modelling, the way you represent the data can have a significant impact on the performance of the model.
+:::
 
 # Metalearning Activation functions 
 (Published, US and International Patent Pending)
@@ -282,11 +345,23 @@ Figure from [Publication](https://www.nature.com/articles/s41598-023-40766-6)
 Figure from [Publication](https://www.nature.com/articles/s41598-023-40766-6)
 :::
 
+::: {.notes}
+Using 1DMNIST dataset, we showed that the learned diverse activations outperformed the traditional activations in the regime of low data few shot learning of around 5 epochs.
+These results are averaged over 100 initializations.
+:::
+
 ## Results: Real World Data
 ![](figures/Result1/real_pendulum.png){fig-alt="real world example" fig-align="center" width=80%}
 
 ::: {.attribution}
 Figure from [Publication](https://www.nature.com/articles/s41598-023-40766-6)
+:::
+
+::: {.notes}
+
+We also showed that it can work for real world data, in this case a real pendulum. 
+We used an HNN for this task to further illustrate the generalizability of the learned diverse activations.
+
 :::
 
 ## Analysis: Participation Ratio
@@ -353,9 +428,13 @@ d\theta_{t} = - \nabla \Loss(\theta_{t})\, dt + \sqrt{2\mathbf{D}} \cdot d\mathc
 $$
 with noise intensity $\mathbf{D} = (\eta / B) \Loss(\theta) \mathbf{H}(\theta\star)$ @mori_power-law_2022
 
-<!-- Resulting minima from diverse neurons is flatter than from homogeneous ones, as measured by both the trace $\Tr\mathbf{H}$ of the Hessian and the fraction $f$ of its eigenvalues near zero: $\Tr \mathbf{H}_1 >  \Tr \mathbf{H}_2 > \Tr \mathbf{H}_{12}$ and $f_1 < f_2 < f_{12}$
+::: {.notes}
 
-Since the noise term aligns with Hessian bear the minima, this suggests that the minima found by diverse neurons are flatter and more stable. -->
+Minima from diverse neurons is flatter than from homogeneous ones, as measured by both the trace $\Tr\mathbf{H}$ of the Hessian and the fraction $f$ of its eigenvalues near zero: $\Tr \mathbf{H}_1 >  \Tr \mathbf{H}_2 > \Tr \mathbf{H}_{12}$ and $f_1 < f_2 < f_{12}$
+
+Since the noise term aligns with Hessian bear the minima, this suggests that the minima found by diverse neurons are flatter and more stable.
+
+:::
 
 ## Speculations: Structure and universality to diverse activations
 
@@ -364,12 +443,16 @@ Since the noise term aligns with Hessian bear the minima, this suggests that the
 
 ![](figures/Result1/learned_act_insight.png){fig-alt="spanning sets" fig-align="center" width=80%}
 
+::: {.notes}
 
+The learned activations seem to form spanning sets for 1-d activation functions.
+There can be future work to explore the universality of this with multidimensional activations and large activation communities. But computational overhead is a significant concern.
+
+:::
 
 # Control and Chaos
 
 ## Background: Hamilton Jacobi Bellman(HJB) Equation
-Extension of Hamilton Jacobi equation/ Continous time analog of Dynamic Programming.
 
 $$
 \dfrac{dx}{dt} = f(x(t),u(t))dt \\
@@ -381,6 +464,8 @@ $$
 :::{.notes}
 V(x,t) is the value function, the minimum cost-to-go from state x at time t.
 If we can solve for V then we can find from it a control u that achieves the minimum cost.
+
+Extension of Hamilton Jacobi equation/ Continous time analog of Dynamic Programming.
 :::
 
 ## Background: Model Predictive Control
@@ -421,6 +506,8 @@ Arbitrary control objective: Traditional set-point tracking and regulation or ec
 
 constrained formulation: Explicitly consider physical, safety or operational system constraints
 The dotted line indicates the current prediction and the solid line represents the realized values.
+
+This simulation uses moving horizon estimation with the problem discretized by orthogonal collocation.
 :::
 
 ## Background: Chaos
@@ -445,6 +532,12 @@ Let $X$ be a metric space. A continous map $f: X \rightarrow X$ is said to be ch
   </tr>
 </table>
 
+:::{.notes}
+Devaney's definition of chaos is a general useful defintion for our purposes. Any two of the rules give the other in ℝ.
+
+There is an equivalent definition where f is indecomposable and the periodic points are dense in X.
+:::
+
 ## Background: Traditional Chaos Control
 
 Relies on the ergodicity of chaotic systems [@ott_controlling_1990; @ditto_experimental_1990].
@@ -453,7 +546,16 @@ Relies on the ergodicity of chaotic systems [@ott_controlling_1990; @ditto_exper
 
 ![](figures/BG2/UPO.png){fig-alt="Unstable periodic orbits" fig-align="center" width=40%}
 
+:::{.notes}
 
+OGY relies on stabilizing unstable periodic orbits in the chaotic system.
+When a trajectory is near the UPO, the OGY method uses a perturbation to move the trajectory off the unstable manifold of the UPO and onto the stable manifold.
+
+In the neighborhood of the UPO, the next point of the system’s Poincar´e section can be
+approximated using the Jacobian. And then the shift can be approximated by linear approximation
+
+Shown attractor of the duffing oscillator with the UPOs marked in purple.
+:::
 
 ## Background: Chaotic Pendulum Array @braiman_taming_1995
 <div>
@@ -466,6 +568,14 @@ Relies on the ergodicity of chaotic systems [@ott_controlling_1990; @ditto_exper
 $$
 l_n^2\ddot\theta_n =-\gamma\dot\theta_n\nonumber-l_n\sin{\theta_n}\nonumber +\tau_{0}+\tau_{1}\sin{\omega t}\nonumber +\kappa(\theta_{n-1}+\theta_{n+1}-2\theta_n)
 $$
+
+:::{.notes}
+
+This damped driven pendulum array is a classic example of a chaotic system that was deeply explored by Y. Braiman, John and Bill in the 90s exploring disorder taming chaos.
+
+If we remove the coupling we get a simple driven damped pendulum. This system can itself be chaotic as well.
+
+:::
 
 ## Background: Kuramoto Oscillator @kuramoto_international_1975
 
@@ -489,9 +599,16 @@ $$\dot{\theta}_i = \omega_i + \lambda\sum_{j=1}^N \sin(\theta_j - \theta_i)$$
 </table>
 </div>
 
-
 :::{.attribution}
 Synchronizing fireflies video from [Robin Meier](http://robinmeier.net/?p=2279)
+:::
+
+:::{.notes}
+Kuramoto can be thought of as a first order mean field theory of the complex Ginzburg-Landau equation.
+
+This model was initially proposed to capture synchronization in large weaky-coupled oscillator systems.
+It found a lot of applications like josephson junction arrays, power grids, and even modelling fireflies.
+
 :::
 
 # Neural Network control of chaos
@@ -505,9 +622,24 @@ Synchronizing fireflies video from [Robin Meier](http://robinmeier.net/?p=2279)
 
 ![](figures/Result2/MPC_NN.png){fig-alt="Model Predictive control" fig-align="center" width=100%}
 
+:::{.notes}
+Instead of training a neural network with a predefined dataset, we train the network in situ with the network serving as the controller that is integrated in the dynamical system at each epoch.
+
+The time horizon for the integration is changed from the first half and seconf half of training by 5x to allow extrapolation of the controller.
+
+:::
+
 ## Results: Kuramoto Grid
 
 ![](figures/Result2/kuramoto_control.png){fig-alt="Controlled kuramoto dynamics" fig-align="center" width=100%}
+
+:::{.notes}
+
+The simplest test for this method was a grid of kuraomoto oscillators. The network was trained to control the phase of the oscillators to a desired state.
+This works very well.
+Interestingly, this method also extends naturally to noisy kuramoto, which is not guaranteed by HJB.
+
+:::
 
 ## Results: Pendulum Array
 
@@ -519,6 +651,13 @@ Synchronizing fireflies video from [Robin Meier](http://robinmeier.net/?p=2279)
   Your browser does not support the video tag.
 </video>
 </div>
+
+:::{.notes}
+
+We also tested the method on the chaotic pendulum array into synchrony while maintaining the mean of the lengths.
+The network was able to control this system as well navigating out of the sliver of chaos.
+
+:::
 
 ## Future Work: Exotic Dynamics @abrams_chimera_2004
 ::: {style="font-size: 70%;"}
@@ -543,9 +682,29 @@ $$\dot{\theta}_i = \omega_i + \lambda\sum_{j=1}^N A_{ij}\sin(\theta_j - \theta_i
 </table>
 </div>
 
+:::{.notes}
+
+This is an extension of kuramoto system where the coupling is nonlocal and the phase difference is shifted by a phase $\alpha$.
+
+It cannot be ascribed to a supercritical instability of the spatially uniform oscillation, because it occurs even if the uniform state is stable. Furthermore, it has nothing to do with the partially locked/partially incoherent states seen in populations of non-identical oscillators with distributed frequencies. There, the splitting of the population stems from the inhomogeneity of the oscillators themselves; the desynchronized oscillators are the intrinsically fastest or slowest ones. Here, all the oscillators are the same.
+
+It would be a good test of the model to see if it can move a system into and out of chimeric states.
+
+:::
+
 ## Future Work: Recurrence matrices in $\mathcal{L}$ @kennel_determining_1992
 
 ![](figures/Result2/recurrence_matrix_lorenz.png){fig-alt="Recurrence matrix for lorenz attractor" fig-align="center" width=70%}
+
+:::{.notes}
+
+Recurrence matrices are are way to capture the dynamics of a system by looking at the recurrences of states.
+This is similar to the notion of delay coordinate embeddings used for approximating attractors.
+As you can see here the recurrence matrices are invariant to the delays.
+
+This can be used in the loss function to prescibe the exact dynamics to optimize towards,
+
+:::
 
 # Dynamics, symmetries, and introspection
 ## Background: Group theory for Dynamical Systems
@@ -573,6 +732,9 @@ For ODEs that means if $f(x)$ is a solution, then so is $f(\gamma x)$ for all $g
 So we can classify solutions upto their symmetry.
 
 If a system starts in a symmetric state, it will remain symmetric.
+
+Isotropy subgroup: The set of all group elements which leave the solution unchanged. i.e Fixed-point subspaces are invariant under the flow generated by f
+
 :::
 
 ## Background: Group Equivariant Neural Networks
@@ -585,6 +747,11 @@ Group equivariant NN work through lifting convolutions to the _group_ space, and
 
 :::{.attribution}
 Figure adapted from [Bart Smets et al.](https://arxiv.org/abs/2001.09046)
+:::
+
+:::{.notes}
+One was thats groups ar integrated into neural networks are as an extension of the traditional convolutation neural network setup. 
+Instead of just lifting to some real space which preserves translationals as in traditional CNNs, we lift to a group space which preserves the group symmetries.
 :::
 
 # Symmetries of controllers
@@ -652,7 +819,7 @@ MNIST1D: 1 hidden layer of 100 neurons, activation of 50 hidden neurons. 100 ini
 
 Neural Network control of chaos:
 
-Control and dynamics integration via diffrax Jax library for neural ODEs. *TSit5* algorithm for ODE integration with PID controller with rtol 1e-7 and atol 1e-9. *Stratanovich Milstein* solver for SDE integrartion with PID controller with rtol 1e-7 and atol 1e-9. 1000 epochs Controller training with only 1/5 data for the first half. Implemented in Jax.
+Control and dynamics integration via diffrax Jax library for neural ODEs. *TSit5* algorithm for ODE integration with PID controller with rtol 1e-7 and atol 1e-9. *Stratanovich Milstein* solver for SDE integration with PID controller with rtol 1e-7 and atol 1e-9. 1000 epochs Controller training with only 1/5 data for the first half. Implemented in Jax.
 
 :::{.notes}
 RMSProp addresses the issue of a global learning rate by maintaining a moving average of the squares of gradients for each weight and dividing the learning rate by this average. This ensures that the learning rate is adapted for each weight in the model, allowing for more nuanced updates.
@@ -752,7 +919,43 @@ This limiting distribution is the Gibbs distribution with density $\exp{(-f(x))}
 Argument from [Francis Bach](https://francisbach.com/gradient-flows/)
 :::
 
+## 1DMNIST {.unnumbered .unlisted visibility="uncounted"}
+
+![](figures/Backup/MNIST1D.png){fig-alt="MNIST1D" fig-align="center" width=70%}
+
 ## Neural ODEs {.unnumbered .unlisted visibility="uncounted"}
+
+- Forward propagation:
+$$
+x(t_1) = \text{ODESolve}(f(x(t),t,\theta), x(t_0), t_0, t_1)\\
+\text{Compute loss: } \Loss(x(t_1))\\
+a(t_1) = \frac{\partial \Loss}{\partial x(t_1)}\\
+$$
+
+- Back propagation:
+$$
+\begin{bmatrix}
+x(t_0) \\
+\frac{\partial \Loss}{\partial x(t_0)}\\
+\frac{\partial \Loss}{\partial \theta}
+\end{bmatrix}
+=
+\text{ODESolve}\left(\begin{bmatrix}
+f(x(t),t,\theta) \\
+-a(t)^T \frac{\partial f(x(t),t,\theta)}{\partial x} \\
+-a(t)^T \frac{\partial f(x(t),t,\theta)}{\partial \theta} 
+\end{bmatrix}
+,
+\begin{bmatrix}
+x(t_1) \\
+\frac{\partial \Loss}{\partial x(t_1)}\\
+0_{|\theta|}
+\end{bmatrix}
+,
+t_1, t_0
+\right)
+$$
+
 
 ## HJB Derivation Sketch {.unnumbered .unlisted visibility="uncounted"}
 Bellman optimality equation:
@@ -787,7 +990,61 @@ $$
 
 ## Stochasticity and noise {.unnumbered .unlisted visibility="uncounted"}
 
-## Delay coordinates and noise {.unnumbered .unlisted visibility="uncounted"}
+::: {style="font-size: 70%;"}
+We can add intrinsic noise to it by adding a noise term $\xi$ with a strength $\sigma$:
+$$ 
+\frac{dx}{dt}=f(x,t)+ σ(x,t)ξ
+$$
+
+Then the rectangular reimann  construction is equivalent to:
+$$
+f(t)≈\sum_{i=1}^n f(\hat{x_i})χ_{Δx_i}
+$$
+where $f(\hat{x_i})$ are constants.
+This approximation is exact in the limit of $n\to\infty$.
+
+
+For the stchastic case, the rectangular construction is equivalent to:
+$$
+\phi(t)≈\sum_{i=1}^n \hat{e}_iχ_{Δx_i}
+$$
+Then the integral is:
+$$
+\int_0^T \phi(t) dW_t=\sum_{i=1}^n \hat{e}_i ΔW_i
+$$
+
+Here, the coeffients $\hat{e}_i$ are *not* constants but random variables since we are allowed to integrate $σ$ which depends on $X_t$.
+
+:::
+
+## Recurrence plots caveat emptor {.unnumbered .unlisted visibility="uncounted"}
+
+::: {layout-ncol=2}
+
+![Roessler lyap](figures/Backup/roessler_det.svg){fig-alt="Roessler lyap" fig-align="center" width=100%}
+
+![Roessler rec](figures/Backup/roessler_rec.svg){fig-alt="Roessler recurrence" fig-align="center" width=100%}
+
+:::
+
+:::{.attribution}
+Lyapunov exponent and Recurrence plot from [Recurrence Plot Pitfalls](http://www.recurrence-plot.tk/pitfalls.php)
+:::
 
 ## Neural network architectures {.unnumbered .unlisted visibility="uncounted"}
 
+::: {layout-ncol=2}
+
+![Autoencoder](assets/Autoencoder_schema.png){fig-alt="Autoencoder" fig-align="right" width=60%}
+
+
+![GRU](assets/Gated_Recurrent_Unit_schema.png){fig-alt="GRU" fig-align="left" width=100%}
+
+:::
+
+![CNN](assets/Typical_cnn.png){fig-alt="CNN" fig-align="center" width=100%}
+
+::: {.attribution}
+
+All images from associated wikipedia pages (Autoencoder, GRU, CNN)
+:::

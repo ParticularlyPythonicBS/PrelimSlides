@@ -13,7 +13,7 @@
   <meta name="generator" content="quarto-1.4.553">
 
   <meta name="author" content="Anil Radhakrishnan">
-  <meta name="dcterms.date" content="2024-04-25">
+  <meta name="dcterms.date" content="2024-04-29">
   <title>Nonlinear dynamics with neural networks</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -376,7 +376,7 @@ Anil Radhakrishnan
     </div>
 </div>
 
-  <p class="date">2024-04-25</p>
+  <p class="date">2024-04-29</p>
 </section><section id="TOC">
 <nav role="doc-toc"> 
 <h2 id="toc-title">Table of contents</h2>
@@ -430,7 +430,11 @@ Anil Radhakrishnan
 </div>
 </div>
 <aside class="notes">
-<p>Speaker notes go here.</p>
+<ul>
+<li>Neural networks have established themselves as a great tool for a variety of tasks.</li>
+<li>They are not an answer to everything, but their scalability makes them a great tool in the age of big compute, big data, and big models.</li>
+<li>They have also found their place in fundamental science, both speeding up research and enabling new discoveries.</li>
+</ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -459,6 +463,7 @@ Anil Radhakrishnan
 <p>Animation by <a href="https://github.com/williamgilpin/cphy">Wliiam Gilpin</a></p>
 </div>
 <aside class="notes">
+<p>Nonlinear dynamics is a powerful paradigm for understanding complex systems. And more and more systems are bocoming more and more complex as we move forward.</p>
 <p>Avalanche activity cascades in a sandpile automaton; a vortex street formed by flow past a cylinder; and Turing patterns in a reaction-diffusion model.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -509,12 +514,19 @@ Anil Radhakrishnan
 <li>Paradigm of solution as an element of a distribution translates naturally to neural networks.</li>
 <li>Data-driven methods accommodate realistic complexity.</li>
 </ul>
-<!-- <img src="assets/escher_day_night.png" alt="Escher's day and night wood blood painting" style="display: block; width: 30%; margin-top: -25px; margin-left: auto; margin-right: auto;">
+<aside class="notes">
 
-  
-::: {.attribution}
-Day and Night by [M.C. Escher](https://www.wikiart.org/en/m-c-escher/day-and-night)
-::: -->
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section></section>
 <section>
 <section id="neural-networks-and-optimization" class="title-slide slide level1 center">
@@ -528,6 +540,22 @@ Day and Night by [M.C. Escher](https://www.wikiart.org/en/m-c-escher/day-and-nig
 <li>Techniques to differentiate through complex programs is more than just deep learning.</li>
 <li>Can be interpreted probabilistically or as a dynamical system. <img data-src="figures/BG1/autodiff.png" style="width:80.0%" alt="autodifferentiation diagram"></li>
 </ul>
+<aside class="notes">
+<ul>
+<li>For the purposes of this study, it is better to think of these algorithms through the lens of differentiability.</li>
+<li>The large parameter space afforded by network structures are ripe for gradient based optimization.</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="background-neural-networks" class="slide level2">
 <h2>Background: Neural Networks</h2>
@@ -540,6 +568,19 @@ Day and Night by [M.C. Escher](https://www.wikiart.org/en/m-c-escher/day-and-nig
 \newcommand{\Loss}{\mathcal{L}}
 \]</span></p>
 <p><span class="math display">\[\varphi: \R^d \rightarrow \R^N_L \qquad T^l: \R^{N_{l-1}}\rightarrow \R^{N_{l}} \qquad \sigma: \R\rightarrow \R\]</span> <span class="math display">\[x \in \R^d \qquad W^l \in \R^{N_l\times N_{l-1}} \qquad b^l \in \R^{N_l}\]</span></p>
+<aside class="notes">
+<p>The neural network is a composition of functions. We can swap out any of these components and and as long as its composable and differentiable, we can optimize it and call it a neural network.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div></section>
 <section id="background-backpropagation" class="slide level2">
 <h2>Background: Backpropagation</h2>
@@ -566,6 +607,23 @@ Day and Night by [M.C. Escher](https://www.wikiart.org/en/m-c-escher/day-and-nig
 </div>
 </div>
 <p>The tunable parameters can then be updated by: <span class="math inline">\(\Param\gets \Param -\eta \nabla_{\Param}\Loss\)</span></p>
+<aside class="notes">
+<ul>
+<li>Computational efficiency aside, backpropagation is essentially the chain rule.</li>
+<li>We take the derivative of the loss with respect to the output of the network and then backpropagate the gradient through the network.</li>
+<li>In the simplest case, we just subtract the gradient from the parameters to update them.</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="background-loss-functions" class="slide level2">
 <h2>Background: Loss Functions</h2>
@@ -580,6 +638,22 @@ Day and Night by [M.C. Escher](https://www.wikiart.org/en/m-c-escher/day-and-nig
 </ul></li>
 </ul>
 <p>Loss functions are combined and regularized to balance the tradeoff between model complexity and data fit.</p>
+<aside class="notes">
+<ul>
+<li>The art of crafting the loss function can make or break a model.</li>
+<li>The loss needs to be compuationally efficient, and smooth enough to allow for stable gradient based optimization.</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="background-optimization" class="slide level2">
 <h2>Background: Optimization</h2>
@@ -593,6 +667,25 @@ Day and Night by [M.C. Escher](https://www.wikiart.org/en/m-c-escher/day-and-nig
 \]</span> where <span class="math inline">\(\lambda \in \Lambda\)</span> is a hyperparameter.</li>
 </ul>
 <p>Stochastic Gradient Descent, Adam, and RMSProp are common optimization algorithms for training neural networks.</p>
+<aside class="notes">
+<ul>
+<li>The optimizer is an important choice in the training process.</li>
+<li>Optimizer takes in loss related info and updates the parameters.</li>
+</ul>
+<p>Adam stands for adaptive moment estimation and is a stochastic gradient descent optimization algorithm that uses an adaptive learning rate based on estimates of the first and second moments. It maintains exponential moving averages of the weights and gradients, which it uses to scale the learning rate. In other words, Adam uses estimates of the mean and variance of the gradients to adaptively scale the learning rate during training, which can improve the speed and stability of the optimization process.</p>
+<p>When you want a fast and efficient optimization algorithm: Adam requires relatively little memory and computation, making it a fast and efficient choice for training deep learning models. When you have noisy or sparse gradients: Adam is well-suited for optimizing models with noisy or sparse gradients, as it can use the additional information provided by the gradients to adapt the learning rate on the fly.</p>
+<p>The algorithm is an extension of the famous stochastic gradient descent (SGD) algorithm. The key idea behind RMSProp is to scale the gradient of each weight in the model by dividing it by the root mean square (RMS) of the gradients of that weight. This helps prevent weights with high gradients from learning too quickly while allowing weights with low gradients to continue learning faster. If you are training a model with many parameters and are experiencing issues with the model diverging or oscillating during training, RMSProp can help stabilize the training process by adjusting to the gradient.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="background-meta-learning" class="slide level2">
 <h2>Background: Meta-Learning</h2>
@@ -615,6 +708,19 @@ Day and Night by [M.C. Escher](https://www.wikiart.org/en/m-c-escher/day-and-nig
 </div>
 </div>
 <p>Algorithms for meta-learning are still in a nascent stage with significant computational overhead.</p>
+<aside class="notes">
+<p>Meta-learning allows the learning algorithm to optimize itself by adding a further layer of abstraction.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 <div class="attribution">
 <p>Figure by <a href="https://www.nature.com/articles/s41598-023-40766-6">John Lindner</a></p>
 </div>
@@ -627,7 +733,20 @@ Day and Night by [M.C. Escher](https://www.wikiart.org/en/m-c-escher/day-and-nig
 <li>Symplectic constraints to the loss function gives Hamiltonian Neural Networks<span class="citation" data-cites="greydanus_hamiltonian_2019"><sup><a href="#/references" role="doc-biblioref" onclick="">4</a></sup></span>.</li>
 </ul>
 
-<img src="figures/BG1/HNN.png" alt="HNN schema" style="display: block; width: 30%; margin-top: -25px; margin-left: auto; margin-right: auto;" class="r-stretch"></section>
+<img src="figures/BG1/HNN.png" alt="HNN schema" style="display: block; width: 30%; margin-top: -25px; margin-left: auto; margin-right: auto;" class="r-stretch"><aside class="notes">
+<p>One way to integrate physics into the neural network is to add the physics as a constraint to the loss function. This can be done by adding a term to the loss function that penalizes the network for not satisfying the physics. This is known as a weak constraint because the network is not required to satisfy the physics exactly, but rather to minimize the difference between the physics and the network’s predictions.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section id="background-coordinates-matter" class="slide level2">
 <h2>Background: Coordinates matter</h2>
 <!--  -->
@@ -640,6 +759,19 @@ Your browser does not support the video tag. </video>
 <div class="attribution">
 <p>Adapted from Heliocentrism and Geocentrism by <a href="https://www.malinc.se/math/">Malin Christersson</a></p>
 </div>
+<aside class="notes">
+<p>As with any data driven modelling, the way you represent the data can have a significant impact on the performance of the model.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section></section>
 <section>
 <section id="metalearning-activation-functions" class="title-slide slide level1 center">
@@ -715,6 +847,19 @@ Your browser does not support the video tag. </video>
 <img data-src="figures/Result1/meta_div_scaling.png" class="quarto-figure quarto-figure-center r-stretch" style="width:80.0%" alt="scaling"><div class="attribution">
 <p>Figure from <a href="https://www.nature.com/articles/s41598-023-40766-6">Publication</a></p>
 </div>
+<aside class="notes">
+<p>Using 1DMNIST dataset, we showed that the learned diverse activations outperformed the traditional activations in the regime of low data few shot learning of around 5 epochs. These results are averaged over 100 initializations.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="results-real-world-data" class="slide level2">
 <h2>Results: Real World Data</h2>
@@ -722,6 +867,19 @@ Your browser does not support the video tag. </video>
 <img data-src="figures/Result1/real_pendulum.png" class="quarto-figure quarto-figure-center r-stretch" style="width:80.0%" alt="real world example"><div class="attribution">
 <p>Figure from <a href="https://www.nature.com/articles/s41598-023-40766-6">Publication</a></p>
 </div>
+<aside class="notes">
+<p>We also showed that it can work for real world data, in this case a real pendulum. We used an HNN for this task to further illustrate the generalizability of the learned diverse activations.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="analysis-participation-ratio" class="slide level2">
 <h2>Analysis: Participation Ratio</h2>
@@ -789,9 +947,20 @@ Nr = \mathcal{R}
 \DeclareMathOperator{\Tr}{Tr}
 d\theta_{t} = - \nabla \Loss(\theta_{t})\, dt + \sqrt{2\mathbf{D}} \cdot d\mathcal{W}_{t}
 \]</span> with noise intensity <span class="math inline">\(\mathbf{D} = (\eta / B) \Loss(\theta) \mathbf{H}(\theta\star)\)</span><span class="citation" data-cites="mori_power-law_2022"><sup><a href="#/references" role="doc-biblioref" onclick="">6</a></sup></span></p>
-<!-- Resulting minima from diverse neurons is flatter than from homogeneous ones, as measured by both the trace $\Tr\mathbf{H}$ of the Hessian and the fraction $f$ of its eigenvalues near zero: $\Tr \mathbf{H}_1 >  \Tr \mathbf{H}_2 > \Tr \mathbf{H}_{12}$ and $f_1 < f_2 < f_{12}$
-
-Since the noise term aligns with Hessian bear the minima, this suggests that the minima found by diverse neurons are flatter and more stable. -->
+<aside class="notes">
+<p>Minima from diverse neurons is flatter than from homogeneous ones, as measured by both the trace <span class="math inline">\(\Tr\mathbf{H}\)</span> of the Hessian and the fraction <span class="math inline">\(f\)</span> of its eigenvalues near zero: <span class="math inline">\(\Tr \mathbf{H}_1 &gt;  \Tr \mathbf{H}_2 &gt; \Tr \mathbf{H}_{12}\)</span> and <span class="math inline">\(f_1 &lt; f_2 &lt; f_{12}\)</span></p>
+<p>Since the noise term aligns with Hessian bear the minima, this suggests that the minima found by diverse neurons are flatter and more stable.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="speculations-structure-and-universality-to-diverse-activations" class="slide level2">
 <h2>Speculations: Structure and universality to diverse activations</h2>
@@ -800,7 +969,20 @@ Since the noise term aligns with Hessian bear the minima, this suggests that the
 <li>The odd and even nature of the learned functions suggest that the network is learning to span the space of possible activation functions.</li>
 </ul>
 
-<img data-src="figures/Result1/learned_act_insight.png" class="quarto-figure quarto-figure-center r-stretch" style="width:80.0%" alt="spanning sets"></section></section>
+<img data-src="figures/Result1/learned_act_insight.png" class="quarto-figure quarto-figure-center r-stretch" style="width:80.0%" alt="spanning sets"><aside class="notes">
+<p>The learned activations seem to form spanning sets for 1-d activation functions. There can be future work to explore the universality of this with multidimensional activations and large activation communities. But computational overhead is a significant concern.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section></section>
 <section>
 <section id="control-and-chaos" class="title-slide slide level1 center">
 <h1>Control and Chaos</h1>
@@ -808,7 +990,6 @@ Since the noise term aligns with Hessian bear the minima, this suggests that the
 </section>
 <section id="background-hamilton-jacobi-bellmanhjb-equation" class="slide level2">
 <h2>Background: Hamilton Jacobi Bellman(HJB) Equation</h2>
-<p>Extension of Hamilton Jacobi equation/ Continous time analog of Dynamic Programming.</p>
 <p><span class="math display">\[
 \dfrac{dx}{dt} = f(x(t),u(t))dt \\
 \mathcal{H}(x,u,t_0,t_f) = Q(x(t_f), t_f) + \int_{t_0}^{t_f} \Loss(x(\tau),u(\tau))d\tau\\
@@ -817,6 +998,7 @@ V(x(t_0),t_0,t_f) = \min_{u(t)} \mathcal{H}(x(t_0),u(t),t_0,t_f)\\
 \]</span></p>
 <aside class="notes">
 <p>V(x,t) is the value function, the minimum cost-to-go from state x at time t. If we can solve for V then we can find from it a control u that achieves the minimum cost.</p>
+<p>Extension of Hamilton Jacobi equation/ Continous time analog of Dynamic Programming.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -853,6 +1035,7 @@ Your browser does not support the video tag. </video> <video width="200" height=
 <p>Non-linear control: MPC can explicitly consider non-linear systems without linearization</p>
 <p>Arbitrary control objective: Traditional set-point tracking and regulation or economic MPC</p>
 <p>constrained formulation: Explicitly consider physical, safety or operational system constraints The dotted line indicates the current prediction and the solid line represents the realized values.</p>
+<p>This simulation uses moving horizon estimation with the problem discretized by orthogonal collocation.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -884,6 +1067,20 @@ Your browser does not support the video tag. </video> <video width="200" height=
 </tr>
 </tbody></table>
 
+<aside class="notes">
+<p>Devaney’s definition of chaos is a general useful defintion for our purposes. Any two of the rules give the other in ℝ.</p>
+<p>There is an equivalent definition where f is indecomposable and the periodic points are dense in X.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="background-traditional-chaos-control" class="slide level2">
 <h2>Background: Traditional Chaos Control</h2>
@@ -898,6 +1095,21 @@ Your browser does not support the video tag. </video> <video width="200" height=
 <p><img data-src="figures/BG2/UPO.png" class="quarto-figure quarto-figure-center" style="width:40.0%" alt="Unstable periodic orbits"></p>
 </figure>
 </div>
+<aside class="notes">
+<p>OGY relies on stabilizing unstable periodic orbits in the chaotic system. When a trajectory is near the UPO, the OGY method uses a perturbation to move the trajectory off the unstable manifold of the UPO and onto the stable manifold.</p>
+<p>In the neighborhood of the UPO, the next point of the system’s Poincar´e section can be approximated using the Jacobian. And then the shift can be approximated by linear approximation</p>
+<p>Shown attractor of the duffing oscillator with the UPOs marked in purple.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="background-chaotic-pendulum-array-braiman_taming_1995" class="slide level2">
 <h2>Background: Chaotic Pendulum Array<span class="citation" data-cites="braiman_taming_1995"><sup><a href="#/references" role="doc-biblioref" onclick="">11</a></sup></span></h2>
@@ -909,6 +1121,20 @@ Your browser does not support the video tag. </video>
 <p><span class="math display">\[
 l_n^2\ddot\theta_n =-\gamma\dot\theta_n\nonumber-l_n\sin{\theta_n}\nonumber +\tau_{0}+\tau_{1}\sin{\omega t}\nonumber +\kappa(\theta_{n-1}+\theta_{n+1}-2\theta_n)
 \]</span></p>
+<aside class="notes">
+<p>This damped driven pendulum array is a classic example of a chaotic system that was deeply explored by Y. Braiman, John and Bill in the 90s exploring disorder taming chaos.</p>
+<p>If we remove the coupling we get a simple driven damped pendulum. This system can itself be chaotic as well.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="background-kuramoto-oscillator-kuramoto_international_1975" class="slide level2">
 <h2>Background: Kuramoto Oscillator<span class="citation" data-cites="kuramoto_international_1975"><sup><a href="#/references" role="doc-biblioref" onclick="">12</a></sup></span></h2>
@@ -931,6 +1157,20 @@ Your browser does not support the video tag. </video> <span class="math display"
 <div class="attribution">
 <p>Synchronizing fireflies video from <a href="http://robinmeier.net/?p=2279">Robin Meier</a></p>
 </div>
+<aside class="notes">
+<p>Kuramoto can be thought of as a first order mean field theory of the complex Ginzburg-Landau equation.</p>
+<p>This model was initially proposed to capture synchronization in large weaky-coupled oscillator systems. It found a lot of applications like josephson junction arrays, power grids, and even modelling fireflies.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section></section>
 <section>
 <section id="neural-network-control-of-chaos" class="title-slide slide level1 center">
@@ -941,18 +1181,45 @@ Your browser does not support the video tag. </video> <span class="math display"
 <h2>Insight</h2>
 <ul>
 <li>Optimal control of network dynamics involves minimizing a cost functional.</li>
-<li>Traditional control approaches like Pontryagin’s maximum principle or Hamilton-Jacobi-Bellman equations are analytically and computationally intractable for complex systems.</li>
+<li>Traditional control approaches like Pontryagin’s (maximum) principle or Hamilton-Jacobi-Bellman equations are analytically and computationally intractable for complex systems.</li>
 <li>Neural networks based on neural ODES can approximate the optimal control policy<span class="citation" data-cites="bottcher_ai_2022"><sup><a href="#/references" role="doc-biblioref" onclick="">13</a></sup></span>.</li>
 </ul>
 </section>
 <section id="methodology-1" class="slide level2">
 <h2>Methodology</h2>
 
-<img data-src="figures/Result2/MPC_NN.png" class="quarto-figure quarto-figure-center r-stretch" style="width:100.0%" alt="Model Predictive control"></section>
+<img data-src="figures/Result2/MPC_NN.png" class="quarto-figure quarto-figure-center r-stretch" style="width:100.0%" alt="Model Predictive control"><aside class="notes">
+<p>Instead of training a neural network with a predefined dataset, we train the network in situ with the network serving as the controller that is integrated in the dynamical system at each epoch.</p>
+<p>The time horizon for the integration is changed from the first half and seconf half of training by 5x to allow extrapolation of the controller.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section id="results-kuramoto-grid" class="slide level2">
 <h2>Results: Kuramoto Grid</h2>
 
-<img data-src="figures/Result2/kuramoto_control.png" class="quarto-figure quarto-figure-center r-stretch" style="width:100.0%" alt="Controlled kuramoto dynamics"></section>
+<img data-src="figures/Result2/kuramoto_control.png" class="quarto-figure quarto-figure-center r-stretch" style="width:100.0%" alt="Controlled kuramoto dynamics"><aside class="notes">
+<p>The simplest test for this method was a grid of kuraomoto oscillators. The network was trained to control the phase of the oscillators to a desired state. This works very well. Interestingly, this method also extends naturally to noisy kuramoto, which is not guaranteed by HJB.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section id="results-pendulum-array" class="slide level2">
 <h2>Results: Pendulum Array</h2>
 
@@ -961,6 +1228,19 @@ Your browser does not support the video tag. </video> <span class="math display"
 <source src="figures/Result2/Pendulum_optimal.mp4" type="video/mp4">
 Your browser does not support the video tag. </video>
 </div>
+<aside class="notes">
+<p>We also tested the method on the chaotic pendulum array into synchrony while maintaining the mean of the lengths. The network was able to control this system as well navigating out of the sliver of chaos.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="future-work-exotic-dynamics-abrams_chimera_2004" class="slide level2">
 <h2>Future Work: Exotic Dynamics<span class="citation" data-cites="abrams_chimera_2004"><sup><a href="#/references" role="doc-biblioref" onclick="">14</a></sup></span></h2>
@@ -983,11 +1263,40 @@ Your browser does not support the video tag. </video>
 </tr>
 </tbody></table>
 </div>
+<aside class="notes">
+<p>This is an extension of kuramoto system where the coupling is nonlocal and the phase difference is shifted by a phase <span class="math inline">\(\alpha\)</span>.</p>
+<p>It cannot be ascribed to a supercritical instability of the spatially uniform oscillation, because it occurs even if the uniform state is stable. Furthermore, it has nothing to do with the partially locked/partially incoherent states seen in populations of non-identical oscillators with distributed frequencies. There, the splitting of the population stems from the inhomogeneity of the oscillators themselves; the desynchronized oscillators are the intrinsically fastest or slowest ones. Here, all the oscillators are the same.</p>
+<p>It would be a good test of the model to see if it can move a system into and out of chimeric states.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="future-work-recurrence-matrices-in-mathcall-kennel_determining_1992" class="slide level2">
 <h2>Future Work: Recurrence matrices in <span class="math inline">\(\mathcal{L}\)</span><span class="citation" data-cites="kennel_determining_1992"><sup><a href="#/references" role="doc-biblioref" onclick="">15</a></sup></span></h2>
 
-<img data-src="figures/Result2/recurrence_matrix_lorenz.png" class="quarto-figure quarto-figure-center r-stretch" style="width:70.0%" alt="Recurrence matrix for lorenz attractor"></section></section>
+<img data-src="figures/Result2/recurrence_matrix_lorenz.png" class="quarto-figure quarto-figure-center r-stretch" style="width:70.0%" alt="Recurrence matrix for lorenz attractor"><aside class="notes">
+<p>Recurrence matrices are are way to capture the dynamics of a system by looking at the recurrences of states. This is similar to the notion of delay coordinate embeddings used for approximating attractors. As you can see here the recurrence matrices are invariant to the delays.</p>
+<p>This can be used in the loss function to prescibe the exact dynamics to optimize towards,</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section></section>
 <section>
 <section id="dynamics-symmetries-and-introspection" class="title-slide slide level1 center">
 <h1>Dynamics, symmetries, and introspection</h1>
@@ -1004,6 +1313,7 @@ Your browser does not support the video tag. </video>
 <p>Cyclic group Dihedral group = Cyclic group + Flips Symmetric group = m! S^1 circle group O(n) Measure preserving transformations</p>
 <p>For ODEs that means if <span class="math inline">\(f(x)\)</span> is a solution, then so is <span class="math inline">\(f(\gamma x)\)</span> for all <span class="math inline">\(gamma \in \Gamma\)</span>. So we can classify solutions upto their symmetry.</p>
 <p>If a system starts in a symmetric state, it will remain symmetric.</p>
+<p>Isotropy subgroup: The set of all group elements which leave the solution unchanged. i.e Fixed-point subspaces are invariant under the flow generated by f</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1025,6 +1335,19 @@ Your browser does not support the video tag. </video>
 <div class="attribution">
 <p>Figure adapted from <a href="https://arxiv.org/abs/2001.09046">Bart Smets et al.</a></p>
 </div>
+<aside class="notes">
+<p>One was thats groups ar integrated into neural networks are as an extension of the traditional convolutation neural network setup. Instead of just lifting to some real space which preserves translationals as in traditional CNNs, we lift to a group space which preserves the group symmetries.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section></section>
 <section>
 <section id="symmetries-of-controllers" class="title-slide slide level1 center">
@@ -1161,7 +1484,7 @@ Your browser does not support the video tag. </video>
 <p>Metalearning Activation functions:</p>
 <p>MNIST1D: 1 hidden layer of 100 neurons, activation of 50 hidden neurons. 100 initializations averaged. RMSprop, Real Pendulum: same other than 50 initializations. Pytorch and Jax frameworks used.</p>
 <p>Neural Network control of chaos:</p>
-<p>Control and dynamics integration via diffrax Jax library for neural ODEs. <em>TSit5</em> algorithm for ODE integration with PID controller with rtol 1e-7 and atol 1e-9. <em>Stratanovich Milstein</em> solver for SDE integrartion with PID controller with rtol 1e-7 and atol 1e-9. 1000 epochs Controller training with only 1/5 data for the first half. Implemented in Jax.</p>
+<p>Control and dynamics integration via diffrax Jax library for neural ODEs. <em>TSit5</em> algorithm for ODE integration with PID controller with rtol 1e-7 and atol 1e-9. <em>Stratanovich Milstein</em> solver for SDE integration with PID controller with rtol 1e-7 and atol 1e-9. 1000 epochs Controller training with only 1/5 data for the first half. Implemented in Jax.</p>
 <aside class="notes">
 <p>RMSProp addresses the issue of a global learning rate by maintaining a moving average of the squares of gradients for each weight and dividing the learning rate by this average. This ensures that the learning rate is adapted for each weight in the model, allowing for more nuanced updates. The general idea is to dampen the oscillations in directions with steep gradients while allowing for faster movement in flat regions of the loss landscape.</p>
 <p>Tsit5 - Tsitouras 5/4 Runge-Kutta method. (free 4th order interpolant). Basically Dormand Prince with better coefficients.</p>
@@ -1249,8 +1572,41 @@ X(t+s) - X(t) =\\
 <p>Argument from <a href="https://francisbach.com/gradient-flows/">Francis Bach</a></p>
 </div>
 </section>
+<section id="dmnist" class="slide level2 unnumbered unlisted" data-visibility="uncounted">
+<h2>1DMNIST</h2>
+
+<img data-src="figures/Backup/MNIST1D.png" class="quarto-figure quarto-figure-center r-stretch" style="width:70.0%" alt="MNIST1D"></section>
 <section id="neural-odes" class="slide level2 unnumbered unlisted" data-visibility="uncounted">
 <h2>Neural ODEs</h2>
+<ul>
+<li><p>Forward propagation: <span class="math display">\[
+x(t_1) = \text{ODESolve}(f(x(t),t,\theta), x(t_0), t_0, t_1)\\
+\text{Compute loss: } \Loss(x(t_1))\\
+a(t_1) = \frac{\partial \Loss}{\partial x(t_1)}\\
+\]</span></p></li>
+<li><p>Back propagation: <span class="math display">\[
+\begin{bmatrix}
+x(t_0) \\
+\frac{\partial \Loss}{\partial x(t_0)}\\
+\frac{\partial \Loss}{\partial \theta}
+\end{bmatrix}
+=
+\text{ODESolve}\left(\begin{bmatrix}
+f(x(t),t,\theta) \\
+-a(t)^T \frac{\partial f(x(t),t,\theta)}{\partial x} \\
+-a(t)^T \frac{\partial f(x(t),t,\theta)}{\partial \theta}
+\end{bmatrix}
+,
+\begin{bmatrix}
+x(t_1) \\
+\frac{\partial \Loss}{\partial x(t_1)}\\
+0_{|\theta|}
+\end{bmatrix}
+,
+t_1, t_0
+\right)
+\]</span></p></li>
+</ul>
 </section>
 <section id="hjb-derivation-sketch" class="slide level2 unnumbered unlisted" data-visibility="uncounted">
 <h2>HJB Derivation Sketch</h2>
@@ -1279,12 +1635,78 @@ x\star = \dfrac{\partial \mathcal{H}}{\partial \lambda}
 </section>
 <section id="stochasticity-and-noise" class="slide level2 unnumbered unlisted" data-visibility="uncounted">
 <h2>Stochasticity and noise</h2>
+<div style="font-size: 70%;">
+<p>We can add intrinsic noise to it by adding a noise term <span class="math inline">\(\xi\)</span> with a strength <span class="math inline">\(\sigma\)</span>: <span class="math display">\[
+\frac{dx}{dt}=f(x,t)+ σ(x,t)ξ
+\]</span></p>
+<p>Then the rectangular reimann construction is equivalent to: <span class="math display">\[
+f(t)≈\sum_{i=1}^n f(\hat{x_i})χ_{Δx_i}
+\]</span> where <span class="math inline">\(f(\hat{x_i})\)</span> are constants. This approximation is exact in the limit of <span class="math inline">\(n\to\infty\)</span>.</p>
+<p>For the stchastic case, the rectangular construction is equivalent to: <span class="math display">\[
+\phi(t)≈\sum_{i=1}^n \hat{e}_iχ_{Δx_i}
+\]</span> Then the integral is: <span class="math display">\[
+\int_0^T \phi(t) dW_t=\sum_{i=1}^n \hat{e}_i ΔW_i
+\]</span></p>
+<p>Here, the coeffients <span class="math inline">\(\hat{e}_i\)</span> are <em>not</em> constants but random variables since we are allowed to integrate <span class="math inline">\(σ\)</span> which depends on <span class="math inline">\(X_t\)</span>.</p>
+</div>
 </section>
-<section id="delay-coordinates-and-noise" class="slide level2 unnumbered unlisted" data-visibility="uncounted">
-<h2>Delay coordinates and noise</h2>
+<section id="recurrence-plots-caveat-emptor" class="slide level2 unnumbered unlisted" data-visibility="uncounted">
+<h2>Recurrence plots caveat emptor</h2>
+<div class="quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="figures/Backup/roessler_det.svg" style="width:100.0%"></p>
+<figcaption>Roessler lyap</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="figures/Backup/roessler_rec.svg" style="width:100.0%"></p>
+<figcaption>Roessler rec</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div class="attribution">
+<p>Lyapunov exponent and Recurrence plot from <a href="http://www.recurrence-plot.tk/pitfalls.php">Recurrence Plot Pitfalls</a></p>
+</div>
 </section>
 <section id="neural-network-architectures" class="slide level2 unnumbered unlisted" data-visibility="uncounted">
 <h2>Neural network architectures</h2>
+<div class="quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-right">
+<figure>
+<p><img data-src="assets/Autoencoder_schema.png" style="width:60.0%"></p>
+<figcaption>Autoencoder</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-left">
+<figure>
+<p><img data-src="assets/Gated_Recurrent_Unit_schema.png" style="width:100.0%"></p>
+<figcaption>GRU</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="assets/Typical_cnn.png" style="width:100.0%"></p>
+<figcaption>CNN</figcaption>
+</figure>
+</div>
+<div class="attribution">
+<p>All images from associated wikipedia pages (Autoencoder, GRU, CNN)</p>
+</div>
 <div class="quarto-auto-generated-content">
 <p><img src="assets/NAIL_state.png" class="slide-logo"></p>
 <div class="footer footer-default">
