@@ -7,13 +7,11 @@
 <link href="index_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="index_files/libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="index_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="index_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="index_files/libs/quarto-contrib/videojs/video.min.js"></script>
-<link href="index_files/libs/quarto-contrib/videojs/video-js.css" rel="stylesheet"><meta charset="utf-8">
+<link href="index_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.4.553">
 
   <meta name="author" content="Anil Radhakrishnan">
-  <meta name="dcterms.date" content="2024-04-29">
+  <meta name="dcterms.date" content="2024-04-30">
   <title>Nonlinear dynamics with neural networks</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -376,7 +374,7 @@ Anil Radhakrishnan
     </div>
 </div>
 
-  <p class="date">2024-04-29</p>
+  <p class="date">2024-04-30</p>
 </section><section id="TOC">
 <nav role="doc-toc"> 
 <h2 id="toc-title">Table of contents</h2>
@@ -454,7 +452,6 @@ Anil Radhakrishnan
 <li>Formal, well-established framework.</li>
 <li>Emergent uses in and out of Physics.</li>
 </ul>
-<!-- <div style="padding:50% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/739921904?h=f803d0bbff&autoplay=1&loop=1&title=0&byline=0&portrait=0" style="position:absolute;top:0;left:5%;width:90%;height:90%;" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div><script src="https://player.vimeo.com/api/player.js"></script> -->
 <div style="margin-top: -70px; margin-bottom: -100px;">
 <video width="700" height="500" loop="" style="display: block; margin-left: auto; margin-right: auto;">
 <source src="assets/nonlinear_dynamics.mp4" type="video/mp4">
@@ -483,7 +480,6 @@ Avalanche activity cascades in a sandpile automaton | Vortex street formed by fl
 </section>
 <section id="motivation-why-nonlinear-dynamics-for-neural-networks" class="slide level2">
 <h2>Motivation: Why Nonlinear Dynamics for Neural Networks?</h2>
-<!-- <div style="padding:90% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/903855670?h=ca2b077023&autoplay=1&loop=1&title=0&byline=0&portrait=0" style="position:absolute;top:0;left:30%;width:40%;height:40%;" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div><script src="https://player.vimeo.com/api/player.js"></script> -->
 <ul>
 <li>Optimization is inescapably nonlinear<span class="citation" data-cites="sohl-dickstein_boundary_2024"><sup><a href="#/references" role="doc-biblioref" onclick="">2</a></sup></span>.</li>
 <li>Neural networks are inherently nonlinear.</li>
@@ -761,7 +757,6 @@ Avalanche activity cascades in a sandpile automaton | Vortex street formed by fl
 </section>
 <section id="background-coordinates-matter" class="slide level2">
 <h2>Background: Coordinates matter</h2>
-<!--  -->
 <div>
 <video width="700" height="500" loop="" style="display: block; margin-left: auto; margin-right: auto;">
 <source src="figures/BG1/coordinates.mp4" type="video/mp4">
@@ -1155,7 +1150,7 @@ l_n^2\ddot\theta_n =-\gamma\dot\theta_n\nonumber-l_n\sin{\theta_n}\nonumber +\ta
 <tbody><tr>
 <td style="vertical-align:top; padding-right:20px; width:65%">
 <video width="300" height="600" loop="" style="display: block; margin-left: auto; margin-right: auto; margin-bottom: 20px;">
-<source src="figures/BG2/fireflies.mp4" type="video/mp4">
+<source src="figures/BG2/fireflies_sim.mp4" type="video/mp4">
 Your browser does not support the video tag. </video>
 </td>
 <td style="vertical-align:top; width:35%">
@@ -1647,19 +1642,16 @@ x\star = \dfrac{\partial \mathcal{H}}{\partial \lambda}
 </section>
 <section id="stochasticity-and-noise" class="slide level2 unnumbered unlisted" data-visibility="uncounted">
 <h2>Stochasticity and noise</h2>
-<div style="font-size: 70%;">
+<div style="font-size: 80%;">
 <p>We can add intrinsic noise to it by adding a noise term <span class="math inline">\(\xi\)</span> with a strength <span class="math inline">\(\sigma\)</span>: <span class="math display">\[
 \frac{dx}{dt}=f(x,t)+ σ(x,t)ξ
 \]</span></p>
-<p>Then the rectangular reimann construction is equivalent to: <span class="math display">\[
-f(t)≈\sum_{i=1}^n f(\hat{x_i})χ_{Δx_i}
-\]</span> where <span class="math inline">\(f(\hat{x_i})\)</span> are constants. This approximation is exact in the limit of <span class="math inline">\(n\to\infty\)</span>.</p>
-<p>For the stchastic case, the rectangular construction is equivalent to: <span class="math display">\[
-\phi(t)≈\sum_{i=1}^n \hat{e}_iχ_{Δx_i}
-\]</span> Then the integral is: <span class="math display">\[
+<p>Then the rectangular reimann construction is equivalent to: <span class="math inline">\(f(t)≈\sum_{i=1}^n f(\hat{x_i})χ_{Δx_i}\)</span></p>
+<p>where <span class="math inline">\(f(\hat{x_i})\)</span> are constants. This approximation is exact in the limit of <span class="math inline">\(n\to\infty\)</span>.</p>
+<p>For the stochastic case, the rectangular construction is equivalent to: <span class="math inline">\(\phi(t)≈\sum_{i=1}^n \hat{e}_iχ_{Δx_i}\)</span> Then the integral is: <span class="math display">\[
 \int_0^T \phi(t) dW_t=\sum_{i=1}^n \hat{e}_i ΔW_i
 \]</span></p>
-<p>Here, the coeffients <span class="math inline">\(\hat{e}_i\)</span> are <em>not</em> constants but random variables since we are allowed to integrate <span class="math inline">\(σ\)</span> which depends on <span class="math inline">\(X_t\)</span>.</p>
+<p>Here, the coefficients <span class="math inline">\(\hat{e}_i\)</span> are <em>not</em> constants but random variables since we are allowed to integrate <span class="math inline">\(σ\)</span> which depends on <span class="math inline">\(X_t\)</span>.</p>
 </div>
 </section>
 <section id="recurrence-plots-caveat-emptor" class="slide level2 unnumbered unlisted" data-visibility="uncounted">
@@ -2115,7 +2107,6 @@ f(t)≈\sum_{i=1}^n f(\hat{x_i})χ_{Δx_i}
       }
     });
     </script>
-    <script>videojs(video_shortcode_videojs_video1);</script>
     
 
 </body></html>

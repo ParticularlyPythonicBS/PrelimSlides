@@ -71,8 +71,6 @@ revealjs-plugins:
 - Formal, well-established framework.
 - Emergent uses in and out of Physics.
 
-<!-- <div style="padding:50% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/739921904?h=f803d0bbff&autoplay=1&loop=1&title=0&byline=0&portrait=0" style="position:absolute;top:0;left:5%;width:90%;height:90%;" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div><script src="https://player.vimeo.com/api/player.js"></script> -->
-
 <div style="margin-top: -70px; margin-bottom: -100px;">
 <video width="700" height="500" loop style="display: block; margin-left: auto; margin-right: auto;">
   <source src="assets/nonlinear_dynamics.mp4" type="video/mp4">
@@ -98,9 +96,6 @@ Avalanche activity cascades in a sandpile automaton; a vortex street formed by f
 :::
 
 ## Motivation: Why Nonlinear Dynamics for Neural Networks?
-
-  
-<!-- <div style="padding:90% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/903855670?h=ca2b077023&autoplay=1&loop=1&title=0&byline=0&portrait=0" style="position:absolute;top:0;left:30%;width:40%;height:40%;" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div><script src="https://player.vimeo.com/api/player.js"></script> -->
 
 - Optimization is inescapably nonlinear @sohl-dickstein_boundary_2024.
 - Neural networks are inherently nonlinear.
@@ -299,7 +294,6 @@ One way to integrate physics into the neural network is to add the physics as a 
 
 ## Background: Coordinates matter
 
-<!-- {{<video figures/coordinates.mp4 width="500" height="400" autoplay="true" loop="true">}} -->
 <div>
 <video width="700" height="500" loop style="display: block; margin-left: auto; margin-right: auto;">
   <source src="figures/BG1/coordinates.mp4" type="video/mp4">
@@ -353,18 +347,14 @@ Figure from [Publication](https://www.nature.com/articles/s41598-023-40766-6)
 :::: {layout="[ 60, 40 ]"}
 
 ::: {#first-column}
-
 - Developed a metalearning framework to optimize activation functions.
 - Tested the algorithm on classification and regression tasks for conventional and physics-informed neural networks.
 - Showed a regime where learned diverse activations are superior.
 - Gave preliminary analysis to support diversity in activation functions improving performance.
-
 :::
 
 ::: {#second-column}
-
 ![](figures/Result1/2NeuronSubpopulation_Sine_1_compact2.png){fig-alt="2neuronmnist1d" fig-align="center" width=100%}
-
 :::
 ::::
 
@@ -621,7 +611,7 @@ If we remove the coupling we get a simple driven damped pendulum. This system ca
   <tr>
     <td style="vertical-align:top; padding-right:20px; width:65%">
 <video width="300" height="600" loop style="display: block; margin-left: auto; margin-right: auto; margin-bottom: 20px;">
-  <source src="figures/BG2/fireflies.mp4" type="video/mp4">
+  <source src="figures/BG2/fireflies_sim.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
     </td>
@@ -1029,30 +1019,25 @@ $$
 
 ## Stochasticity and noise {.unnumbered .unlisted visibility="uncounted"}
 
-::: {style="font-size: 70%;"}
+::: {style="font-size: 80%;"}
 We can add intrinsic noise to it by adding a noise term $\xi$ with a strength $\sigma$:
 $$ 
 \frac{dx}{dt}=f(x,t)+ σ(x,t)ξ
 $$
 
-Then the rectangular reimann  construction is equivalent to:
-$$
-f(t)≈\sum_{i=1}^n f(\hat{x_i})χ_{Δx_i}
-$$
+Then the rectangular reimann  construction is equivalent to: $f(t)≈\sum_{i=1}^n f(\hat{x_i})χ_{Δx_i}$
+
 where $f(\hat{x_i})$ are constants.
 This approximation is exact in the limit of $n\to\infty$.
 
 
-For the stchastic case, the rectangular construction is equivalent to:
-$$
-\phi(t)≈\sum_{i=1}^n \hat{e}_iχ_{Δx_i}
-$$
+For the stochastic case, the rectangular construction is equivalent to: $\phi(t)≈\sum_{i=1}^n \hat{e}_iχ_{Δx_i}$
 Then the integral is:
 $$
 \int_0^T \phi(t) dW_t=\sum_{i=1}^n \hat{e}_i ΔW_i
 $$
 
-Here, the coeffients $\hat{e}_i$ are *not* constants but random variables since we are allowed to integrate $σ$ which depends on $X_t$.
+Here, the coefficients $\hat{e}_i$ are *not* constants but random variables since we are allowed to integrate $σ$ which depends on $X_t$.
 
 :::
 
