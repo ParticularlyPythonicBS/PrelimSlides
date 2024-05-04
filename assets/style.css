@@ -10,3 +10,7 @@
 figcaption {
     display: none;
 }
+
+.reveal .negpad li:not(:last-child) {
+    margin-bottom:0px  !important;
+}

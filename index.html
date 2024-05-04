@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.4.553">
 
   <meta name="author" content="Anil Radhakrishnan">
-  <meta name="dcterms.date" content="2024-04-30">
+  <meta name="dcterms.date" content="2024-05-08">
   <title>Nonlinear dynamics with neural networks</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -374,7 +374,7 @@ Anil Radhakrishnan
     </div>
 </div>
 
-  <p class="date">2024-04-30</p>
+  <p class="date">May 8, 2024</p>
 </section><section id="TOC">
 <nav role="doc-toc"> 
 <h2 id="toc-title">Table of contents</h2>
@@ -1254,21 +1254,37 @@ Your browser does not support the video tag. </video>
 <div style="font-size: 70%;">
 <p><span class="math display">\[\dot{\theta}_i = \omega_i + \lambda\sum_{j=1}^N A_{ij}\sin(\theta_j - \theta_i-\alpha)\]</span></p>
 </div>
+<div style="margin-top: -100px; padding: 0;">
+<video width="820" height="700" loop="" style="display: block; margin-left: auto; margin-right: auto;">
+<source src="figures/Result2/ks_combined_no_eq.mp4" type="video/mp4">
+Your browser does not support the video tag. </video>
+</div>
 <div>
-<table style="width:100%; margin:0; padding:0; margin-top:-65px;">
-<tbody><tr>
-<td style="vertical-align:top; padding-right:20px; width:50%">
-<video width="300" height="600" loop="" style="display: block; margin-left: auto; margin-right: auto; margin-bottom: 20px;">
+<!-- ::: {style="font-size: 70%;"}
+$$\dot{\theta}_i = \omega_i + \lambda\sum_{j=1}^N A_{ij}\sin(\theta_j - \theta_i-\alpha)$$
+:::
+<div>
+
+<table data-quarto-postprocess="true" style="width:100%; margin:0; padding:0; margin-top:-65px;">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td style="vertical-align: top; padding-right: 20px; width: 50%"><video width="300" height="600" loop style="display: block; margin-left: auto; margin-right: auto; margin-bottom: 20px;">
 <source src="figures/Result2/ks_basic.mp4" type="video/mp4">
-Your browser does not support the video tag. </video>
-</td>
-<td style="vertical-align:top; padding-right:20px; width:50%">
-<video width="300" height="600" loop="" style="display: block; margin-left: auto; margin-right: auto; margin-bottom: 20px;">
+Your browser does not support the video tag.
+</video></td>
+<td style="vertical-align: top; padding-right: 20px; width: 50%"><video width="300" height="600" loop style="display: block; margin-left: auto; margin-right: auto; margin-bottom: 20px;">
 <source src="figures/Result2/ks_chimera.mp4" type="video/mp4">
-Your browser does not support the video tag. </video>
-</td>
+Your browser does not support the video tag.
+</video></td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+
+</div> -->
 </div>
 <aside class="notes">
 <p>This is an extension of kuramoto system where the coupling is nonlocal and the phase difference is shifted by a phase <span class="math inline">\(\alpha\)</span>.</p>

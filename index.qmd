@@ -3,7 +3,8 @@ title: Nonlinear dynamics with neural networks
 subtitle: Preliminary Examination
 author: Anil Radhakrishnan
 institute: Nonlinear Artificial Intelligence Laboratory, North Carolina State University
-date: last-modified
+date: 2024-05-08
+date-format: long
 bibliography: references.bib
 csl: nature.csl
 
@@ -687,7 +688,19 @@ The network was able to control this system as well navigating out of the sliver
 :::
 
 ## Future Work: Exotic Dynamics @abrams_chimera_2004
+
 ::: {style="font-size: 70%;"}
+$$\dot{\theta}_i = \omega_i + \lambda\sum_{j=1}^N A_{ij}\sin(\theta_j - \theta_i-\alpha)$$
+:::
+
+<div style="margin-top: -100px; padding: 0;">
+<video width="820" height="700" loop style="display: block; margin-left: auto; margin-right: auto;">
+  <source src="figures/Result2/ks_combined_no_eq.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+</div>
+
+<!-- ::: {style="font-size: 70%;"}
 $$\dot{\theta}_i = \omega_i + \lambda\sum_{j=1}^N A_{ij}\sin(\theta_j - \theta_i-\alpha)$$
 :::
 <div>
@@ -707,7 +720,7 @@ $$\dot{\theta}_i = \omega_i + \lambda\sum_{j=1}^N A_{ij}\sin(\theta_j - \theta_i
     </td>
   </tr>
 </table>
-</div>
+</div> -->
 
 :::{.notes}
 
