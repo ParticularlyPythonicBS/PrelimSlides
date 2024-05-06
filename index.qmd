@@ -14,7 +14,7 @@ format:
     logo: assets/NAIL_state.png
     css: assets/style.css
     slide-number: true
-    toc: true
+    toc: false
     toc-depth: 1
     show-slide-number: all
     chalkboard: true
@@ -41,6 +41,29 @@ revealjs-plugins:
   - attribution
     
 ---
+
+## Table of Contents
+
+<div>
+<dl>
+  <dt><a href="#motivation">Motivation</a></dt>
+  <dt><a href="#background-neural-networks-and-optimization">Neural Networks and optimization</a><dt>
+      <dd><a href="#background-differentiable-computing">Background</a></dd>
+      <dd><a href="#metalearning-activation-functions">Metalearning Activation functions</a></dd>
+  
+  <dt><a href="#background-control-and-chaos">Control and Chaos</a><dt>
+      <dd><a href="#background-hamilton-jacobi-bellmanhjb-equation">Background</a></dd>
+      <dd><a href="#neural-network-control-of-chaos">Neural Network control of chaos</a></dd>
+
+  <dt><a href="#background-dynamics-and-symmetries">Dynamics and symmetries</a><dt>
+    <dd><a href="#background-group-theory-for-dynamical-systems">Background</a></dd>
+    <dd><a href="#symmetries-of-controllers">Symmetries of controllers</a></dd>
+
+  <dt><a href="#conclusion">Conclusion</a></dt>
+  <dt><a href="#references">References</a></dt>
+  <dt><a href="#acknowledgements">Acknowledgements</a></dt>
+</dl>
+</div>
 
 # Motivation
 

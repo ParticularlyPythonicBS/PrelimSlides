@@ -8,7 +8,7 @@
 <link href="index_files/libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="index_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="index_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.4.553">
+  <meta name="generator" content="quarto-1.4.554">
 
   <meta name="author" content="Anil Radhakrishnan">
   <meta name="dcterms.date" content="2024-05-08">
@@ -375,20 +375,52 @@ Anil Radhakrishnan
 </div>
 
   <p class="date">May 8, 2024</p>
-</section><section id="TOC">
-<nav role="doc-toc"> 
-<h2 id="toc-title">Table of contents</h2>
-<ul>
-<li><a href="#/motivation" id="/toc-motivation">Motivation</a></li>
-<li><a href="#/background-neural-networks-and-optimization" id="/toc-background-neural-networks-and-optimization">Background Neural Networks and optimization</a></li>
-<li><a href="#/metalearning-activation-functions" id="/toc-metalearning-activation-functions">Metalearning Activation functions</a></li>
-<li><a href="#/background-control-and-chaos" id="/toc-background-control-and-chaos">Background: Control and Chaos</a></li>
-<li><a href="#/neural-network-control-of-chaos" id="/toc-neural-network-control-of-chaos">Neural Network control of chaos</a></li>
-<li><a href="#/background-dynamics-and-symmetries" id="/toc-background-dynamics-and-symmetries">Background: Dynamics and symmetries</a></li>
-<li><a href="#/symmetries-of-controllers" id="/toc-symmetries-of-controllers">Symmetries of controllers</a></li>
-<li><a href="#/conclusion" id="/toc-conclusion">Conclusion</a></li>
-</ul>
-</nav>
+</section>
+<section id="table-of-contents" class="slide level2">
+<h2>Table of Contents</h2>
+<div>
+<dl>
+<dt>
+<a href="#motivation">Motivation</a>
+</dt>
+<dt>
+<a href="#background-neural-networks-and-optimization">Neural Networks and optimization</a>
+</dt><dt>
+</dt><dd>
+<a href="#background-differentiable-computing">Background</a>
+</dd>
+<dd>
+<a href="#metalearning-activation-functions">Metalearning Activation functions</a>
+</dd>
+<dt>
+<a href="#background-control-and-chaos">Control and Chaos</a>
+</dt><dt>
+</dt><dd>
+<a href="#background-hamilton-jacobi-bellmanhjb-equation">Background</a>
+</dd>
+<dd>
+<a href="#neural-network-control-of-chaos">Neural Network control of chaos</a>
+</dd>
+<dt>
+<a href="#background-dynamics-and-symmetries">Dynamics and symmetries</a>
+</dt><dt>
+</dt><dd>
+<a href="#background-group-theory-for-dynamical-systems">Background</a>
+</dd>
+<dd>
+<a href="#symmetries-of-controllers">Symmetries of controllers</a>
+</dd>
+<dt>
+<a href="#conclusion">Conclusion</a>
+</dt>
+<dt>
+<a href="#references">References</a>
+</dt>
+<dt>
+<a href="#acknowledgements">Acknowledgements</a>
+</dt>
+</dl>
+</div>
 </section>
 <section>
 <section id="motivation" class="title-slide slide level1 center">
@@ -1677,7 +1709,7 @@ x\star = \dfrac{\partial \mathcal{H}}{\partial \lambda}
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="figures/Backup/roessler_det.svg" style="width:100.0%"></p>
+<p><img data-src="figures/Backup/roessler_det.svg" style="width:100.0%" alt="Roessler lyap"></p>
 <figcaption>Roessler lyap</figcaption>
 </figure>
 </div>
@@ -1685,7 +1717,7 @@ x\star = \dfrac{\partial \mathcal{H}}{\partial \lambda}
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="figures/Backup/roessler_rec.svg" style="width:100.0%"></p>
+<p><img data-src="figures/Backup/roessler_rec.svg" style="width:100.0%" alt="Roessler recurrence"></p>
 <figcaption>Roessler rec</figcaption>
 </figure>
 </div>
@@ -1703,7 +1735,7 @@ x\star = \dfrac{\partial \mathcal{H}}{\partial \lambda}
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div class="quarto-figure quarto-figure-right">
 <figure>
-<p><img data-src="assets/Autoencoder_schema.png" style="width:60.0%"></p>
+<p><img data-src="assets/Autoencoder_schema.png" style="width:60.0%" alt="Autoencoder"></p>
 <figcaption>Autoencoder</figcaption>
 </figure>
 </div>
@@ -1711,7 +1743,7 @@ x\star = \dfrac{\partial \mathcal{H}}{\partial \lambda}
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div class="quarto-figure quarto-figure-left">
 <figure>
-<p><img data-src="assets/Gated_Recurrent_Unit_schema.png" style="width:100.0%"></p>
+<p><img data-src="assets/Gated_Recurrent_Unit_schema.png" style="width:100.0%" alt="GRU"></p>
 <figcaption>GRU</figcaption>
 </figure>
 </div>
@@ -1720,7 +1752,7 @@ x\star = \dfrac{\partial \mathcal{H}}{\partial \lambda}
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="assets/Typical_cnn.png" style="width:100.0%"></p>
+<p><img data-src="assets/Typical_cnn.png" style="width:100.0%" alt="CNN"></p>
 <figcaption>CNN</figcaption>
 </figure>
 </div>
