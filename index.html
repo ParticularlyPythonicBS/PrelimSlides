@@ -387,28 +387,28 @@ Anil Radhakrishnan
 <a href="#background-neural-networks-and-optimization">Neural Networks and optimization</a>
 </dt><dt>
 </dt><dd>
-<a href="#background-differentiable-computing">Background</a>
+▹ <a href="#background-differentiable-computing">Background</a>
 </dd>
 <dd>
-<a href="#metalearning-activation-functions">Metalearning Activation functions</a>
+▹ <a href="#metalearning-activation-functions">Metalearning Activation functions</a>
 </dd>
 <dt>
 <a href="#background-control-and-chaos">Control and Chaos</a>
 </dt><dt>
 </dt><dd>
-<a href="#background-hamilton-jacobi-bellmanhjb-equation">Background</a>
+▹ <a href="#background-hamilton-jacobi-bellmanhjb-equation">Background</a>
 </dd>
 <dd>
-<a href="#neural-network-control-of-chaos">Neural Network control of chaos</a>
+▹ <a href="#neural-network-control-of-chaos">Neural Network control of chaos</a>
 </dd>
 <dt>
 <a href="#background-dynamics-and-symmetries">Dynamics and symmetries</a>
 </dt><dt>
 </dt><dd>
-<a href="#background-group-theory-for-dynamical-systems">Background</a>
+▹ <a href="#background-group-theory-for-dynamical-systems">Background</a>
 </dd>
 <dd>
-<a href="#symmetries-of-controllers">Symmetries of controllers</a>
+▹ <a href="#symmetries-of-controllers">Symmetries of controllers</a>
 </dd>
 <dt>
 <a href="#conclusion">Conclusion</a>
@@ -1029,8 +1029,10 @@ d\theta_{t} = - \nabla \Loss(\theta_{t})\, dt + \sqrt{2\mathbf{D}} \cdot d\mathc
 </section>
 <section id="background-hamilton-jacobi-bellmanhjb-equation" class="slide level2">
 <h2>Background: Hamilton Jacobi Bellman(HJB) Equation</h2>
-<p><span class="math display">\[
+<p>For a control system with state <span class="math inline">\(x(t)\)</span> and control <span class="math inline">\(u(t)\)</span>, <span class="math display">\[
 \dfrac{dx}{dt} = f(x(t),u(t))dt \\
+\]</span></p>
+<p><span class="math display">\[
 \mathcal{H}(x,u,t_0,t_f) = Q(x(t_f), t_f) + \int_{t_0}^{t_f} \Loss(x(\tau),u(\tau))d\tau\\
 V(x(t_0),t_0,t_f) = \min_{u(t)} \mathcal{H}(x(t_0),u(t),t_0,t_f)\\
 -\dfrac{\partial V}{\partial t} = \min_{u(t)} \left[ \Loss(x(t),u(t)) + \dfrac{\partial V}{\partial x}^T f(x(t),u(t)) \right]
@@ -1109,6 +1111,7 @@ Your browser does not support the video tag. </video> <video width="200" height=
 <aside class="notes">
 <p>Devaney’s definition of chaos is a general useful definition for our purposes. Any two of the rules give the other in ℝ.</p>
 <p>There is an equivalent definition where f is indecomposable and the periodic points are dense in X.</p>
+<p>topologically transitive dynamical system has points which eventually move under iteration from one arbitrarily small open set to any other. Consequently, such a dynamical system cannot be decomposed into two disjoint sets with nonempty interiors which do not interact under the transformation.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1286,9 +1289,9 @@ Your browser does not support the video tag. </video>
 <div style="font-size: 70%;">
 <p><span class="math display">\[\dot{\theta}_i = \omega_i + \lambda\sum_{j=1}^N A_{ij}\sin(\theta_j - \theta_i-\alpha)\]</span></p>
 </div>
-<div style="margin-top: -100px; padding: 0;">
+<div style="margin-top: -120px; padding: 0;">
 <video width="820" height="700" loop="" style="display: block; margin-left: auto; margin-right: auto;">
-<source src="figures/Result2/ks_combined_no_eq.mp4" type="video/mp4">
+<source src="figures/Result2/ks_combined_no_eq_alpha.mp4" type="video/mp4">
 Your browser does not support the video tag. </video>
 </div>
 <div>
@@ -1340,6 +1343,7 @@ Your browser does not support the video tag.
 <img data-src="figures/Result2/recurrence_matrix_lorenz.png" class="quarto-figure quarto-figure-center r-stretch" style="width:70.0%" alt="Recurrence matrix for lorenz attractor"><aside class="notes">
 <p>Recurrence matrices are are way to capture the dynamics of a system by looking at the recurrences of states. This is similar to the notion of delay coordinate embeddings used for approximating attractors. As you can see here the recurrence matrices are invariant to the delays.</p>
 <p>This can be used in the loss function to prescribe the exact dynamics to optimize towards,</p>
+<p>Computed by subtracting the transpose of the timeseries from itself and then thresholding the absolute value.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1362,7 +1366,7 @@ Your browser does not support the video tag.
 <p>Let <span class="math inline">\(\Gamma\)</span> act on <span class="math inline">\(\mathbb{R}^n\)</span> and <span class="math inline">\(f: \mathbb{R}^n \rightarrow \mathbb{R}^m\)</span> . Then <span class="math inline">\(f\)</span> is said to be <span class="math inline">\(\Gamma\)</span>-equivariant if <span class="math inline">\(f(\gamma x) = \gamma f(x)\)</span> for all <span class="math inline">\(x \in \mathbb{R}^n\)</span> and <span class="math inline">\(\gamma \in \Gamma\)</span><span class="citation" data-cites="zee_group_2016"><sup><a href="#/references" role="doc-biblioref" onclick="">16</a></sup></span>.</p>
 <p>For dynamical systems, for a fixed point <span class="math inline">\(f(x\star)=0\)</span>, <span class="math inline">\(\gamma x\star\)</span> is also a fixed point.</p>
 <p>Isotropy subgroup: Let <span class="math inline">\(v\in \mathbb{R}^n: \Sigma_v = \{\gamma \in \Gamma: \gamma v = v\}\)</span></p>
-<p>Fixed pt subspace: Let <span class="math inline">\(\Sigma \subseteq \Gamma\)</span>. <span class="math inline">\(\text{Fix}(\Sigma)=\{v \in \mathbb{R}^n:\sigma v=v\}\)</span></p>
+<p>Fixed pt subspace: Let <span class="math inline">\(\sigma \in \Sigma \subseteq \Gamma\)</span>. <span class="math inline">\(\text{Fix}(\Sigma)=\{v \in \mathbb{R}^n:\sigma v=v\}\)</span></p>
 <p><em>Thm</em>: Let <span class="math inline">\(f: \mathbb{R}^n \rightarrow \mathbb{R}^m\)</span> be a <span class="math inline">\(\Gamma\)</span>-equivariant map and <span class="math inline">\(\Sigma \subseteq \Gamma\)</span>. Then <span class="math inline">\(f(\text{Fix}(\Sigma))\subseteq\text{Fix}(\Sigma)\)</span>.</p>
 <aside class="notes">
 <p>Cyclic group Dihedral group = Cyclic group + Flips Symmetric group = m! S^1 circle group O(n) Measure preserving transformations</p>
@@ -1444,12 +1448,11 @@ Your browser does not support the video tag.
 </section>
 <section id="deliverables" class="slide level2">
 <h2>Deliverables</h2>
-<ul>
-<li>Publishable article on Neural Network Control of Chaos.</li>
-<li>Thorough study of the symmetries of controllers.</li>
-<li>Codebase for the above studies.</li>
-<li>Dissertation detailing the discoveries and pitfalls found throughout.</li>
-</ul>
+<p>● Publication and Patent on Metalearning Activation functions.</p>
+<p>◕ Publishable article on Neural Network Control of Chaos.</p>
+<p>◔ Thorough study of the symmetries of controllers.</p>
+<p>◑ Codebase for the above studies.</p>
+<p>◔ Dissertation detailing the discoveries and pitfalls found throughout.</p>
 <p>Estimated time of completion: August 2025</p>
 </section>
 <section id="acknowledgements" class="slide level2" data-background-image="assets/ks_pretty.png" data-background-size="contain" data-background-position="center" data-background-repeat="&quot;no-repeat">

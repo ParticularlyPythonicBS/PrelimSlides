@@ -48,16 +48,16 @@ revealjs-plugins:
 <dl>
   <dt><a href="#motivation">Motivation</a></dt>
   <dt><a href="#background-neural-networks-and-optimization">Neural Networks and optimization</a><dt>
-      <dd><a href="#background-differentiable-computing">Background</a></dd>
-      <dd><a href="#metalearning-activation-functions">Metalearning Activation functions</a></dd>
+      <dd>▹ <a href="#background-differentiable-computing">Background</a></dd>
+      <dd>▹ <a href="#metalearning-activation-functions">Metalearning Activation functions</a></dd>
   
   <dt><a href="#background-control-and-chaos">Control and Chaos</a><dt>
-      <dd><a href="#background-hamilton-jacobi-bellmanhjb-equation">Background</a></dd>
-      <dd><a href="#neural-network-control-of-chaos">Neural Network control of chaos</a></dd>
+      <dd>▹ <a href="#background-hamilton-jacobi-bellmanhjb-equation">Background</a></dd>
+      <dd>▹ <a href="#neural-network-control-of-chaos">Neural Network control of chaos</a></dd>
 
   <dt><a href="#background-dynamics-and-symmetries">Dynamics and symmetries</a><dt>
-    <dd><a href="#background-group-theory-for-dynamical-systems">Background</a></dd>
-    <dd><a href="#symmetries-of-controllers">Symmetries of controllers</a></dd>
+    <dd>▹ <a href="#background-group-theory-for-dynamical-systems">Background</a></dd>
+    <dd>▹ <a href="#symmetries-of-controllers">Symmetries of controllers</a></dd>
 
   <dt><a href="#conclusion">Conclusion</a></dt>
   <dt><a href="#references">References</a></dt>
@@ -504,9 +504,12 @@ There can be future work to explore the universality of this with multidimension
 # Background: Control and Chaos
 
 ## Background: Hamilton Jacobi Bellman(HJB) Equation
-
+For a control system with state $x(t)$ and control $u(t)$,
 $$
 \dfrac{dx}{dt} = f(x(t),u(t))dt \\
+$$
+
+$$
 \mathcal{H}(x,u,t_0,t_f) = Q(x(t_f), t_f) + \int_{t_0}^{t_f} \Loss(x(\tau),u(\tau))d\tau\\
 V(x(t_0),t_0,t_f) = \min_{u(t)} \mathcal{H}(x(t_0),u(t),t_0,t_f)\\
 -\dfrac{\partial V}{\partial t} = \min_{u(t)} \left[ \Loss(x(t),u(t)) + \dfrac{\partial V}{\partial x}^T f(x(t),u(t)) \right]
@@ -587,6 +590,8 @@ Let $X$ be a metric space. A continuous map $f: X \rightarrow X$ is said to be c
 Devaney's definition of chaos is a general useful definition for our purposes. Any two of the rules give the other in ℝ.
 
 There is an equivalent definition where f is indecomposable and the periodic points are dense in X.
+
+topologically transitive dynamical system has points which eventually move under iteration from one arbitrarily small open set to any other. Consequently, such a dynamical system cannot be decomposed into two disjoint sets with nonempty interiors which do not interact under the transformation.
 :::
 
 ## Background: Traditional Chaos Control
@@ -716,9 +721,9 @@ The network was able to control this system as well navigating out of the sliver
 $$\dot{\theta}_i = \omega_i + \lambda\sum_{j=1}^N A_{ij}\sin(\theta_j - \theta_i-\alpha)$$
 :::
 
-<div style="margin-top: -100px; padding: 0;">
+<div style="margin-top: -120px; padding: 0;">
 <video width="820" height="700" loop style="display: block; margin-left: auto; margin-right: auto;">
-  <source src="figures/Result2/ks_combined_no_eq.mp4" type="video/mp4">
+  <source src="figures/Result2/ks_combined_no_eq_alpha.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
 </div>
@@ -767,6 +772,7 @@ As you can see here the recurrence matrices are invariant to the delays.
 
 This can be used in the loss function to prescribe the exact dynamics to optimize towards,
 
+Computed by subtracting the transpose of the timeseries from itself and then thresholding the absolute value.
 :::
 
 # Background: Dynamics and symmetries
@@ -781,7 +787,7 @@ Isotropy subgroup:
 Let $v\in \mathbb{R}^n: \Sigma_v = \{\gamma \in \Gamma: \gamma v = v\}$
 
 Fixed pt subspace:
-Let $\Sigma \subseteq \Gamma$. $\text{Fix}(\Sigma)=\{v \in \mathbb{R}^n:\sigma v=v\}$
+Let $\sigma \in \Sigma \subseteq \Gamma$. $\text{Fix}(\Sigma)=\{v \in \mathbb{R}^n:\sigma v=v\}$
 
 *Thm*: Let $f: \mathbb{R}^n \rightarrow \mathbb{R}^m$ be a $\Gamma$-equivariant map and  $\Sigma \subseteq \Gamma$. Then $f(\text{Fix}(\Sigma))\subseteq\text{Fix}(\Sigma)$.
 
@@ -845,10 +851,15 @@ Instead of just lifting to some real space which preserves translations as in tr
 - The interplay of Physics, Mathematics, and Computer Science gives us the best shot at understanding complex systems
 
 ## Deliverables
-- Publishable article on Neural Network Control of Chaos.
-- Thorough study of the symmetries of controllers.
-- Codebase for the above studies.
-- Dissertation detailing the discoveries and pitfalls found throughout.
+● Publication and Patent on Metalearning Activation functions.
+
+◕ Publishable article on Neural Network Control of Chaos.
+
+◔ Thorough study of the symmetries of controllers.
+
+◑ Codebase for the above studies.
+
+◔ Dissertation detailing the discoveries and pitfalls found throughout. 
 
 Estimated time of completion: August 2025
 
