@@ -232,7 +232,6 @@ $\Param\gets \Param -\eta \nabla_{\Param}\Loss$
 
 ## Background: Loss Functions
 - Neural networks compute a probability distribution on the data space. 
-- Our objective is maximize the likelihood the assigned to empirical data.
 - Constructing a suitable differentiable loss function gives the path to optimization of a neural network.
 Common loss functions include:
   - Mean Squared Error $\Loss(\theta) = \sum_{i=1}^N (y_i - f(x_i;\theta))^2$
