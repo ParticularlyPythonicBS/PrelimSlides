@@ -538,7 +538,7 @@ Control scheme where a model is used for predicting the future behavior of the s
 </video>
     </td>
     <td style="vertical-align:top; width:35%">
-![](figures/BG2/MPC_basic.png){fig-alt="Model Predictive control" fig-align="center" width=100%}
+![](figures/BG2/MPC_basic.webp){fig-alt="Model Predictive control" fig-align="center" width=100%}
     </td>
   </tr>
 </table>
