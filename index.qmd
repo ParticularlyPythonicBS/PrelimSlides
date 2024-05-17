@@ -11,7 +11,7 @@ csl: nature.csl
 format:
   revealjs:
     theme: [default, assets/custom.scss]
-    logo: assets/NAIL_state.png
+    logo: assets/NAIL_state.webp
     css: assets/style.css
     slide-number: true
     toc: false
@@ -74,11 +74,11 @@ revealjs-plugins:
 
 ::: {layout-ncol=3}
 
-![](assets/ChatGPT.png){fig-alt="ChatGPT" fig-align="left" width="250"}
+![](assets/ChatGPT.webp){fig-alt="ChatGPT" fig-align="left" width="250"}
 
-![](assets/Microsoft_365_Copilot_Icon.png){fig-alt="CoPilot" fig-align="center" width="250"}
+![](assets/Microsoft_365_Copilot_Icon.webp){fig-alt="CoPilot" fig-align="center" width="250"}
 
-![](assets/netket.png){fig-alt="NetKet" fig-align="right" width="250"}
+![](assets/netket.webp){fig-alt="NetKet" fig-align="right" width="250"}
 
 :::
 
@@ -136,7 +136,7 @@ Avalanche activity cascades in a sandpile automaton; a vortex street formed by f
 
     </td>
     <td style="vertical-align:top; width:20%">
-![](assets/chaos_cm.png){fig-alt="Model Predictive control" fig-align="center" width=50%}
+![](assets/chaos_cm.webp){fig-alt="Model Predictive control" fig-align="center" width=50%}
     </td>
   </tr>
 </table>
@@ -168,7 +168,7 @@ The neural network consists of an input layer, a tanh nonlinearity, and an outpu
 - Paradigm where programs can be differentiated end-to-end automatically, enabling optimization of parameters of the program @blondel_elements_2024.
 - Techniques to differentiate through complex programs is more than just deep learning.
 - Can be interpreted probabilistically or as a dynamical system.
-![](figures/BG1/autodiff.png){fig-alt="autodifferentiation diagram" width=80% }
+![](figures/BG1/autodiff.webp){fig-alt="autodifferentiation diagram" width=80% }
 
 ::: {.notes}
 
@@ -179,7 +179,7 @@ The neural network consists of an input layer, a tanh nonlinearity, and an outpu
 
 ## Background: Neural Networks
 
-![](figures/BG1/NN.png){fig-alt="Neural Network diagram" width=80%}
+![](figures/BG1/NN.webp){fig-alt="Neural Network diagram" width=80%}
 <div style="margin-top: -20px;">
 $$
 \newcommand{\defeq}{\mathrel{\mathop:}=}
@@ -216,7 +216,7 @@ $$
 :::
 
 ::: {#second-column}
-![](figures/BG1/backprop_zoomed.png){fig-alt="backprop diagram" fig-align="right" width=80%}
+![](figures/BG1/backprop_zoomed.webp){fig-alt="backprop diagram" fig-align="right" width=80%}
 :::
 ::::
 The tunable parameters can then be updated by:
@@ -287,7 +287,7 @@ If you are training a model with many parameters and are experiencing issues wit
 :::
 
 ::: {#second-column}
-![](figures/BG1/Metalearning.png){fig-alt="metalearning" fig-align="center" width=80%}
+![](figures/BG1/Metalearning.webp){fig-alt="metalearning" fig-align="center" width=80%}
 :::
 ::::
 Algorithms for meta-learning are still in a nascent stage with significant computational overhead.
@@ -307,7 +307,7 @@ Figure by [John Lindner ](https://www.nature.com/articles/s41598-023-40766-6)
 - Physics as a weak constraint in a composite loss function or a hard constraint with architectural choices.
 - Symplectic constraints to the loss function gives Hamiltonian Neural Networks @greydanus_hamiltonian_2019.
 
-<img src="figures/BG1/HNN.png" alt="HNN schema" style="display: block; width: 30%; margin-top: -25px; margin-left: auto; margin-right: auto;">
+<img src="figures/BG1/HNN.webp" alt="HNN schema" style="display: block; width: 30%; margin-top: -25px; margin-left: auto; margin-right: auto;">
 
 ::: {.notes}
 
@@ -357,7 +357,7 @@ As with any data driven modelling, the way you represent the data can have a sig
 :::
 
 ::: {#second-column}
-![](figures/Result1/meta_act_schema_vert.png){fig-alt="metalearning" fig-align="center" width=80%}
+![](figures/Result1/meta_act_schema_vert.webp){fig-alt="metalearning" fig-align="center" width=80%}
 :::
 ::::
 
@@ -377,7 +377,7 @@ Figure from [Publication](https://www.nature.com/articles/s41598-023-40766-6)
 :::
 
 ::: {#second-column}
-![](figures/Result1/2NeuronSubpopulation_Sine_1_compact2.png){fig-alt="2neuronmnist1d" fig-align="center" width=100%}
+![](figures/Result1/2NeuronSubpopulation_Sine_1_compact2.webp){fig-alt="2neuronmnist1d" fig-align="center" width=100%}
 :::
 ::::
 
@@ -387,7 +387,7 @@ Figure from [Publication](https://www.nature.com/articles/s41598-023-40766-6)
 
 ## Results: Scaling
 
-![](figures/Result1/meta_div_scaling.png){fig-alt="scaling" fig-align="center" width=80%}
+![](figures/Result1/meta_div_scaling.webp){fig-alt="scaling" fig-align="center" width=80%}
 
 
 ::: {.attribution}
@@ -401,7 +401,7 @@ These results are averaged over 100 initializations.
 
 ## Results: Real World Data
 
-![](figures/Result1/real_pendulum.png){fig-alt="real world example" fig-align="center" width=80%}
+![](figures/Result1/real_pendulum.webp){fig-alt="real world example" fig-align="center" width=80%}
 
 ::: {.attribution}
 Figure from [Publication](https://www.nature.com/articles/s41598-023-40766-6)
@@ -434,7 +434,7 @@ The normalized participation ratio $r = \mathcal{R} / N$ @gao_theory_2017.
 
 ::: {#second-column}
 
-![](figures/Result1/Participation_ratio.png){fig-alt="participation ratio" fig-align="center" width=100%}
+![](figures/Result1/Participation_ratio.webp){fig-alt="participation ratio" fig-align="center" width=100%}
 
 :::
 ::::
@@ -463,7 +463,7 @@ Typically, $1 < \mathcal{R} < N$, and $\mathcal{R}$ corresponds to the number of
 ## Speculations: Achieving stable minima
 
 <div style="margin-bottom: 30px;">
-![](figures/Result1/Noisy_descent.png){fig-alt="Noisy descent" fig-align="center" width=30%}
+![](figures/Result1/Noisy_descent.webp){fig-alt="Noisy descent" fig-align="center" width=30%}
 </div>
 
 &nbsp;
@@ -491,7 +491,7 @@ Since the noise term aligns with Hessian bear the minima, this suggests that the
 - Learned activation functions appear qualitatively independent of the base activation function.
 - The odd and even nature of the learned functions suggest that the network is learning to span the space of possible activation functions.
 
-![](figures/Result1/learned_act_insight.png){fig-alt="spanning sets" fig-align="center" width=80%}
+![](figures/Result1/learned_act_insight.webp){fig-alt="spanning sets" fig-align="center" width=80%}
 
 ::: {.notes}
 
@@ -597,9 +597,9 @@ topologically transitive dynamical system has points which eventually move under
 
 Relies on the ergodicity of chaotic systems [@ott_controlling_1990; @ditto_experimental_1990].
 
-![](figures/BG2/OGY.png){fig-alt="Ott-Gerbogi-Yorke control" fig-align="center" width=80%}
+![](figures/BG2/OGY.webp){fig-alt="Ott-Gerbogi-Yorke control" fig-align="center" width=80%}
 
-![](figures/BG2/UPO.png){fig-alt="Unstable periodic orbits" fig-align="center" width=40%}
+![](figures/BG2/UPO.webp){fig-alt="Unstable periodic orbits" fig-align="center" width=40%}
 
 :::{.notes}
 
@@ -645,7 +645,7 @@ If we remove the coupling we get a simple driven damped pendulum. This system ca
     </td>
     <td style="vertical-align:top; width:35%">
 <video width="700" height="300" loop style="display: block; margin-left: auto; margin-right: auto;">
-  <source src="figures/BG2/firefly_vid.mp4" type="video/mp4">
+  <source src="figures/BG2/fireflies_vid.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
 $$\dot{\theta}_i = \omega_i + \lambda\sum_{j=1}^N \sin(\theta_j - \theta_i)$$
@@ -675,7 +675,7 @@ It found a lot of applications like josephson junction arrays, power grids, and 
 
 ## Methodology
 
-![](figures/Result2/MPC_NN.png){fig-alt="Model Predictive control" fig-align="center" width=100%}
+![](figures/Result2/MPC_NN.webp){fig-alt="Model Predictive control" fig-align="center" width=100%}
 
 :::{.notes}
 Instead of training a neural network with a predefined dataset, we train the network in situ with the network serving as the controller that is integrated in the dynamical system at each epoch.
@@ -686,7 +686,7 @@ The time horizon for the integration is changed from the first half and second h
 
 ## Results: Kuramoto Grid
 
-![](figures/Result2/kuramoto_control.png){fig-alt="Controlled kuramoto dynamics" fig-align="center" width=100%}
+![](figures/Result2/kuramoto_control.webp){fig-alt="Controlled kuramoto dynamics" fig-align="center" width=100%}
 
 :::{.notes}
 
@@ -698,7 +698,7 @@ Interestingly, this method also extends naturally to noisy kuramoto, which is no
 
 ## Results: Pendulum Array
 
-![](figures/Result2/controlled_pendulum_dynamics.png){fig-alt="Controlled Pendulum dynamics" fig-align="center" width=70%}
+![](figures/Result2/controlled_pendulum_dynamics.webp){fig-alt="Controlled Pendulum dynamics" fig-align="center" width=70%}
 
 <div style="margin-top: 30px;">
 <video width="700" height="400" style="display: block; margin-left: auto; margin-right: auto;">
@@ -727,27 +727,6 @@ $$\dot{\theta}_i = \omega_i + \lambda\sum_{j=1}^N A_{ij}\sin(\theta_j - \theta_i
 </video>
 </div>
 
-<!-- ::: {style="font-size: 70%;"}
-$$\dot{\theta}_i = \omega_i + \lambda\sum_{j=1}^N A_{ij}\sin(\theta_j - \theta_i-\alpha)$$
-:::
-<div>
-<table style="width:100%; margin:0; padding:0; margin-top:-65px;">
-  <tr>
-    <td style="vertical-align:top; padding-right:20px; width:50%">
-<video width="300" height="600" loop style="display: block; margin-left: auto; margin-right: auto; margin-bottom: 20px;">
-  <source src="figures/Result2/ks_basic.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
-    </td>
-    <td style="vertical-align:top; padding-right:20px; width:50%">
-<video width="300" height="600" loop style="display: block; margin-left: auto; margin-right: auto; margin-bottom: 20px;">
-  <source src="figures/Result2/ks_chimera.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
-    </td>
-  </tr>
-</table>
-</div> -->
 
 :::{.notes}
 
@@ -761,7 +740,7 @@ It would be a good test of the model to see if it can move a system into and out
 
 ## Future Work: Recurrence matrices in $\mathcal{L}$ @kennel_determining_1992
 
-![](figures/Result2/recurrence_matrix_lorenz.png){fig-alt="Recurrence matrix for lorenz attractor" fig-align="center" width=70%}
+![](figures/Result2/recurrence_matrix_lorenz.webp){fig-alt="Recurrence matrix for lorenz attractor" fig-align="center" width=70%}
 
 :::{.notes}
 
@@ -809,7 +788,7 @@ Isotropy subgroup: The set of all group elements which leave the solution unchan
 ## Background: Group Equivariant Neural Networks
 
 <div style="margin-bottom: 40px; text-align: center;">
-<img src="figures/BG3/lift_project.png" alt="Group equivariance works by lifting and projection" style="width: 50%;">
+<img src="figures/BG3/lift_project.webp" alt="Group equivariance works by lifting and projection" style="width: 50%;">
 </div>
 
 Group equivariant NN work through lifting convolutions to the _group_ space, and then projecting back to the original space @cohen_group_2016.
@@ -862,10 +841,10 @@ Instead of just lifting to some real space which preserves translations as in tr
 
 Estimated time of completion: August 2025
 
-## Acknowledgements {background-image="assets/ks_pretty.png" background-size="contain" background-position="center" background-repeat="no-repeat}
+## Acknowledgements {background-image="assets/ks_pretty.webp" background-size="contain" background-position="center" background-repeat="no-repeat}
 
 <div style="text-align: center; margin-top: 100px;">
-<img src="assets/acknowledgements.png" alt="Bill, John, Anshul" style="width: 400px;">
+<img src="assets/acknowledgements.webp" alt="Bill, John, Anshul" style="width: 400px;">
 </div>
 
 :::{.attribution}
@@ -996,7 +975,7 @@ Argument from [Francis Bach](https://francisbach.com/gradient-flows/)
 
 ## 1DMNIST {.unnumbered .unlisted visibility="uncounted"}
 
-![](figures/Backup/MNIST1D.png){fig-alt="MNIST1D" fig-align="center" width=70%}
+![](figures/Backup/MNIST1D.webp){fig-alt="MNIST1D" fig-align="center" width=70%}
 
 ## Neural ODEs {.unnumbered .unlisted visibility="uncounted"}
 
@@ -1091,9 +1070,9 @@ Here, the coefficients $\hat{e}_i$ are *not* constants but random variables sinc
 
 ::: {layout-ncol=2}
 
-![Roessler lyap](figures/Backup/roessler_det.svg){fig-alt="Roessler lyap" fig-align="center" width=100%}
+![Roessler lyap](figures/Backup/roessler_det.webp){fig-alt="Roessler lyap" fig-align="center" width=100%}
 
-![Roessler rec](figures/Backup/roessler_rec.svg){fig-alt="Roessler recurrence" fig-align="center" width=100%}
+![Roessler rec](figures/Backup/roessler_rec.webp){fig-alt="Roessler recurrence" fig-align="center" width=100%}
 
 :::
 
@@ -1105,14 +1084,14 @@ Lyapunov exponent and Recurrence plot from [Recurrence Plot Pitfalls](http://www
 
 ::: {layout-ncol=2}
 
-![Autoencoder](assets/Autoencoder_schema.png){fig-alt="Autoencoder" fig-align="right" width=60%}
+![Autoencoder](assets/Autoencoder_schema.webp){fig-alt="Autoencoder" fig-align="right" width=60%}
 
 
-![GRU](assets/Gated_Recurrent_Unit_schema.png){fig-alt="GRU" fig-align="left" width=100%}
+![GRU](assets/Gated_Recurrent_Unit_schema.webp){fig-alt="GRU" fig-align="left" width=100%}
 
 :::
 
-![CNN](assets/Typical_cnn.png){fig-alt="CNN" fig-align="center" width=100%}
+![CNN](assets/Typical_cnn.webp){fig-alt="CNN" fig-align="center" width=100%}
 
 ::: {.attribution}
 
